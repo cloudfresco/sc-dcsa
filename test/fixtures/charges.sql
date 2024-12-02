@@ -1,0 +1,33 @@
+insert into charges (
+    uuid4,
+    transport_document_id,
+    shipment_id,
+    charge_type,
+    currency_amount,
+    currency_code,
+    payment_term_code,
+    calculation_basis,
+    unit_price,
+    quantity,
+    status_code,
+    created_by_user_id,
+    updated_by_user_id,
+    created_at,
+    updated_at
+) VALUES (
+    UNHEX(REPLACE('f9d3c9ae-89c1-4394-a5fc-8e73538aaac4','-','')),
+    (SELECT transport_documents.id FROM transport_documents WHERE  transport_document_reference = 'be038e58-5365'),
+    (SELECT shipments.id FROM shipments WHERE carrier_booking_reference = 'ABC123123123'),
+    'TBD',
+    12.12,
+    'UMB',
+    'PRE',
+    'WHAT',
+    12.12,
+    123.321,
+    'active',
+'auth0|66fd06d0bfea78a82bb42459',
+'auth0|66fd06d0bfea78a82bb42459',
+'2020-03-07 12:12:12.000',
+'2020-04-07 12:12:12.000'
+ );

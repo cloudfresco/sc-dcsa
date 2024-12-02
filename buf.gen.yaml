@@ -1,0 +1,10 @@
+version: v1
+plugins:
+  - name: go
+    out: .
+    opt:
+      - module=github.com/cloudfresco/sc-dcsa
+  - name: go-grpc
+    out: .
+    opt:
+      - module=github.com/cloudfresco/sc-dcsa

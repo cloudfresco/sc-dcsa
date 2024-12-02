@@ -1,0 +1,29 @@
+{
+  "rate_limit": {
+		"u_max_rate": "1500",
+		"u_max_burst": "1500",
+		"user_max_rate": "1500",
+		"user_max_burst": "1500",
+		"party_max_rate": "300",
+		"party_max_burst": "300",
+		"bkg_max_rate": "300",
+		"bkg_max_burst": "300",
+		"ebl_max_rate": "300",
+		"ebl_max_burst": "300",
+		"event_core_max_rate": "300",
+		"event_core_max_burst": "300",	
+		"jit_max_rate": "400",
+		"jit_max_burst": "400",
+		"search_max_rate": "20",
+		"search_max_burst": "20",
+		"ovs_max_rate": "20",
+		"ovs_max_burst": "20",
+		"tnt_max_rate": "20",
+		"tnt_max_burst": "20"
+  },
+  "limit_sql_rows": "21",
+  "user_options": {
+		"confirm_token_duration": "296h",
+		"reset_token_duration": "296h"
+  }
+}

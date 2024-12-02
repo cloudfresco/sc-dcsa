@@ -1,0 +1,411 @@
+syntax = "proto3";
+
+package internal.proto.tnt.v3;
+
+import "google/protobuf/timestamp.proto";
+import "internal/proto/common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/tnt/v3";
+
+// The EventService service definition.
+service EventService {
+  rpc GetEvents(GetEventsRequest) returns (GetEventsResponse);
+  rpc GetEvent(GetEventRequest) returns (GetEventResponse);
+  rpc CreateEvent(CreateEventRequest) returns (CreateEventResponse);
+  rpc CreateEquipmentEvent(CreateEquipmentEventRequest) returns (CreateEquipmentEventResponse);
+  rpc LoadRelatedEntities(LoadRelatedEntitiesRequest) returns (LoadRelatedEntitiesResponse);
+  rpc CreateOperationsEvent(CreateOperationsEventRequest) returns (CreateOperationsEventResponse);
+  rpc LoadOperationsRelatedEntities(LoadOperationsRelatedEntitiesRequest) returns (LoadOperationsRelatedEntitiesResponse);
+  rpc CreateTransportEvent(CreateTransportEventRequest) returns (CreateTransportEventResponse);
+  rpc LoadTransportRelatedEntities(LoadTransportRelatedEntitiesRequest) returns (LoadTransportRelatedEntitiesResponse);
+  rpc CreateShipmentEvent(CreateShipmentEventRequest) returns (CreateShipmentEventResponse);
+  rpc CreateShipmentEventFromShippingInstruction(CreateShipmentEventFromShippingInstructionRequest) returns (CreateShipmentEventFromShippingInstructionResponse);
+  rpc LoadShipmentRelatedEntities(LoadShipmentRelatedEntitiesRequest) returns (LoadShipmentRelatedEntitiesResponse);
+}
+
+message Event {
+  EventD event_d = 1;
+  EventT event_t = 2;
+  EventClassifier event_classifier = 3;
+}
+
+message EventD {
+  uint32 id = 1;
+  bytes event_id = 2;
+  string event_classifier_code = 3;
+}
+
+message EventT {
+  google.protobuf.Timestamp event_created_date_time = 1;
+  google.protobuf.Timestamp event_date_time = 2;
+}
+
+message CreateEventRequest {
+  string event_classifier_code = 1;
+  string event_created_date_time = 2;
+  string event_date_time = 3;
+  string event_type = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+  CreateEventClassifierRequest event_classifier = 8;
+  CreateEquipmentEventRequest equipment_event = 9;
+  CreateOperationsEventRequest operations_event = 10;
+  CreateTransportEventRequest transport_event = 11;
+  CreateShipmentEventRequest shipment_event = 12;
+}
+
+message CreateEventResponse {
+  Event event = 1;
+}
+
+message CreateEventClassifierRequest {
+  string event_classifier_code = 1;
+  string event_classifier_name = 2;
+  string event_classifier_description = 3;
+  uint32 event_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message EventClassifier {
+  string event_classifier_code = 1;
+  string event_classifier_name = 2;
+  string event_classifier_description = 3;
+  uint32 event_id = 4;
+}
+
+message GetEventsResponse {
+  repeated Event events = 1;
+  string next_cursor = 2;
+}
+
+message GetEventsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetEventRequest {
+  internal.proto.common.v1.GetRequest get_request = 1;
+}
+
+message GetEventResponse {
+  Event event = 1;
+}
+
+message EquipmentEvent {
+  EquipmentEventD equipment_event_d = 1;
+  EquipmentEventT equipment_event_t = 2;
+  EquipmentEventType equipment_event_type = 3;
+}
+
+message EquipmentEventD {
+  uint32 id = 1;
+  bytes event_id_s = 2;
+  string event_classifier_code = 3;
+  string equipment_event_type_code = 4;
+  string equipment_reference = 5;
+  string empty_indicator_code = 6;
+  uint32 transport_call_id = 7;
+  string event_location = 8;
+  uint32 event_id = 9;
+}
+
+message EquipmentEventT {
+  google.protobuf.Timestamp event_created_date_time = 1;
+  google.protobuf.Timestamp event_date_time = 2;
+}
+
+message CreateEquipmentEventRequest {
+  string event_classifier_code = 1;
+  string event_created_date_time = 2;
+  string event_date_time = 3;
+  string equipment_event_type_code = 4;
+  string equipment_reference = 5;
+  string empty_indicator_code = 6;
+  uint32 transport_call_id = 7;
+  string event_location = 8;
+  uint32 event_id = 9;
+  string user_id = 10;
+  string user_email = 11;
+  string request_id = 12;
+  CreateEquipmentEventTypeRequest equipment_event_type = 13;
+}
+
+message CreateEquipmentEventTypeRequest {
+  string equipment_event_type_code = 1;
+  string equipment_event_type_name = 2;
+  string equipment_event_type_description = 3;
+  uint32 equipment_event_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateEquipmentEventResponse {
+  EquipmentEvent equipment_event = 1;
+}
+
+message LoadRelatedEntitiesResponse {
+  repeated EquipmentEvent equipment_events = 1;
+  string next_cursor = 2;
+}
+
+message LoadRelatedEntitiesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message EquipmentEventType {
+  string equipment_event_type_code = 1;
+  string equipment_event_type_name = 2;
+  string equipment_event_type_description = 3;
+  uint32 equipment_event_id = 4;
+}
+
+message OperationsEvent {
+  OperationsEventD operations_event_d = 1;
+  OperationsEventT operations_event_t = 2;
+  OperationsEventType operations_event_type = 3;
+}
+
+message OperationsEventD {
+  uint32 id = 1;
+  bytes event_id_s = 2;
+  string event_classifier_code = 3;
+  string publisher = 4;
+  string publisher_role = 5;
+  string operations_event_type_code = 6;
+  string event_location = 7;
+  uint32 transport_call_id = 8;
+  string port_call_service_type_code = 9;
+  string facility_type_code = 10;
+  string delay_reason_code = 11;
+  string vessel_position = 12;
+  string remark = 13;
+  string port_call_phase_type_code = 14;
+  double vessel_draft = 15;
+  string vessel_draft_unit = 16;
+  double miles_remaining_to_destination = 17;
+  uint32 event_id = 18;
+}
+
+message OperationsEventT {
+  google.protobuf.Timestamp event_created_date_time = 1;
+  google.protobuf.Timestamp event_date_time = 2;
+}
+
+message CreateOperationsEventRequest {
+  string event_classifier_code = 1;
+  string event_created_date_time = 2;
+  string event_date_time = 3;
+  string publisher = 4;
+  string publisher_role = 5;
+  string operations_event_type_code = 6;
+  string event_location = 7;
+  uint32 transport_call_id = 8;
+  string port_call_service_type_code = 9;
+  string facility_type_code = 10;
+  string delay_reason_code = 11;
+  string vessel_position = 12;
+  string remark = 13;
+  string port_call_phase_type_code = 14;
+  double vessel_draft = 15;
+  string vessel_draft_unit = 16;
+  double miles_remaining_to_destination = 17;
+  uint32 event_id = 18;
+  string user_id = 19;
+  string user_email = 20;
+  string request_id = 21;
+  CreateOperationsEventTypeRequest operations_event_type = 22;
+}
+
+message CreateOperationsEventTypeRequest {
+  string operations_event_type_code = 1;
+  string operations_event_type_name = 2;
+  string operations_event_type_description = 3;
+  uint32 operations_event_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateOperationsEventResponse {
+  OperationsEvent operations_event = 1;
+}
+
+message LoadOperationsRelatedEntitiesResponse {
+  repeated OperationsEvent operations_events = 1;
+  string next_cursor = 2;
+}
+
+message LoadOperationsRelatedEntitiesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message OperationsEventType {
+  string operations_event_type_code = 1;
+  string operations_event_type_name = 2;
+  string operations_event_type_description = 3;
+  uint32 operations_event_id = 4;
+}
+
+message ShipmentEvent {
+  ShipmentEventD shipment_event_d = 1;
+  ShipmentEventT shipment_event_t = 2;
+  ShipmentEventType shipment_event_type = 3;
+}
+
+message ShipmentEventD {
+  uint32 id = 1;
+  bytes event_id_s = 2;
+  string event_classifier_code = 3;
+  string shipment_event_type_code = 4;
+  string document_type_code = 5;
+  uint32 document_id = 6;
+  string document_reference = 7;
+  string reason = 8;
+  uint32 event_id = 9;
+}
+
+message ShipmentEventT {
+  google.protobuf.Timestamp event_created_date_time = 1;
+  google.protobuf.Timestamp event_date_time = 2;
+}
+
+message CreateShipmentEventRequest {
+  string event_classifier_code = 1;
+  string event_created_date_time = 2;
+  string event_date_time = 3;
+  string shipment_event_type_code = 4;
+  string document_type_code = 5;
+  uint32 document_id = 6;
+  string document_reference = 7;
+  string reason = 8;
+  uint32 event_id = 9;
+  string user_id = 10;
+  string user_email = 11;
+  string request_id = 12;
+  uint32 booking_id = 13;
+  uint32 shipping_instruction_id = 14;
+  CreateShipmentEventTypeRequest shipment_event_type = 15;
+}
+
+message CreateShipmentEventTypeRequest {
+  string shipment_event_type_code = 1;
+  string shipment_event_type_name = 2;
+  string shipment_event_type_description = 3;
+  uint32 shipment_event_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateShipmentEventResponse {
+  ShipmentEvent shipment_event = 1;
+}
+
+message CreateShipmentEventFromShippingInstructionRequest {
+  CreateShipmentEventRequest create_shipment_event_request = 1;
+}
+
+message CreateShipmentEventFromShippingInstructionResponse {
+  ShipmentEvent shipment_event = 1;
+}
+
+message LoadShipmentRelatedEntitiesResponse {
+  repeated ShipmentEvent shipment_events = 1;
+  string next_cursor = 2;
+}
+
+message LoadShipmentRelatedEntitiesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message ShipmentEventType {
+  string shipment_event_type_code = 1;
+  string shipment_event_type_name = 2;
+  string shipment_event_type_description = 3;
+  uint32 shipment_event_id = 4;
+}
+
+message TransportEvent {
+  TransportEventD transport_event_d = 1;
+  TransportEventT transport_event_t = 2;
+  TransportEventType transport_event_type = 3;
+}
+
+message TransportEventD {
+  uint32 id = 1;
+  bytes event_id_s = 2;
+  string event_classifier_code = 3;
+  string transport_event_type_code = 4;
+  string delay_reason_code = 5;
+  string change_remark = 6;
+  uint32 transport_call_id = 7;
+  uint32 event_id = 8;
+}
+
+message TransportEventT {
+  google.protobuf.Timestamp event_created_date_time = 1;
+  google.protobuf.Timestamp event_date_time = 2;
+}
+
+message CreateTransportEventRequest {
+  string event_classifier_code = 1;
+  string event_created_date_time = 2;
+  string event_date_time = 3;
+  string transport_event_type_code = 4;
+  string delay_reason_code = 5;
+  string change_remark = 6;
+  uint32 transport_call_id = 7;
+  uint32 event_id = 8;
+  string user_id = 9;
+  string user_email = 10;
+  string request_id = 11;
+  CreateTransportEventTypeRequest transport_event_type = 12;
+}
+
+message CreateTransportEventTypeRequest {
+  string transport_event_type_code = 1;
+  string transport_event_type_name = 2;
+  string transport_event_type_description = 3;
+  uint32 transport_event_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateTransportEventResponse {
+  TransportEvent transport_event = 1;
+}
+
+message LoadTransportRelatedEntitiesResponse {
+  repeated TransportEvent transport_events = 1;
+  string next_cursor = 2;
+}
+
+message LoadTransportRelatedEntitiesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message TransportEventType {
+  string transport_event_type_code = 1;
+  string transport_event_type_name = 2;
+  string transport_event_type_description = 3;
+  uint32 transport_event_id = 4;
+}
