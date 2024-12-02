@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package internal.proto.eventcore.v1;
+package eventcore.v1;
 
 import "buf/validate/validate.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/eventcore/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/eventcore/v1";
 
 // The TransportCallService service definition.
 service TransportCallService {
@@ -16,7 +16,7 @@ service TransportCallService {
 }
 
 message FindTransportCallRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message FindTransportCallResponse {
@@ -24,7 +24,7 @@ message FindTransportCallResponse {
 }
 
 message GetTransportCallByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetTransportCallByPkResponse {
@@ -72,8 +72,8 @@ message GetTransportCallsRequest {
 
 message TransportCall {
   TransportCallD transport_call_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message TransportCallD {

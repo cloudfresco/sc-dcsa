@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	tntproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/tnt/v3"
+	tntproto "github.com/cloudfresco/sc-dcsa/internal/protogen/tnt/v3"
 
 	tntworkflows "github.com/cloudfresco/sc-dcsa/internal/workflows/tntworkflows"
 

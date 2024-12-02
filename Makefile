@@ -16,7 +16,7 @@ SHELL := /bin/bash
 #LDFLAGS=-ldflags "-X=main.Version=$(VERSION) -X=main.Build=$(BUILD)"
 
 # go source files, ignore vendor directory
-SRC = $(shell find . -type f -name '*.go' -not -path "./internal/proto-gen/*")
+SRC = $(shell find . -type f -name '*.go' -not -path "./internal/protogen/*")
 SRCPROTO = $(shell find . -type f -name '*.proto'")
 MFILE = cmd/main.go
 EXEC = cmd/sc-dcsa

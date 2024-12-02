@@ -5,7 +5,7 @@ import (
 	"errors"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	"github.com/jmoiron/sqlx"
 	"go.uber.org/zap"
 )

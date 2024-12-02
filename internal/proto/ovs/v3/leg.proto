@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package internal.proto.ovs.v3;
+package ovs.v3;
 
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ovs/v3";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3";
 
 // The LegService service definition.
 service LegService {
@@ -56,7 +56,7 @@ message GetLegsRequest {
 }
 
 message GetLegRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetLegResponse {
@@ -64,7 +64,7 @@ message GetLegResponse {
 }
 
 message GetLegByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetLegByPkResponse {
@@ -73,8 +73,8 @@ message GetLegByPkResponse {
 
 message Leg {
   LegD leg_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message LegD {
@@ -125,7 +125,7 @@ message GetPointToPointRoutingsRequest {
 }
 
 message GetPointToPointRoutingRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetPointToPointRoutingResponse {
@@ -133,7 +133,7 @@ message GetPointToPointRoutingResponse {
 }
 
 message GetPointToPointRoutingByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetPointToPointRoutingByPkResponse {
@@ -142,8 +142,8 @@ message GetPointToPointRoutingByPkResponse {
 
 message PointToPointRouting {
   PointToPointRoutingD point_to_point_routing_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
   repeated Leg legs = 4;
 }
 

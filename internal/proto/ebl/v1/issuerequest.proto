@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package internal.proto.ebl.v1;
+package ebl.v1;
 
 import "buf/validate/validate.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
 
 // The IssueRequestService service definition.
 service IssueRequestService {
@@ -77,8 +77,8 @@ message UpdateIssuePartyResponse {}
 
 message IssueParty {
   IssuePartyD issue_party_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message IssuePartyD {
@@ -93,7 +93,7 @@ message IssuePartyD {
 }
 
 message GetIssuePartyRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetIssuePartyResponse {
@@ -113,7 +113,7 @@ message GetIssuePartiesResponse {
 }
 
 message GetIssuePartyByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetIssuePartyByPkResponse {
@@ -157,8 +157,8 @@ message UpdateIssuePartySupportingCodeResponse {}
 
 message IssuePartySupportingCode {
   IssuePartySupportingCodeD issue_party_supporting_code_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message IssuePartySupportingCodeD {
@@ -195,8 +195,8 @@ message UpdateEblVisualizationResponse {}
 
 message EblVisualization {
   EblVisualizationD ebl_visualization_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message EblVisualizationD {
@@ -235,8 +235,8 @@ message UpdateIssuanceRequestResponse {}
 
 message IssuanceRequest {
   IssuanceRequestD issuance_request_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message IssuanceRequestD {

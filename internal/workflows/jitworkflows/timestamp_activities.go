@@ -3,8 +3,8 @@ package jitworkflows
 import (
 	"context"
 
-	jitproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/jit/v1"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	jitproto "github.com/cloudfresco/sc-dcsa/internal/protogen/jit/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/metadata"
 )

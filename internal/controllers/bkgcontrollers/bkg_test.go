@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	bkgproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2"
+	bkgproto "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2"
 	"github.com/cloudfresco/sc-dcsa/test"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/stretchr/testify/assert"

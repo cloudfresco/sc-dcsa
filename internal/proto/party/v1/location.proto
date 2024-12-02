@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package internal.proto.party.v1;
+package party.v1;
 
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1";
 
 // The LocationService service definition.
 service LocationService {
@@ -43,7 +43,7 @@ message LoadLocationsRequest {
 }
 
 message FetchLocationByIDRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message FetchLocationByIDResponse {

@@ -9,7 +9,7 @@ import (
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
 	"github.com/cloudfresco/sc-dcsa/internal/config"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	"github.com/cloudfresco/sc-dcsa/test"
 	_ "github.com/go-sql-driver/mysql"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"

@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	jitproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/jit/v1"
+	jitproto "github.com/cloudfresco/sc-dcsa/internal/protogen/jit/v1"
 	"github.com/cloudfresco/sc-dcsa/test"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap"

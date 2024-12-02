@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
 	"github.com/spf13/viper"
 	//"io"
 	//"io/ioutil"

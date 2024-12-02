@@ -3,8 +3,8 @@ package bkgworkflows
 import (
 	"time"
 
-	bkgproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	bkgproto "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 
 	"go.uber.org/cadence/workflow"
 	"go.uber.org/zap"

@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package internal.proto.ebl.v1;
+package ebl.v1;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
 
 // The ShippingService service definition.
 service ShippingService {
@@ -42,11 +42,11 @@ message FindCarrierBookingReferenceByShippingInstructionIdResponse {
 }
 
 message FindCarrierBookingReferenceByShippingInstructionIdRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetShipmentRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetShipmentResponse {
@@ -54,7 +54,7 @@ message GetShipmentResponse {
 }
 
 message GetShipmentByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetShipmentByPkResponse {
@@ -76,8 +76,8 @@ message GetShipmentsResponse {
 message Shipment {
   ShipmentD shipment_d = 1;
   ShipmentT shipment_t = 2;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 3;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 4;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
 }
 
 message ShipmentD {
@@ -134,7 +134,7 @@ message CreateTransportResponse {
 }
 
 message GetTransportRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetTransportResponse {
@@ -142,7 +142,7 @@ message GetTransportResponse {
 }
 
 message GetTransportByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetTransportByPkResponse {
@@ -151,8 +151,8 @@ message GetTransportByPkResponse {
 
 message Transport {
   TransportD transport_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message TransportD {

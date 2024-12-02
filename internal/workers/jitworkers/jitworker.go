@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	jitproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/jit/v1"
+	jitproto "github.com/cloudfresco/sc-dcsa/internal/protogen/jit/v1"
 
 	jitworkflows "github.com/cloudfresco/sc-dcsa/internal/workflows/jitworkflows"
 

@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
-	eblproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
+	eblproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1"
 	partyservice "github.com/cloudfresco/sc-dcsa/internal/services/partyservices"
 	commonstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/common/v1"
 	eblstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/ebl/v1"

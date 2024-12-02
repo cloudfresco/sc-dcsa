@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	ovsproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ovs/v3"
+	ovsproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3"
 
 	ovsworkflows "github.com/cloudfresco/sc-dcsa/internal/workflows/ovsworkflows"
 

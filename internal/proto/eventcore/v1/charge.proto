@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package internal.proto.eventcore.v1;
+package eventcore.v1;
 
 import "buf/validate/validate.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/eventcore/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/eventcore/v1";
 
 // The ChargeService service definition.
 service ChargeService {
@@ -63,8 +63,8 @@ message FetchChargesByTransportDocumentIdResponse {
 
 message Charge {
   ChargeD charge_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message ChargeD {

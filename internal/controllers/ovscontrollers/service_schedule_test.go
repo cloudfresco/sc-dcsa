@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	ovsproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ovs/v3"
+	ovsproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3"
 	"github.com/cloudfresco/sc-dcsa/test"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/stretchr/testify/assert"

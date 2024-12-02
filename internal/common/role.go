@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strings"
 
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
 	"go.uber.org/zap"
 )
 

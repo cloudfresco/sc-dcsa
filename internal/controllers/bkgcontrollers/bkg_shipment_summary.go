@@ -8,8 +8,8 @@ import (
 	"net/url"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	bkgproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	bkgproto "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/metadata"
 )

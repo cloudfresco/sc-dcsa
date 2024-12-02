@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package internal.proto.bkg.v2;
+package bkg.v2;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
-import "internal/proto/bkg/v2/reference.proto";
-import "internal/proto/common/v1/common.proto";
+import "bkg/v2/reference.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2";
 
 // The BkgService service definition.
 service BkgService {
@@ -90,7 +90,7 @@ message GetBookingsResponse {
 }
 
 message GetBookingRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetBookingResponse {
@@ -98,7 +98,7 @@ message GetBookingResponse {
 }
 
 message GetBookingByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetBookingByPkResponse {
@@ -234,8 +234,8 @@ message FetchShipmentLocationsByBookingIDResponse {
 message Booking {
   BookingD booking_d = 1;
   BookingT booking_t = 2;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 3;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 4;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
   repeated Commodity commodities = 5;
   repeated ValueAddedServiceRequest value_added_service_requests = 6;
   repeated Reference1 references = 7;
@@ -291,8 +291,8 @@ message BookingT {
 message Commodity {
   CommodityD commodity_d = 1;
   CommodityT commodity_t = 2;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 3;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 4;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
 }
 
 message CommodityD {
@@ -316,8 +316,8 @@ message CommodityT {
 
 message RequestedEquipment {
   RequestedEquipmentD requested_equipment_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message RequestedEquipmentD {

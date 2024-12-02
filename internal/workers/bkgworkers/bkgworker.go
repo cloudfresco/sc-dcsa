@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	bkgproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2"
+	bkgproto "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2"
 
 	bkgworkflows "github.com/cloudfresco/sc-dcsa/internal/workflows/bkgworkflows"
 

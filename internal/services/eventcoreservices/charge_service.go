@@ -8,9 +8,9 @@ import (
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
 	"github.com/cloudfresco/sc-dcsa/internal/config"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
-	eventcoreproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/eventcore/v1"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
+	eventcoreproto "github.com/cloudfresco/sc-dcsa/internal/protogen/eventcore/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	partyservice "github.com/cloudfresco/sc-dcsa/internal/services/partyservices"
 	commonstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/common/v1"
 	eventcorestruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/eventcore/v1"

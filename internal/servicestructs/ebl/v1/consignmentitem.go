@@ -1,8 +1,8 @@
 package v1
 
 import (
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
-	eblproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
+	eblproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1"
 	commonstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/common/v1"
 )
 

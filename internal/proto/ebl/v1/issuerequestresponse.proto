@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package internal.proto.ebl.v1;
+package ebl.v1;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
 
 // The IssueRequestResponseService service definition.
 service IssueRequestResponseService {
@@ -54,8 +54,8 @@ message UpdateIssuanceRequestResponseResponse {}
 message IssuanceRequestResponse {
   IssuanceRequestResponseD issuance_request_response_d = 1;
   IssuanceRequestResponseT issuance_request_response_t = 2;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 3;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 4;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
 }
 
 message IssuanceRequestResponseD {

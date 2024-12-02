@@ -9,8 +9,8 @@ import (
 	"github.com/cloudfresco/sc-dcsa/internal/common"
 	"github.com/cloudfresco/sc-dcsa/internal/config"
 
-	ovsproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ovs/v3"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	ovsproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	"github.com/throttled/throttled/v2/store/goredisstore"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.uber.org/cadence/client"

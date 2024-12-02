@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package internal.proto.tnt.v3;
+package tnt.v3;
 
 import "buf/validate/validate.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/tnt/v3";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/tnt/v3";
 
 // The SealService service definition.
 service SealService {
@@ -15,8 +15,8 @@ service SealService {
 
 message Seal {
   SealD seal_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message SealD {

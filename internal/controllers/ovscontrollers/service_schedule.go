@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	ovsproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ovs/v3"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	ovsproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	"github.com/cloudfresco/sc-dcsa/internal/workflows/ovsworkflows"
 	"github.com/pborman/uuid"
 	"go.uber.org/cadence/client"

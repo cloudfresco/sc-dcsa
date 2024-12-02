@@ -1,8 +1,8 @@
 package v1
 
 import (
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
-	jitproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/jit/v1"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
+	jitproto "github.com/cloudfresco/sc-dcsa/internal/protogen/jit/v1"
 	commonstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/common/v1"
 )
 

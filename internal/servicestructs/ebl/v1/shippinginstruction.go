@@ -3,7 +3,7 @@ package v1
 import (
 	"time"
 
-	eblproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1"
+	eblproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1"
 )
 
 // ShippingInstruction - struct ShippingInstruction

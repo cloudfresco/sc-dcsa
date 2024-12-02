@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package internal.proto.ebl.v1;
+package ebl.v1;
 
 import "buf/validate/validate.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
 
 // The ConsignmentItemService service definition.
 service ConsignmentItemService {
@@ -70,8 +70,8 @@ message RemoveConsignmentItemsByShippingInstructionIdResponse {}
 
 message CargoItem {
   CargoItemD cargo_item_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
   repeated CargoLineItem cargo_line_items = 4;
 }
 
@@ -108,8 +108,8 @@ message CreateCargoItemRequest {
 
 message CargoLineItem {
   CargoLineItemD cargo_line_item_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message CargoLineItemD {
@@ -130,8 +130,8 @@ message CreateCargoLineItemRequest {
 
 message ConsignmentItem {
   ConsignmentItemD consignment_item_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
   repeated CargoItem cargo_items = 4;
 }
 

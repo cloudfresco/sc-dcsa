@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package internal.proto.ebl.v1;
+package ebl.v1;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
 
 // The SurrenderRequestService service definition.
 service SurrenderRequestService {
@@ -78,8 +78,8 @@ message UpdateTransactionPartyResponse {}
 
 message TransactionParty {
   TransactionPartyD transaction_party_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message TransactionPartyD {
@@ -94,7 +94,7 @@ message TransactionPartyD {
 }
 
 message GetTransactionPartyRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetTransactionPartyResponse {
@@ -114,7 +114,7 @@ message GetTransactionPartiesResponse {
 }
 
 message GetTransactionPartyByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetTransactionPartyByPkResponse {
@@ -158,8 +158,8 @@ message UpdateTransactionPartySupportingCodeResponse {}
 
 message TransactionPartySupportingCode {
   TransactionPartySupportingCodeD transaction_party_supporting_code_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message TransactionPartySupportingCodeD {
@@ -201,8 +201,8 @@ message UpdateEndorsementChainLinkResponse {}
 message EndorsementChainLink {
   EndorsementChainLinkD endorsement_chain_link_d = 1;
   EndorsementChainLinkT endorsement_chain_link_t = 2;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 3;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 4;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
 }
 
 message EndorsementChainLinkD {
@@ -261,8 +261,8 @@ message UpdateSurrenderRequestResponse {}
 message SurrenderRequest {
   SurrenderRequestD surrender_request_d = 1;
   SurrenderRequestT surrender_request_t = 2;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 3;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 4;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
 }
 
 message SurrenderRequestD {

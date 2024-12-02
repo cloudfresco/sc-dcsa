@@ -3,8 +3,8 @@ package tntworkflows
 import (
 	"time"
 
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
-	tntproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/tnt/v3"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
+	tntproto "github.com/cloudfresco/sc-dcsa/internal/protogen/tnt/v3"
 
 	"go.uber.org/cadence/workflow"
 	"go.uber.org/zap"

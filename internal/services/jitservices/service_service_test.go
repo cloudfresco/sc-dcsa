@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
-	jitproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/jit/v1"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
+	jitproto "github.com/cloudfresco/sc-dcsa/internal/protogen/jit/v1"
 	"github.com/cloudfresco/sc-dcsa/test"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap"

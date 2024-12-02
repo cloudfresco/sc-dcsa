@@ -9,9 +9,9 @@ import (
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
 	"github.com/cloudfresco/sc-dcsa/internal/config"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
-	tntproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/tnt/v3"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
+	tntproto "github.com/cloudfresco/sc-dcsa/internal/protogen/tnt/v3"
 	tntstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/tnt/v3"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 

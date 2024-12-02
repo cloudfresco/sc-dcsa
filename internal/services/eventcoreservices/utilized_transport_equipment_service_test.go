@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	eventcoreproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/eventcore/v1"
+	eventcoreproto "github.com/cloudfresco/sc-dcsa/internal/protogen/eventcore/v1"
 	"github.com/cloudfresco/sc-dcsa/test"
 	"github.com/stretchr/testify/assert"
 )

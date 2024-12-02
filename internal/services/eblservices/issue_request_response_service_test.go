@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	eblproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1"
+	eblproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1"
 	"github.com/cloudfresco/sc-dcsa/test"
 	"github.com/stretchr/testify/assert"
 )

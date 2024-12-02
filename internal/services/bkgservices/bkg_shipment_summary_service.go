@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	bkgproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	bkgproto "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	partyservice "github.com/cloudfresco/sc-dcsa/internal/services/partyservices"
 	bkgstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/bkg/v2"
 	commonstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/common/v1"

@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package internal.proto.party.v1;
+package party.v1;
 
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1";
 
 // The PartyService service definition.
 service PartyService {
@@ -70,13 +70,13 @@ message UpdatePartyRequest {
 message UpdatePartyResponse {}
 
 message DeletePartyRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message DeletePartyResponse {}
 
 message GetPartyRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetPartyResponse {
@@ -84,7 +84,7 @@ message GetPartyResponse {
 }
 
 message GetPartyByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetPartyByPkResponse {
@@ -93,8 +93,8 @@ message GetPartyByPkResponse {
 
 message Party {
   PartyD party_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message PartyD {
@@ -114,8 +114,8 @@ message Parties {
 
 message PartyContactDetail {
   PartyContactDetailD party_contact_detail_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message PartyContactDetailD {
@@ -158,7 +158,7 @@ message UpdatePartyContactDetailRequest {
 message UpdatePartyContactDetailResponse {}
 
 message GetPartyContactDetailRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetPartyContactDetailResponse {
@@ -166,7 +166,7 @@ message GetPartyContactDetailResponse {
 }
 
 message DeletePartyContactDetailRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message DeletePartyContactDetailResponse {}
@@ -211,8 +211,8 @@ message CreateFacilityResponse {
 
 message Facility {
   FacilityD facility_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message FacilityD {

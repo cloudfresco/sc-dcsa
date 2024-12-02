@@ -1,6 +1,12 @@
-version: v1
-name: buf.build/cloudfresco/sc-dcsa
+version: v2
+modules:
+  - path: internal/proto
+    name: buf.build/slruser100/sc-dcsa
+lint:
+  use:
+    - STANDARD
+breaking:
+  use:
+    - FILE
 deps:
-  - buf.build/googleapis/googleapis
-  - buf.build/grpc-ecosystem/grpc-gateway
   - buf.build/bufbuild/protovalidate

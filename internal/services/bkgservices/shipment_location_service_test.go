@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	bkgproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2"
+	bkgproto "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2"
 	"github.com/cloudfresco/sc-dcsa/test"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap"

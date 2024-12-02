@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package internal.proto.jit.v1;
+package jit.v1;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/jit/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/jit/v1";
 
 // The TimestampService service definition.
 service TimestampService {

@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	bkgproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
+	bkgproto "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
 	"github.com/cloudfresco/sc-dcsa/test"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap"

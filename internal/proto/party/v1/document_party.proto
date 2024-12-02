@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package internal.proto.party.v1;
+package party.v1;
 
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1";
 
 // The DocumentPartyService service definition.
 service DocumentPartyService {
@@ -88,8 +88,8 @@ message ResolveDocumentPartiesForShippingInstructionIDResponse {}
 
 message DocumentParty {
   DocumentPartyD document_party_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message DocumentPartyD {

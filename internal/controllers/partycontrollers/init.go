@@ -9,7 +9,7 @@ import (
 	"github.com/cloudfresco/sc-dcsa/internal/common"
 	"github.com/cloudfresco/sc-dcsa/internal/config"
 
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	"github.com/throttled/throttled/v2/store/goredisstore"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.uber.org/zap"

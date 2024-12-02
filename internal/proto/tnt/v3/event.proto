@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package internal.proto.tnt.v3;
+package tnt.v3;
 
 import "google/protobuf/timestamp.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/tnt/v3";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/tnt/v3";
 
 // The EventService service definition.
 service EventService {
@@ -89,7 +89,7 @@ message GetEventsRequest {
 }
 
 message GetEventRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetEventResponse {

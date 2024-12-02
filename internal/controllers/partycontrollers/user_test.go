@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"testing"
 
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	"github.com/cloudfresco/sc-dcsa/test"
 	_ "github.com/go-sql-driver/mysql"
 )

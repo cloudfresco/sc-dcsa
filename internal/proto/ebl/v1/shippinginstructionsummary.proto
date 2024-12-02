@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package internal.proto.ebl.v1;
+package ebl.v1;
 
 import "google/protobuf/timestamp.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
 
 // The ShippingInstructionSummaryService service definition.
 service ShippingInstructionSummaryService {
@@ -20,8 +20,8 @@ message CreateShippingInstructionSummaryResponse {
 message ShippingInstructionSummary {
   ShippingInstructionSummaryD shipping_instruction_summary_d = 1;
   ShippingInstructionSummaryT shipping_instruction_summary_t = 2;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 3;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 4;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
 }
 
 message ShippingInstructionSummaryD {

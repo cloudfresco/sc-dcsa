@@ -11,8 +11,8 @@ import (
 
 	"github.com/bufbuild/protovalidate-go"
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	bkgproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	bkgproto "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	bkgworkflows "github.com/cloudfresco/sc-dcsa/internal/workflows/bkgworkflows"
 
 	"github.com/pborman/uuid"

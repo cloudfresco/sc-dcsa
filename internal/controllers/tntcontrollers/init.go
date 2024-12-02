@@ -8,8 +8,8 @@ import (
 	"github.com/cloudfresco/sc-dcsa/internal/common"
 	"github.com/cloudfresco/sc-dcsa/internal/config"
 
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
-	tntproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/tnt/v3"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
+	tntproto "github.com/cloudfresco/sc-dcsa/internal/protogen/tnt/v3"
 	"github.com/throttled/throttled/v2/store/goredisstore"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.uber.org/cadence/client"

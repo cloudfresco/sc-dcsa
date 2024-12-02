@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package internal.proto.common.v1;
+package common.v1;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1";
 
 message GetByIdRequest {
   uint32 id = 1;

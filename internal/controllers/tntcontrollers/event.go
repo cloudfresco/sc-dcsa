@@ -8,9 +8,9 @@ import (
 	"net/url"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
-	tntproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/tnt/v3"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
+	tntproto "github.com/cloudfresco/sc-dcsa/internal/protogen/tnt/v3"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/metadata"
 )

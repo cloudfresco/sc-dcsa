@@ -1,11 +1,10 @@
 syntax = "proto3";
 
-package internal.proto.party.v1;
+package party.v1;
 
-import "google/protobuf/timestamp.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1";
 
 // The UserService service definition.
 service UserService {
@@ -43,7 +42,7 @@ message User {
 }
 
 message GetUserRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetUserResponse {
@@ -130,65 +129,65 @@ message GetAuthUserDetailsRequest {
 }
 
 message CreateRoleRequest {
-  internal.proto.common.v1.CreateRole create_role = 1;
+  common.v1.CreateRole create_role = 1;
 }
 
 message CreateRoleResponse {
-  internal.proto.common.v1.Role role = 1;
+  common.v1.Role role = 1;
 }
 
 message GetRoleRequest {
-  internal.proto.common.v1.GetRole get_role = 1;
+  common.v1.GetRole get_role = 1;
 }
 
 message GetRoleResponse {
-  internal.proto.common.v1.Role role = 1;
+  common.v1.Role role = 1;
 }
 
 message GetRolesRequest {
-  internal.proto.common.v1.GetRoles get_roles = 1;
+  common.v1.GetRoles get_roles = 1;
 }
 
 message GetRolesResponse {
-  repeated internal.proto.common.v1.Role roles = 1;
+  repeated common.v1.Role roles = 1;
 }
 
 message DeleteRoleRequest {
-  internal.proto.common.v1.DeleteRole delete_role = 1;
+  common.v1.DeleteRole delete_role = 1;
 }
 
 message DeleteRoleResponse {}
 
 message UpdateRoleRequest {
-  internal.proto.common.v1.UpdateRole update_role = 1;
+  common.v1.UpdateRole update_role = 1;
 }
 
 message UpdateRoleResponse {
-  internal.proto.common.v1.Role role = 1;
+  common.v1.Role role = 1;
 }
 
 message AddPermisionsToRolesRequest {
-  internal.proto.common.v1.AddPermisionsToRoles add_permisions_to_roles = 1;
+  common.v1.AddPermisionsToRoles add_permisions_to_roles = 1;
 }
 
 message AddPermisionsToRolesResponse {}
 
 message RemoveRolePermissionRequest {
-  internal.proto.common.v1.RemoveRolePermission remove_role_permission = 1;
+  common.v1.RemoveRolePermission remove_role_permission = 1;
 }
 
 message RemoveRolePermissionResponse {}
 
 message GetRolePermissionsRequest {
-  internal.proto.common.v1.GetRolePermissions get_role_permissions = 1;
+  common.v1.GetRolePermissions get_role_permissions = 1;
 }
 
 message GetRolePermissionsResponse {
-  repeated internal.proto.common.v1.RolePermission role_permissions = 1;
+  repeated common.v1.RolePermission role_permissions = 1;
 }
 
 message AssignRolesToUsersRequest {
-  internal.proto.common.v1.AssignRolesToUsers assign_roles_to_users = 1;
+  common.v1.AssignRolesToUsers assign_roles_to_users = 1;
 }
 
 message AssignRolesToUsersResponse {}
@@ -205,15 +204,15 @@ message GetRoleUsersResponse {
 }
 
 message ViewUserRolesRequest {
- internal.proto.common.v1.ViewUserRoles view_user_roles = 1;
+ common.v1.ViewUserRoles view_user_roles = 1;
 }
 
 message ViewUserRolesResponse {
-  repeated internal.proto.common.v1.Role roles = 1;
+  repeated common.v1.Role roles = 1;
 }
 
 message AddAPIPermissionRequest {
-  repeated internal.proto.common.v1.Permission permissions = 1;
+  repeated common.v1.Permission permissions = 1;
 }
 
 message AddAPIPermissionResponse {}

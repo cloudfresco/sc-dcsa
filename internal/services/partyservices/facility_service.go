@@ -5,8 +5,8 @@ import (
 	"errors"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	commonstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/common/v1"
 	partystruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/party/v1"
 	"github.com/jmoiron/sqlx"

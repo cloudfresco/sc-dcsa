@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package internal.proto.jit.v1;
+package jit.v1;
 
 import "buf/validate/validate.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/jit/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/jit/v1";
 
 // The Service service definition.
 service ServiceService {
@@ -44,7 +44,7 @@ message GetServicesResponse {
 }
 
 message GetServiceRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetServiceResponse {
@@ -52,7 +52,7 @@ message GetServiceResponse {
 }
 
 message GetServiceByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetServiceByPkResponse {
@@ -72,8 +72,8 @@ message FindByCarrierServiceCodeResponse {
 
 message Service {
   ServiceD service_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message ServiceD {

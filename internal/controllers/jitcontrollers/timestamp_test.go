@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	jitproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/jit/v1"
+	jitproto "github.com/cloudfresco/sc-dcsa/internal/protogen/jit/v1"
 	"github.com/cloudfresco/sc-dcsa/test"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/stretchr/testify/assert"

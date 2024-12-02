@@ -3,8 +3,8 @@ package v2
 import (
 	"time"
 
-	bkgproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
+	bkgproto "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
 	commonstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/common/v1"
 )
 

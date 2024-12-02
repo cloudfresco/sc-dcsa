@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package internal.proto.bkg.v2;
+package bkg.v2;
 
 import "google/protobuf/timestamp.proto";
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/bkg/v2";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2";
 
 // The BkgShipmentSummaryService service definition.
 service BkgShipmentSummaryService {
@@ -45,8 +45,8 @@ message GetBkgShipmentSummariesResponse {
 message BkgShipmentSummary {
   BkgShipmentSummaryD bkg_shipment_summary_d = 1;
   BkgShipmentSummaryT bkg_shipment_summary_t = 2;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 3;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 4;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
 }
 
 message BkgShipmentSummaryD {

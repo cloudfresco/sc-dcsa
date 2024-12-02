@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-package internal.proto.ebl.v1;
+package ebl.v1;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
-import "internal/proto/bkg/v2/reference.proto";
-import "internal/proto/common/v1/common.proto";
-import "internal/proto/ebl/v1/consignmentitem.proto";
-import "internal/proto/eventcore/v1/utilizedtransportequipment.proto";
+import "bkg/v2/reference.proto";
+import "common/v1/common.proto";
+import "ebl/v1/consignmentitem.proto";
+import "eventcore/v1/utilizedtransportequipment.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
 
 // The ShippingInstructionService service definition.
 service ShippingInstructionService {
@@ -48,9 +48,9 @@ message CreateShippingInstructionRequest {
   string user_id = 19;
   string user_email = 20;
   string request_id = 21;
-  repeated internal.proto.bkg.v2.CreateReferenceRequest references = 22;
-  repeated internal.proto.eventcore.v1.CreateUtilizedTransportEquipmentRequest utilized_transport_equipments = 23;
-  repeated internal.proto.ebl.v1.CreateConsignmentItemRequest consignment_items = 24;
+  repeated bkg.v2.CreateReferenceRequest references = 22;
+  repeated eventcore.v1.CreateUtilizedTransportEquipmentRequest utilized_transport_equipments = 23;
+  repeated ebl.v1.CreateConsignmentItemRequest consignment_items = 24;
 }
 
 message CreateShippingInstructionResponse {
@@ -70,7 +70,7 @@ message GetShippingInstructionsRequest {
 }
 
 message FindByIdRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message FindByIdResponse {
@@ -78,7 +78,7 @@ message FindByIdResponse {
 }
 
 message GetShippingInstructionByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetShippingInstructionByPkResponse {

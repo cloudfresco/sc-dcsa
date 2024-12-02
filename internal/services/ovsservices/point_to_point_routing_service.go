@@ -5,8 +5,8 @@ import (
 	"errors"
 
 	"github.com/cloudfresco/sc-dcsa/internal/common"
-	commonproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/common/v1"
-	ovsproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ovs/v3"
+	commonproto "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1"
+	ovsproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3"
 	partyservice "github.com/cloudfresco/sc-dcsa/internal/services/partyservices"
 	commonstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/common/v1"
 	ovsstruct "github.com/cloudfresco/sc-dcsa/internal/servicestructs/ovs/v3"

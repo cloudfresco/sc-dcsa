@@ -3,8 +3,8 @@ package ovsworkflows
 import (
 	"context"
 
-	ovsproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ovs/v3"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	ovsproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/metadata"
 )

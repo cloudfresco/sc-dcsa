@@ -3,8 +3,8 @@ package eblworkflows
 import (
 	"time"
 
-	eblproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ebl/v1"
-	partyproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/party/v1"
+	eblproto "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1"
+	partyproto "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1"
 
 	"go.uber.org/cadence/workflow"
 	"go.uber.org/zap"

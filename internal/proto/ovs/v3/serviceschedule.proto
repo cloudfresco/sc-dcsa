@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package internal.proto.ovs.v3;
+package ovs.v3;
 
-import "internal/proto/common/v1/common.proto";
+import "common/v1/common.proto";
 
-option go_package = "github.com/cloudfresco/sc-dcsa/internal/proto-gen/ovs/v3";
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3";
 
 // The ServiceScheduleService service definition.
 service ServiceScheduleService {
@@ -30,7 +30,7 @@ message CreateServiceScheduleResponse {
 }
 
 message GetServiceScheduleRequest {
-  internal.proto.common.v1.GetRequest get_request = 1;
+  common.v1.GetRequest get_request = 1;
 }
 
 message GetServiceScheduleResponse {
@@ -38,7 +38,7 @@ message GetServiceScheduleResponse {
 }
 
 message GetServiceScheduleByPkRequest {
-  internal.proto.common.v1.GetByIdRequest get_by_id_request = 1;
+  common.v1.GetByIdRequest get_by_id_request = 1;
 }
 
 message GetServiceScheduleByPkResponse {
@@ -80,8 +80,8 @@ message UpdateServiceScheduleByUniversalServiceReferenceResponse {}
 
 message ServiceSchedule {
   ServiceScheduleD service_schedule_d = 1;
-  internal.proto.common.v1.CrUpdUser cr_upd_user = 2;
-  internal.proto.common.v1.CrUpdTime cr_upd_time = 3;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
 }
 
 message ServiceScheduleD {

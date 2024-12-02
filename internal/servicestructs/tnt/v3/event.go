@@ -3,7 +3,7 @@ package v3
 import (
 	"time"
 
-	tntproto "github.com/cloudfresco/sc-dcsa/internal/proto-gen/tnt/v3"
+	tntproto "github.com/cloudfresco/sc-dcsa/internal/protogen/tnt/v3"
 )
 
 // Event - struct Event
