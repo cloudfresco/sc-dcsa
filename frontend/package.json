@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@auth0/auth0-vue": "^2.0.0",
-    "axios": "^0.27.2",
+    "axios": "^0.28.0",
     "vue": "^3.2.36",
     "vue-router": "^4.0.15"
   },
@@ -20,6 +20,6 @@
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^8.2.0",
     "prettier": "^2.5.1",
-    "vite": "^2.9.9"
+    "vite": "^3.2.11"
   }
 }
