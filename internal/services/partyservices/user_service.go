@@ -121,8 +121,6 @@ func StartUserServer(log *zap.Logger, isTest bool, pwd string, dbOpt *config.DBO
 
 // GetUsers - Get users
 func (u *UserService) GetUsers(ctx context.Context, in *partyproto.GetUsersRequest) (*partyproto.GetUsersResponse, error) {
-	// url := "https://dev-q3i1a0rds2l1nrpb.us.auth0.com/api/v2/users
-	// fmt.Println("u.ServerOptions.Auth0Domain", u.ServerOptions.Auth0Domain)
 	fmt.Println("u.ServerOptions.Auth0Domain", u.ServerOptions.Auth0MgmtToken)
 	url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/users"
 	respBody, err := common.SendRequest("GET", url, nil, "Bearer "+u.ServerOptions.Auth0MgmtToken)
@@ -156,7 +154,6 @@ func (u *UserService) GetUsers(ctx context.Context, in *partyproto.GetUsersReque
 
 // GetUserByEmail - Get user details by email
 func (u *UserService) GetUserByEmail(ctx context.Context, in *partyproto.GetUserByEmailRequest) (*partyproto.GetUserByEmailResponse, error) {
-	// url := "https://dev-q3i1a0rds2l1nrpb.us.auth0.com/api/v2/users-by-email?email=" + email
 	fmt.Println("in.Email", in.Email)
 	fmt.Println("u.ServerOptions.Auth0MgmtToken", "Bearer "+u.ServerOptions.Auth0MgmtToken)
 	url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/users-by-email?email=" + in.Email
@@ -194,7 +191,6 @@ func (u *UserService) GetUserByEmail(ctx context.Context, in *partyproto.GetUser
 // GetUser - used to get user by Id
 func (u *UserService) GetUser(ctx context.Context, inReq *partyproto.GetUserRequest) (*partyproto.GetUserResponse, error) {
 	in := inReq.GetRequest
-	// url := "https://dev-q3i1a0rds2l1nrpb.us.auth0.com/api/v2/users/" + userID
 	fmt.Println(" GetUser in.Id", in.Id)
 	url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/users/" + in.Id
 	respBody, err := common.SendRequest("GET", url, nil, "Bearer "+u.ServerOptions.Auth0MgmtToken)
@@ -225,8 +221,6 @@ func (u *UserService) GetUser(ctx context.Context, inReq *partyproto.GetUserRequ
 
 // ChangePassword - used to update password
 func (u *UserService) ChangePassword(ctx context.Context, in *partyproto.ChangePasswordRequest) (*partyproto.ChangePasswordResponse, error) {
-	// https://{yourDomain}/dbconnections/change_password \
-	// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/dbconnections/change_password"
 	url := "https://" + u.ServerOptions.Auth0Domain + "/dbconnections/change_password"
 
 	fmt.Println("url", url)
@@ -253,7 +247,6 @@ func (u *UserService) ChangePassword(ctx context.Context, in *partyproto.ChangeP
 
 // DeleteUser - used to get user by Id
 func (u *UserService) DeleteUser(ctx context.Context, in *partyproto.DeleteUserRequest) (*partyproto.DeleteUserResponse, error) {
-	// url := "https://dev-q3i1a0rds2l1nrpb.us.auth0.com/api/v2/users/" + userID
 	url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/users/" + in.UserId
 	_, err := common.SendRequest("DELETE", url, nil, "Bearer "+u.ServerOptions.Auth0MgmtToken)
 	if err != nil {
@@ -293,7 +286,6 @@ func (u *UserService) GetAuthUserDetails(ctx context.Context, in *partyproto.Get
 		fmt.Println("UserService GetAuthUserDetails() resp", resp)
 		v := partyproto.GetAuthUserDetailsResponse{}
 		if resp == "" {
-			// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/userinfo"
 			url := "https://" + u.ServerOptions.Auth0Domain + "/userinfo"
 			fmt.Println("url", url)
 			respBody, err := common.SendRequest("GET", url, nil, "Bearer "+in.TokenString)
@@ -336,11 +328,6 @@ func (u *UserService) GetAuthUserDetails(ctx context.Context, in *partyproto.Get
 
 // CreateRole - used to create Role
 func (u *UserService) CreateRole(ctx context.Context, in *partyproto.CreateRoleRequest) (*partyproto.CreateRoleResponse, error) {
-	// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/api/v2/roles"
-	/*url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/roles"
-	payload := strings.NewReader(`{"name":"` + in.Name + `","description":"` + in.Description + `"}`)
-
-	_, err := common.SendRequest("POST", url, payload, "Bearer "+u.ServerOptions.Auth0MgmtToken)*/
 	inReq := in.CreateRole
 	inReq.Auth0Domain = u.ServerOptions.Auth0Domain
 	inReq.Auth0MgmtToken = u.ServerOptions.Auth0MgmtToken
@@ -357,26 +344,6 @@ func (u *UserService) CreateRole(ctx context.Context, in *partyproto.CreateRoleR
 
 // GetRole - used to get Role
 func (u *UserService) GetRole(ctx context.Context, in *partyproto.GetRoleRequest) (*partyproto.GetRoleResponse, error) {
-	// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/api/v2/roles/" + roleID
-	/*url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/roles/" + in.RoleId
-	respBody, err := common.SendRequest("GET", url, nil, "Bearer "+u.ServerOptions.Auth0MgmtToken)
-	if err != nil {
-		fmt.Println("err", err)
-		return nil, err
-	}
-
-	jsonDataReader := strings.NewReader(string(respBody))
-	decoder := json.NewDecoder(jsonDataReader)
-	var roleResp map[string]interface{}
-	err = decoder.Decode(&roleResp)
-	if err != nil {
-		fmt.Println("err", err)
-		return nil, err
-	}
-	role := commonproto.Role{}
-	role.Id = roleResp["id"].(string)
-	role.Name = roleResp["name"].(string)
-	role.Description = roleResp["description"].(string)*/
 	inReq := in.GetRole
 	inReq.Auth0Domain = u.ServerOptions.Auth0Domain
 	inReq.Auth0MgmtToken = u.ServerOptions.Auth0MgmtToken
@@ -392,9 +359,6 @@ func (u *UserService) GetRole(ctx context.Context, in *partyproto.GetRoleRequest
 
 // DeleteRole - used to delete Role
 func (u *UserService) DeleteRole(ctx context.Context, in *partyproto.DeleteRoleRequest) (*partyproto.DeleteRoleResponse, error) {
-	// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/api/v2/roles/" + roleID
-	/*url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/roles/" + in.RoleId
-	_, err := common.SendRequest("DELETE", url, nil, "Bearer "+u.ServerOptions.Auth0MgmtToken)*/
 	inReq := in.DeleteRole
 	inReq.Auth0Domain = u.ServerOptions.Auth0Domain
 	inReq.Auth0MgmtToken = u.ServerOptions.Auth0MgmtToken
@@ -408,16 +372,6 @@ func (u *UserService) DeleteRole(ctx context.Context, in *partyproto.DeleteRoleR
 
 // UpdateRole - used to update Role
 func (u *UserService) UpdateRole(ctx context.Context, in *partyproto.UpdateRoleRequest) (*partyproto.UpdateRoleResponse, error) {
-	// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/api/v2/roles/"   + roleID
-	/*url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/roles/" + in.RoleId
-	payload := strings.NewReader(`{"name":"` + in.Name + `","description":"` + in.Description + `"}`)
-
-	_, err := common.SendRequest("PATCH", url, payload, "Bearer "+u.ServerOptions.Auth0MgmtToken)
-	if err != nil {
-		fmt.Println("err", err)
-		return nil, err
-	}*/
-
 	inReq := in.UpdateRole
 	inReq.Auth0Domain = u.ServerOptions.Auth0Domain
 	inReq.Auth0MgmtToken = u.ServerOptions.Auth0MgmtToken
@@ -434,29 +388,6 @@ func (u *UserService) UpdateRole(ctx context.Context, in *partyproto.UpdateRoleR
 
 // GetRoles - used to get Roles
 func (u *UserService) GetRoles(ctx context.Context, in *partyproto.GetRolesRequest) (*partyproto.GetRolesResponse, error) {
-	// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/api/v2/roles
-	/*url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/roles"
-	respBody, err := common.SendRequest("GET", url, nil, "Bearer "+u.ServerOptions.Auth0MgmtToken)
-	if err != nil {
-		fmt.Println("err", err)
-		return nil, err
-	}
-	jsonDataReader := strings.NewReader(string(respBody))
-	decoder := json.NewDecoder(jsonDataReader)
-	var roleResp []map[string]interface{}
-	err = decoder.Decode(&roleResp)
-	if err != nil {
-		fmt.Println("err", err)
-		return nil, err
-	}
-	roles := []*commonproto.Role{}
-	for _, rl := range roleResp {
-		role := commonproto.Role{}
-		role.Id = rl["id"].(string)
-		role.Name = rl["name"].(string)
-		role.Description = rl["description"].(string)
-		roles = append(roles, &role)
-	}*/
 	inReq := in.GetRoles
 	inReq.Auth0Domain = u.ServerOptions.Auth0Domain
 	inReq.Auth0MgmtToken = u.ServerOptions.Auth0MgmtToken
@@ -471,13 +402,6 @@ func (u *UserService) GetRoles(ctx context.Context, in *partyproto.GetRolesReque
 }
 
 func (u *UserService) AddPermisionsToRoles(ctx context.Context, in *partyproto.AddPermisionsToRolesRequest) (*partyproto.AddPermisionsToRolesResponse, error) {
-	// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/api/v2/roles/" + roleID + "/permissions"
-	/*url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/roles/" + in.RoleId + "/permissions"
-
-	payload := strings.NewReader(`{"permissions": [{"resource_server_identifier":"` + in.ResourceServerIdentifier + `","permission_name":"` + in.PermissionName + `"}]}`)
-
-	_, err := common.SendRequest("POST", url, payload, "Bearer "+u.ServerOptions.Auth0MgmtToken)*/
-
 	inReq := in.AddPermisionsToRoles
 	inReq.Auth0Domain = u.ServerOptions.Auth0Domain
 	inReq.Auth0MgmtToken = u.ServerOptions.Auth0MgmtToken
@@ -491,13 +415,6 @@ func (u *UserService) AddPermisionsToRoles(ctx context.Context, in *partyproto.A
 }
 
 func (u *UserService) RemoveRolePermission(ctx context.Context, in *partyproto.RemoveRolePermissionRequest) (*partyproto.RemoveRolePermissionResponse, error) {
-	// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/api/v2/roles/" + roleID + "/permissions"
-	/*url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/roles/" + in.RoleId + "/permissions"
-
-	payload := strings.NewReader(`{"permissions": [{"resource_server_identifier":"` + in.ResourceServerIdentifier + `","permission_name":"` + in.PermissionName + `"}]}`)
-
-	_, err := common.SendRequest("DELETE", url, payload, "Bearer "+u.ServerOptions.Auth0MgmtToken)*/
-
 	inReq := in.RemoveRolePermission
 	inReq.Auth0Domain = u.ServerOptions.Auth0Domain
 	inReq.Auth0MgmtToken = u.ServerOptions.Auth0MgmtToken
@@ -511,33 +428,6 @@ func (u *UserService) RemoveRolePermission(ctx context.Context, in *partyproto.R
 }
 
 func (u *UserService) GetRolePermissions(ctx context.Context, in *partyproto.GetRolePermissionsRequest) (*partyproto.GetRolePermissionsResponse, error) {
-	// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/api/v2/roles/" + roleID + "/permissions"
-	/*url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/roles/" + in.RoleId + "/permissions"
-
-	respBody, err := common.SendRequest("GET", url, nil, "Bearer "+u.ServerOptions.Auth0MgmtToken)
-	if err != nil {
-		fmt.Println("err", err)
-		return nil, err
-	}
-
-	jsonDataReader := strings.NewReader(string(respBody))
-	decoder := json.NewDecoder(jsonDataReader)
-	var rolePermissionResp []map[string]interface{}
-	err = decoder.Decode(&rolePermissionResp)
-	if err != nil {
-		fmt.Println("err", err)
-		return nil, err
-	}
-	rolePermissions := []*partyproto.RolePermission{}
-	for _, rl := range rolePermissionResp {
-		rolePermission := partyproto.RolePermission{}
-		rolePermission.PermissionName = rl["permission_name"].(string)
-		rolePermission.Description = rl["description"].(string)
-		rolePermission.ResourceServerName = rl["resource_server_name"].(string)
-		rolePermission.ResourceServerIdentifier = rl["resource_server_identifier"].(string)
-		rolePermissions = append(rolePermissions, &rolePermission)
-	}*/
-
 	inReq := in.GetRolePermissions
 	inReq.Auth0Domain = u.ServerOptions.Auth0Domain
 	inReq.Auth0MgmtToken = u.ServerOptions.Auth0MgmtToken
@@ -554,13 +444,6 @@ func (u *UserService) GetRolePermissions(ctx context.Context, in *partyproto.Get
 
 // AssignRolesToUsers - used to assign roles to users
 func (u *UserService) AssignRolesToUsers(ctx context.Context, in *partyproto.AssignRolesToUsersRequest) (*partyproto.AssignRolesToUsersResponse, error) {
-	// url := "https://dev-llzybv0gk4ybnuqm.us.auth0.com/api/v2/users/" + userID + "/roles"
-
-	/*url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/users/" + in.AssignToUserId + "/roles"
-
-	payload := strings.NewReader(`{ "roles": [ "` + in.RoleId + `"] }`)
-
-	_, err := common.SendRequest("POST", url, payload, "Bearer "+u.ServerOptions.Auth0MgmtToken)*/
 	inReq := in.AssignRolesToUsers
 	inReq.Auth0Domain = u.ServerOptions.Auth0Domain
 	inReq.Auth0MgmtToken = u.ServerOptions.Auth0MgmtToken
@@ -574,30 +457,6 @@ func (u *UserService) AssignRolesToUsers(ctx context.Context, in *partyproto.Ass
 
 // ViewUserRoles - used to View User Roles
 func (u *UserService) ViewUserRoles(ctx context.Context, in *partyproto.ViewUserRolesRequest) (*partyproto.ViewUserRolesResponse, error) {
-	/*url := "https://" + u.ServerOptions.Auth0Domain + "/api/v2/users/" + in.UserId + "/roles"
-	respBody, err := common.SendRequest("GET", url, nil, "Bearer "+u.ServerOptions.Auth0MgmtToken)
-	if err != nil {
-		fmt.Println("err", err)
-		return nil, err
-	}
-
-	jsonDataReader := strings.NewReader(string(respBody))
-	decoder := json.NewDecoder(jsonDataReader)
-	var roleResp []map[string]interface{}
-	err = decoder.Decode(&roleResp)
-	if err != nil {
-		fmt.Println("err", err)
-		return nil, err
-	}
-	roles := []*commonproto.Role{}
-	for _, rl := range roleResp {
-		role := commonproto.Role{}
-		role.Id = rl["id"].(string)
-		role.Name = rl["name"].(string)
-		role.Description = rl["description"].(string)
-		roles = append(roles, &role)
-	}*/
-
 	inReq := in.ViewUserRoles
 	inReq.Auth0Domain = u.ServerOptions.Auth0Domain
 	inReq.Auth0MgmtToken = u.ServerOptions.Auth0MgmtToken

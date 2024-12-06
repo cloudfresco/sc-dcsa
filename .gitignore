@@ -22,6 +22,7 @@ go.work
 go.work.sum
 
 # env file
+data
 sc-dcsa.sh
 sc-dcsa-local.sh
 sc-dcsa.log
