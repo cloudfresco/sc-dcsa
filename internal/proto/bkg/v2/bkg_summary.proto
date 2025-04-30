@@ -1,0 +1,133 @@
+syntax = "proto3";
+
+package bkg.v2;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2";
+
+// The BkgSummaryService service definition.
+service BkgSummaryService {
+  rpc CreateBookingSummary(CreateBookingSummaryRequest) returns (CreateBookingSummaryResponse);
+  rpc GetBookingSummaries(GetBookingSummariesRequest) returns (GetBookingSummariesResponse);
+  rpc GetBookingSummaryByCarrierBookingRequestReference(GetBookingSummaryByCarrierBookingRequestReferenceRequest) returns (GetBookingSummaryByCarrierBookingRequestReferenceResponse);
+}
+
+message CreateBookingSummaryRequest {
+  string carrier_booking_request_reference = 1;
+  string document_status = 2;
+  string booking_request_created_date_time = 3;
+  string booking_request_updated_date_time = 4;
+  string receipt_type_at_origin = 5;
+  string delivery_type_at_destination = 6;
+  string cargo_movement_type_at_origin = 7;
+  string cargo_movement_type_at_destination = 8;
+  string service_contract_reference = 9;
+  string vessel_name = 10;
+  string carrier_export_voyage_number = 11;
+  string universal_export_voyage_reference = 12;
+  double declared_value = 13;
+  string delivery_value_currency = 14;
+  string payment_term_code = 15;
+  bool is_partial_load_allowed = 16;
+  bool is_export_declaration_required = 17;
+  string export_declaration_reference = 18;
+  bool is_import_license_required = 19;
+  string import_license_reference = 20;
+  string submission_date_time = 21;
+  bool is_ams_aci_filing_required = 22;
+  bool is_destination_filing_required = 23;
+  string contract_quotation_reference = 24;
+  string expected_departure_date = 25;
+  string expected_arrival_at_place_of_delivery_start_date = 26;
+  string expected_arrival_at_place_of_delivery_end_date = 27;
+  string transport_document_type_code = 28;
+  string transport_document_reference = 29;
+  string booking_channel_reference = 30;
+  string inco_terms = 31;
+  string communication_channel_code = 32;
+  bool is_equipment_substitution_allowed = 33;
+  string vessel_imo_number = 34;
+  string pre_carriage_mode_of_transport_code = 35;
+  string user_id = 36;
+  string user_email = 37;
+  string request_id = 38;
+}
+
+message CreateBookingSummaryResponse {
+  BookingSummary booking_summary = 1;
+}
+
+message GetBookingSummariesResponse {
+  repeated BookingSummary booking_summaries = 1;
+  string next_cursor = 2;
+}
+
+message GetBookingSummariesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message BookingSummary {
+  BookingSummaryD booking_summary_d = 1;
+  BookingSummaryT booking_summary_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message BookingSummaryD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string carrier_booking_request_reference = 4;
+  string document_status = 5;
+  string receipt_type_at_origin = 6;
+  string delivery_type_at_destination = 7;
+  string cargo_movement_type_at_origin = 8;
+  string cargo_movement_type_at_destination = 9;
+  string service_contract_reference = 10;
+  string vessel_name = 11;
+  string carrier_export_voyage_number = 12;
+  string universal_export_voyage_reference = 13;
+  double declared_value = 14;
+  string delivery_value_currency = 15;
+  string payment_term_code = 16;
+  bool is_partial_load_allowed = 17;
+  bool is_export_declaration_required = 18;
+  string export_declaration_reference = 19;
+  bool is_import_license_required = 20;
+  string import_license_reference = 21;
+  bool is_ams_aci_filing_required = 22;
+  bool is_destination_filing_required = 23;
+  string contract_quotation_reference = 24;
+  string transport_document_type_code = 25;
+  string transport_document_reference = 26;
+  string booking_channel_reference = 27;
+  string inco_terms = 28;
+  string communication_channel_code = 29;
+  bool is_equipment_substitution_allowed = 30;
+  string vessel_imo_number = 31;
+  string pre_carriage_mode_of_transport_code = 32;
+}
+
+message BookingSummaryT {
+  google.protobuf.Timestamp booking_request_created_date_time = 1;
+  google.protobuf.Timestamp booking_request_updated_date_time = 2;
+  google.protobuf.Timestamp submission_date_time = 3;
+  google.protobuf.Timestamp expected_departure_date = 4;
+  google.protobuf.Timestamp expected_arrival_at_place_of_delivery_start_date = 5;
+  google.protobuf.Timestamp expected_arrival_at_place_of_delivery_end_date = 6;
+}
+
+message GetBookingSummaryByCarrierBookingRequestReferenceRequest {
+  string carrier_booking_request_reference = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message GetBookingSummaryByCarrierBookingRequestReferenceResponse {
+  BookingSummary booking_summary = 1;
+}

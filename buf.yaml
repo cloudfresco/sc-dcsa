@@ -1,0 +1,12 @@
+version: v2
+modules:
+  - path: internal/proto
+    name: buf.build/slruser100/sc-dcsa
+lint:
+  use:
+    - STANDARD
+breaking:
+  use:
+    - FILE
+deps:
+  - buf.build/bufbuild/protovalidate

@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package party.v1;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1";
+
+// The DocumentPartyService service definition.
+service DocumentPartyService {
+  rpc CreateDocumentParty(CreateDocumentPartyRequest) returns (CreateDocumentPartyResponse);
+  rpc CreateDocumentPartiesByBookingID(CreateDocumentPartiesByBookingIDRequest) returns (CreateDocumentPartiesByBookingIDResponse);
+  rpc CreateDocumentPartiesByShippingInstructionID(CreateDocumentPartiesByShippingInstructionIDRequest) returns (CreateDocumentPartiesByShippingInstructionIDResponse);
+  rpc FetchDocumentPartiesByBookingID(FetchDocumentPartiesByBookingIDRequest) returns (FetchDocumentPartiesByBookingIDResponse);
+  rpc FetchDocumentPartiesByByShippingInstructionID(FetchDocumentPartiesByByShippingInstructionIDRequest) returns (FetchDocumentPartiesByByShippingInstructionIDResponse);
+  rpc ResolveDocumentPartiesForShippingInstructionID(ResolveDocumentPartiesForShippingInstructionIDRequest) returns (ResolveDocumentPartiesForShippingInstructionIDResponse);
+}
+
+message CreateDocumentPartyRequest {
+  uint32 party_id = 1;
+  uint32 shipping_instruction_id = 2;
+  uint32 shipment_id = 3;
+  string party_function = 4;
+  bool is_to_be_notified = 5;
+  uint32 booking_id = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateDocumentPartyResponse {
+  DocumentParty document_party = 1;
+}
+
+message CreateDocumentPartiesByBookingIDRequest {
+  CreateDocumentPartyRequest create_document_party_request = 1;
+}
+
+message CreateDocumentPartiesByBookingIDResponse {
+  DocumentParty document_party = 1;
+}
+
+message CreateDocumentPartiesByShippingInstructionIDRequest {
+  CreateDocumentPartyRequest create_document_party_request = 1;
+}
+
+message CreateDocumentPartiesByShippingInstructionIDResponse {
+  DocumentParty document_party = 1;
+}
+
+message FetchDocumentPartiesByBookingIDRequest {
+  uint32 booking_id = 1;
+  string limit = 2;
+  string next_cursor = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message FetchDocumentPartiesByBookingIDResponse {
+  repeated DocumentParty document_parties = 1;
+  string next_cursor = 2;
+}
+
+message FetchDocumentPartiesByByShippingInstructionIDRequest {
+  uint32 shipping_instruction_id = 1;
+  string limit = 2;
+  string next_cursor = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message FetchDocumentPartiesByByShippingInstructionIDResponse {
+  repeated DocumentParty document_parties = 1;
+  string next_cursor = 2;
+}
+
+message ResolveDocumentPartiesForShippingInstructionIDRequest {
+  uint32 shipping_instruction_id = 1;
+  uint32 document_party_id = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message ResolveDocumentPartiesForShippingInstructionIDResponse {}
+
+message DocumentParty {
+  DocumentPartyD document_party_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message DocumentPartyD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 party_id = 4;
+  uint32 shipping_instruction_id = 5;
+  uint32 shipment_id = 6;
+  string party_function = 7;
+  bool is_to_be_notified = 8;
+  uint32 booking_id = 9;
+}

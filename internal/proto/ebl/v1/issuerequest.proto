@@ -1,0 +1,251 @@
+syntax = "proto3";
+
+package ebl.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
+
+// The IssueRequestService service definition.
+service IssueRequestService {
+  rpc CreateIssueParty(CreateIssuePartyRequest) returns (CreateIssuePartyResponse);
+  rpc UpdateIssueParty(UpdateIssuePartyRequest) returns (UpdateIssuePartyResponse);
+  rpc GetIssueParties(GetIssuePartiesRequest) returns (GetIssuePartiesResponse);
+  rpc GetIssueParty(GetIssuePartyRequest) returns (GetIssuePartyResponse);
+  rpc GetIssuePartyByPk(GetIssuePartyByPkRequest) returns (GetIssuePartyByPkResponse);
+  rpc CreateIssuePartySupportingCode(CreateIssuePartySupportingCodeRequest) returns (CreateIssuePartySupportingCodeResponse);
+  rpc UpdateIssuePartySupportingCode(UpdateIssuePartySupportingCodeRequest) returns (UpdateIssuePartySupportingCodeResponse);
+  rpc CreateIssuanceRequest(CreateIssuanceRequestRequest) returns (CreateIssuanceRequestResponse);
+  rpc UpdateIssuanceRequest(UpdateIssuanceRequestRequest) returns (UpdateIssuanceRequestResponse);
+  rpc CreateEblVisualization(CreateEblVisualizationRequest) returns (CreateEblVisualizationResponse);
+  rpc UpdateEblVisualization(UpdateEblVisualizationRequest) returns (UpdateEblVisualizationResponse);
+}
+
+message CreateIssuePartyRequest {
+  string ebl_platform_identifier = 1 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+@\\S+$",
+      max_len: 100,
+    },
+  }];
+  string legal_name = 2 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*$",
+      max_len: 100,
+    },
+  }];
+  string registration_number = 3 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*$",
+      max_len: 100,
+    },
+  }];
+  string location_of_registration = 4 [(buf.validate.field) = {
+    string: {
+      pattern: "^[A-Z]{2}$",
+      max_len: 2,
+    },
+  }];
+  string tax_reference = 5 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+$",
+      max_len: 100,
+    },
+  }];
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreateIssuePartyResponse {
+  IssueParty issue_party = 1;
+}
+
+message UpdateIssuePartyRequest {
+  string ebl_platform_identifier = 1;
+  string legal_name = 2;
+  string registration_number = 3;
+  string location_of_registration = 4;
+  string id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message UpdateIssuePartyResponse {}
+
+message IssueParty {
+  IssuePartyD issue_party_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message IssuePartyD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string ebl_platform_identifier = 4;
+  string legal_name = 5;
+  string registration_number = 6;
+  string location_of_registration = 7;
+  string tax_reference = 8;
+}
+
+message GetIssuePartyRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetIssuePartyResponse {
+  IssueParty issue_party = 1;
+}
+
+message GetIssuePartiesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetIssuePartiesResponse {
+  repeated IssueParty issue_parties = 1;
+  string next_cursor = 2;
+}
+
+message GetIssuePartyByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetIssuePartyByPkResponse {
+  IssueParty issue_party = 1;
+}
+
+message CreateIssuePartySupportingCodeRequest {
+  uint32 issue_party_id = 1;
+  string party_code = 2 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*",
+      max_len: 100,
+    },
+  }];
+  string party_code_list_provider = 3 [(buf.validate.field).string.min_len = 1];
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateIssuePartySupportingCodeResponse {
+  IssuePartySupportingCode issue_party_supporting_code = 1;
+}
+
+message UpdateIssuePartySupportingCodeRequest {
+  uint32 issue_party_id = 1;
+  string party_code = 2 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*",
+      max_len: 100,
+    },
+  }];
+  string party_code_list_provider = 3 [(buf.validate.field).string.min_len = 1];
+  string id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message UpdateIssuePartySupportingCodeResponse {}
+
+message IssuePartySupportingCode {
+  IssuePartySupportingCodeD issue_party_supporting_code_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message IssuePartySupportingCodeD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 issue_party_id = 4;
+  string party_code = 5;
+  string party_code_list_provider = 6;
+}
+
+message CreateEblVisualizationRequest {
+  string name = 1;
+  string content = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateEblVisualizationResponse {
+  EblVisualization ebl_visualization = 1;
+}
+
+message UpdateEblVisualizationRequest {
+  string name = 1;
+  string content = 2;
+  string id = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message UpdateEblVisualizationResponse {}
+
+message EblVisualization {
+  EblVisualizationD ebl_visualization_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message EblVisualizationD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string name = 4;
+  string content = 5;
+}
+
+message CreateIssuanceRequestRequest {
+  string transport_document_reference = 1;
+  string issuance_request_state = 2;
+  uint32 issue_to = 3;
+  uint32 ebl_visualization_id = 4;
+  string transport_document_json = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreateIssuanceRequestResponse {
+  IssuanceRequest issuance_request = 1;
+}
+
+message UpdateIssuanceRequestRequest {
+  string transport_document_reference = 1;
+  string issuance_request_state = 2;
+  string id = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message UpdateIssuanceRequestResponse {}
+
+message IssuanceRequest {
+  IssuanceRequestD issuance_request_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message IssuanceRequestD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string transport_document_reference = 4;
+  string issuance_request_state = 5;
+  uint32 issue_to = 6;
+  uint32 ebl_visualization_id = 7;
+  string transport_document_json = 8;
+}

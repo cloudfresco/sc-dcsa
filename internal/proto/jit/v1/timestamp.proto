@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package jit.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/jit/v1";
+
+// The TimestampService service definition.
+service TimestampService {
+  rpc CreateTimestamp(CreateTimestampRequest) returns (CreateTimestampResponse);
+  rpc GetTimestamps(GetTimestampsRequest) returns (GetTimestampsResponse);
+}
+
+message CreateTimestampResponse {
+  Timestamp timestamp1 = 1;
+}
+
+message Timestamp {
+  TimestampD timestamp_d = 1;
+  TimestampT timestamp_t = 2;
+}
+
+message TimestampD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string event_type_code = 4;
+  string event_classifier_code = 5;
+  string delay_reason_code = 6;
+  string change_remark = 7;
+}
+
+message TimestampT {
+  google.protobuf.Timestamp event_date_time = 1;
+}
+
+message CreateTimestampRequest {
+  string event_type_code = 1;
+  string event_classifier_code = 2;
+  string event_date_time = 3;
+  string delay_reason_code = 4;
+  string change_remark = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message GetTimestampsResponse {
+  repeated Timestamp timestamps = 1;
+  string next_cursor = 2;
+}
+
+message GetTimestampsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}

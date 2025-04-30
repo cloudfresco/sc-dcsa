@@ -1,0 +1,157 @@
+syntax = "proto3";
+
+package ovs.v3;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3";
+
+// The LegService service definition.
+service LegService {
+  rpc CreateLeg(CreateLegRequest) returns (CreateLegResponse);
+  rpc GetLegs(GetLegsRequest) returns (GetLegsResponse);
+  rpc GetLeg(GetLegRequest) returns (GetLegResponse);
+  rpc GetLegByPk(GetLegByPkRequest) returns (GetLegByPkResponse);
+  rpc CreatePointToPointRouting(CreatePointToPointRoutingRequest) returns (CreatePointToPointRoutingResponse);
+  rpc GetPointToPointRoutings(GetPointToPointRoutingsRequest) returns (GetPointToPointRoutingsResponse);
+  rpc GetPointToPointRouting(GetPointToPointRoutingRequest) returns (GetPointToPointRoutingResponse);
+  rpc GetPointToPointRoutingByPk(GetPointToPointRoutingByPkRequest) returns (GetPointToPointRoutingByPkResponse);
+}
+
+message CreateLegRequest {
+  int32 sequence_number = 1;
+  string mode_of_transport = 2;
+  string vessel_operator_smdg_liner_code = 3;
+  string vessel_imo_number = 4;
+  string vessel_name = 5;
+  string carrier_service_name = 6;
+  string universal_service_reference = 7;
+  string carrier_service_code = 8;
+  string universal_import_voyage_reference = 9;
+  string universal_export_voyage_reference = 10;
+  string carrier_import_voyage_number = 11;
+  string carrier_export_voyage_number = 12;
+  uint32 departure_id = 13;
+  uint32 arrival_id = 14;
+  uint32 point_to_point_routing_id = 15;
+  string user_id = 16;
+  string user_email = 17;
+  string request_id = 18;
+}
+
+message CreateLegResponse {
+  Leg leg = 1;
+}
+
+message GetLegsResponse {
+  repeated Leg legs = 1;
+  string next_cursor = 2;
+}
+
+message GetLegsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetLegRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetLegResponse {
+  Leg leg = 1;
+}
+
+message GetLegByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetLegByPkResponse {
+  Leg leg = 1;
+}
+
+message Leg {
+  LegD leg_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message LegD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  int32 sequence_number = 4;
+  string mode_of_transport = 5;
+  string vessel_operator_smdg_liner_code = 6;
+  string vessel_imo_number = 7;
+  string vessel_name = 8;
+  string carrier_service_name = 9;
+  string universal_service_reference = 10;
+  string carrier_service_code = 11;
+  string universal_import_voyage_reference = 12;
+  string universal_export_voyage_reference = 13;
+  string carrier_import_voyage_number = 14;
+  string carrier_export_voyage_number = 15;
+  uint32 departure_id = 16;
+  uint32 arrival_id = 17;
+  uint32 point_to_point_routing_id = 18;
+}
+
+message CreatePointToPointRoutingRequest {
+  int32 sequence_number = 1;
+  uint32 place_of_receipt_id = 2;
+  uint32 place_of_delivery_id = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+  repeated CreateLegRequest legs = 7;
+}
+
+message CreatePointToPointRoutingResponse {
+  PointToPointRouting point_to_point_routing = 1;
+}
+
+message GetPointToPointRoutingsResponse {
+  repeated PointToPointRouting point_to_point_routings = 1;
+  string next_cursor = 2;
+}
+
+message GetPointToPointRoutingsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetPointToPointRoutingRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetPointToPointRoutingResponse {
+  PointToPointRouting point_to_point_routing = 1;
+}
+
+message GetPointToPointRoutingByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetPointToPointRoutingByPkResponse {
+  PointToPointRouting point_to_point_routing = 1;
+}
+
+message PointToPointRouting {
+  PointToPointRoutingD point_to_point_routing_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+  repeated Leg legs = 4;
+}
+
+message PointToPointRoutingD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  int32 sequence_number = 4;
+  uint32 place_of_receipt_id = 5;
+  uint32 place_of_delivery_id = 6;
+}

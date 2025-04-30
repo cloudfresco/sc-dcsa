@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+package ovs.v3;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3";
+
+// The VesselScheduleService service definition.
+service VesselScheduleService {
+  rpc CreateVesselSchedule(CreateVesselScheduleRequest) returns (CreateVesselScheduleResponse);
+  rpc GetVesselSchedules(GetVesselSchedulesRequest) returns (GetVesselSchedulesResponse);
+  rpc GetVesselSchedule(GetVesselScheduleRequest) returns (GetVesselScheduleResponse);
+  rpc GetVesselScheduleByPk(GetVesselScheduleByPkRequest) returns (GetVesselScheduleByPkResponse);
+  rpc CreateVessel(CreateVesselRequest) returns (CreateVesselResponse);
+  rpc GetVessels(GetVesselsRequest) returns (GetVesselsResponse);
+  rpc GetVessel(GetVesselRequest) returns (GetVesselResponse);
+  rpc GetVesselByPk(GetVesselByPkRequest) returns (GetVesselByPkResponse);
+}
+
+message CreateVesselScheduleRequest {
+  uint32 vessel_id = 1;
+  uint32 service_id = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateVesselScheduleResponse {
+  VesselSchedule vessel_schedule = 1;
+}
+
+message GetVesselSchedulesResponse {
+  repeated VesselSchedule vessel_schedules = 1;
+  string next_cursor = 2;
+}
+
+message GetVesselSchedulesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetVesselScheduleRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetVesselScheduleResponse {
+  VesselSchedule vessel_schedule = 1;
+}
+
+message GetVesselScheduleByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetVesselScheduleByPkResponse {
+  VesselSchedule vessel_schedule = 1;
+}
+
+message VesselSchedule {
+  VesselScheduleD vessel_schedule_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message VesselScheduleD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 vessel_id = 4;
+  uint32 service_id = 5;
+}
+
+message CreateVesselRequest {
+  string vessel_imo_number = 1;
+  string vessel_name = 2;
+  string vessel_flag = 3;
+  string vessel_call_sign = 4;
+  bool is_dummy_vessel = 5;
+  string vessel_operator_carrier_code = 6;
+  string vessel_operator_carrier_code_list_provider = 7;
+  double vessel_length = 8;
+  double vessel_width = 9;
+  string dimension_unit = 10;
+  string user_id = 11;
+  string user_email = 12;
+  string request_id = 13;
+}
+
+message CreateVesselResponse {
+  Vessel vessel = 1;
+}
+
+message GetVesselsResponse {
+  repeated Vessel vessels = 1;
+  string next_cursor = 2;
+}
+
+message GetVesselsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetVesselRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetVesselResponse {
+  Vessel vessel = 1;
+}
+
+message GetVesselByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetVesselByPkResponse {
+  Vessel vessel = 1;
+}
+
+message Vessel {
+  VesselD vessel_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message VesselD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string vessel_imo_number = 4;
+  string vessel_name = 5;
+  string vessel_flag = 6;
+  string vessel_call_sign = 7;
+  bool is_dummy_vessel = 8;
+  string vessel_operator_carrier_code = 9;
+  string vessel_operator_carrier_code_list_provider = 10;
+  double vessel_length = 11;
+  double vessel_width = 12;
+  string dimension_unit = 13;
+}

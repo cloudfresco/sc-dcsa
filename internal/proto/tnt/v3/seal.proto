@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package tnt.v3;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/tnt/v3";
+
+// The SealService service definition.
+service SealService {
+  rpc CreateSeal(CreateSealRequest) returns (CreateSealResponse);
+  rpc GetSeals(GetSealsRequest) returns (GetSealsResponse);
+}
+
+message Seal {
+  SealD seal_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message SealD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 utilized_transport_equipment_id = 4;
+  string seal_number = 5;
+  string seal_source_code = 6;
+  string seal_type_code = 7;
+}
+
+message CreateSealRequest {
+  uint32 utilized_transport_equipment_id = 1;
+  string seal_number = 2 [(buf.validate.field).string.max_len = 15];
+  string seal_source_code = 3 [(buf.validate.field).string.max_len = 5];
+  string seal_type_code = 4 [(buf.validate.field).string.max_len = 5];
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateSealResponse {
+  Seal seal = 1;
+}
+
+message GetSealsResponse {
+  repeated Seal seals = 1;
+  string next_cursor = 2;
+}
+
+message GetSealsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}

@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package party.v1;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1";
+
+// The LocationService service definition.
+service LocationService {
+  rpc CreateLocation(CreateLocationRequest) returns (CreateLocationResponse);
+  rpc LoadLocations(LoadLocationsRequest) returns (LoadLocationsResponse);
+  rpc FetchLocationByID(FetchLocationByIDRequest) returns (FetchLocationByIDResponse);
+}
+
+message CreateLocationRequest {
+  string location_name = 1;
+  string latitude = 2;
+  string longitude = 3;
+  string facility_smdg_code = 4;
+  string un_location_code = 5;
+  uint32 address_id = 6;
+  uint32 facility_id = 7;
+  string user_id = 8;
+  string user_email = 9;
+  string request_id = 10;
+}
+
+message CreateLocationResponse {
+  Location location = 1;
+}
+
+message LoadLocationsResponse {
+  repeated Location locations = 1;
+  string next_cursor = 2;
+}
+
+message LoadLocationsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FetchLocationByIDRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message FetchLocationByIDResponse {
+  Location location = 1;
+}
+
+message Location {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string location_name = 4;
+  string latitude = 5;
+  string longitude = 6;
+  string facility_smdg_code = 7;
+  string un_location_code = 8;
+  uint32 address_id = 9;
+  uint32 facility_id = 10;
+}

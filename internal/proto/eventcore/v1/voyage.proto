@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package eventcore.v1;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/eventcore/v1";
+
+// The VoyageService service definition.
+service VoyageService {
+  rpc CreateVoyage(CreateVoyageRequest) returns (CreateVoyageResponse);
+  rpc GetVoyages(GetVoyagesRequest) returns (GetVoyagesResponse);
+  rpc FindCarrierVoyageNumbersByTransportDocumentRef(FindCarrierVoyageNumbersByTransportDocumentRefRequest) returns (FindCarrierVoyageNumbersByTransportDocumentRefResponse);
+  rpc FindByCarrierVoyageNumberAndServiceId(FindByCarrierVoyageNumberAndServiceIdRequest) returns (FindByCarrierVoyageNumberAndServiceIdResponse);
+  rpc FindByCarrierVoyageNumber(FindByCarrierVoyageNumberRequest) returns (FindByCarrierVoyageNumberResponse);
+  rpc FindCarrierVoyageNumbersByCarrierBookingRef(FindCarrierVoyageNumbersByCarrierBookingRefRequest) returns (FindCarrierVoyageNumbersByCarrierBookingRefResponse);
+  rpc FindCarrierVoyageNumbersByShippingInstructionId(FindCarrierVoyageNumbersByShippingInstructionIdRequest) returns (FindCarrierVoyageNumbersByShippingInstructionIdResponse);
+}
+
+message CreateVoyageRequest {
+  string carrier_voyage_number = 1;
+  string universal_voyage_reference = 2;
+  uint32 service_id = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateVoyageResponse {
+  Voyage voyage = 1;
+}
+
+message GetVoyagesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetVoyagesResponse {
+  repeated Voyage voyages = 1;
+  string next_cursor = 2;
+}
+
+message FindCarrierVoyageNumbersByTransportDocumentRefResponse {
+  Voyage voyage = 1;
+}
+
+message FindCarrierVoyageNumbersByTransportDocumentRefRequest {
+  string transport_document_ref = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FindByCarrierVoyageNumberAndServiceIdRequest {
+  string carrier_voyage_number = 1;
+  uint32 service_id = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message FindByCarrierVoyageNumberAndServiceIdResponse {
+  Voyage voyage = 1;
+}
+
+message FindByCarrierVoyageNumberRequest {
+  string carrier_voyage_number = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FindByCarrierVoyageNumberResponse {
+  Voyage voyage = 1;
+}
+
+message FindCarrierVoyageNumbersByCarrierBookingRefRequest {
+  string carrier_booking_ref = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FindCarrierVoyageNumbersByCarrierBookingRefResponse {
+  Voyage voyage = 1;
+}
+
+message FindCarrierVoyageNumbersByShippingInstructionIdResponse {
+  Voyage voyage = 1;
+}
+
+message FindCarrierVoyageNumbersByShippingInstructionIdRequest {
+  uint32 shipping_instruction_id = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message Voyage {
+  VoyageD voyage_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message VoyageD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string carrier_voyage_number = 4;
+  string universal_voyage_reference = 5;
+  uint32 service_id = 6;
+}

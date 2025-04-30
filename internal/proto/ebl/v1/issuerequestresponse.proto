@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package ebl.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
+
+// The IssueRequestResponseService service definition.
+service IssueRequestResponseService {
+  rpc CreateIssuanceRequestResponse(CreateIssuanceRequestResponseRequest) returns (CreateIssuanceRequestResponseResponse);
+  rpc UpdateIssuanceRequestResponse(UpdateIssuanceRequestResponseRequest) returns (UpdateIssuanceRequestResponseResponse);
+}
+
+message CreateIssuanceRequestResponseRequest {
+  string transport_document_reference = 1 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*$",
+      max_len: 20,
+    },
+  }];
+  string issuance_response_code = 2 [(buf.validate.field).string.min_len = 1];
+  string reason = 3 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*$",
+      max_len: 255,
+    },
+  }];
+  string created_date_time = 4;
+  uint32 issuance_request_id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreateIssuanceRequestResponseResponse {
+  IssuanceRequestResponse issuance_request_response = 1;
+}
+
+message UpdateIssuanceRequestResponseRequest {
+  string transport_document_reference = 1;
+  string issuance_response_code = 2;
+  string reason = 3;
+  string id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message UpdateIssuanceRequestResponseResponse {}
+
+message IssuanceRequestResponse {
+  IssuanceRequestResponseD issuance_request_response_d = 1;
+  IssuanceRequestResponseT issuance_request_response_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message IssuanceRequestResponseD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string transport_document_reference = 4;
+  string issuance_response_code = 5;
+  string reason = 6;
+  uint32 issuance_request_id = 7;
+}
+
+message IssuanceRequestResponseT {
+  google.protobuf.Timestamp created_date_time = 1;
+}

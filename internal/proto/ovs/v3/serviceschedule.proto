@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package ovs.v3;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ovs/v3";
+
+// The ServiceScheduleService service definition.
+service ServiceScheduleService {
+  rpc CreateServiceSchedule(CreateServiceScheduleRequest) returns (CreateServiceScheduleResponse);
+  rpc GetServiceSchedules(GetServiceSchedulesRequest) returns (GetServiceSchedulesResponse);
+  rpc GetServiceSchedule(GetServiceScheduleRequest) returns (GetServiceScheduleResponse);
+  rpc GetServiceScheduleByUniversalServiceReference(GetServiceScheduleByUniversalServiceReferenceRequest) returns (GetServiceScheduleByUniversalServiceReferenceResponse);
+  rpc UpdateServiceScheduleByUniversalServiceReference(UpdateServiceScheduleByUniversalServiceReferenceRequest) returns (UpdateServiceScheduleByUniversalServiceReferenceResponse);
+  rpc GetServiceScheduleByPk(GetServiceScheduleByPkRequest) returns (GetServiceScheduleByPkResponse);
+}
+
+message CreateServiceScheduleRequest {
+  string carrier_service_name = 1;
+  string carrier_service_code = 2;
+  string universal_service_reference = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateServiceScheduleResponse {
+  ServiceSchedule service_schedule = 1;
+}
+
+message GetServiceScheduleRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetServiceScheduleResponse {
+  ServiceSchedule service_schedule = 1;
+}
+
+message GetServiceScheduleByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetServiceScheduleByPkResponse {
+  ServiceSchedule service_schedule = 1;
+}
+
+message GetServiceScheduleByUniversalServiceReferenceRequest {
+  string universal_service_reference = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message GetServiceScheduleByUniversalServiceReferenceResponse {
+  ServiceSchedule service_schedule = 1;
+}
+
+message GetServiceSchedulesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetServiceSchedulesResponse {
+  repeated ServiceSchedule service_schedules = 1;
+  string next_cursor = 2;
+}
+
+message UpdateServiceScheduleByUniversalServiceReferenceRequest {
+  string carrier_service_name = 1;
+  string carrier_service_code = 2;
+  string universal_service_reference = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message UpdateServiceScheduleByUniversalServiceReferenceResponse {}
+
+message ServiceSchedule {
+  ServiceScheduleD service_schedule_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message ServiceScheduleD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string carrier_service_name = 4;
+  string carrier_service_code = 5;
+  string universal_service_reference = 6;
+}

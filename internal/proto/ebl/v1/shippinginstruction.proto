@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package ebl.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+import "bkg/v2/reference.proto";
+import "common/v1/common.proto";
+import "ebl/v1/consignmentitem.proto";
+import "eventcore/v1/utilizedtransportequipment.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
+
+// The ShippingInstructionService service definition.
+service ShippingInstructionService {
+  rpc CreateShippingInstruction(CreateShippingInstructionRequest) returns (CreateShippingInstructionResponse);
+  rpc GetShippingInstructions(GetShippingInstructionsRequest) returns (GetShippingInstructionsResponse);
+  rpc FindById(FindByIdRequest) returns (FindByIdResponse);
+  rpc GetShippingInstructionByPk(GetShippingInstructionByPkRequest) returns (GetShippingInstructionByPkResponse);
+  rpc FindByReference(FindByReferenceRequest) returns (FindByReferenceResponse);
+  rpc UpdateShippingInstructionByShippingInstructionReference(UpdateShippingInstructionByShippingInstructionReferenceRequest) returns (UpdateShippingInstructionByShippingInstructionReferenceResponse);
+}
+
+message CreateShippingInstructionRequest {
+  string shipping_instruction_reference = 1 [(buf.validate.field).string.max_len = 100];
+  string document_status = 2;
+  bool is_shipped_onboard_type = 3;
+  uint32 number_of_copies = 4 [(buf.validate.field).uint32.gte = 0];
+  uint32 number_of_originals = 5 [(buf.validate.field).uint32.gte = 0];
+  bool is_electronic = 6 [(buf.validate.field).bool.const = true];
+  bool is_to_order = 7 [(buf.validate.field).bool.const = true];
+  bool are_charges_displayed_on_originals = 8;
+  bool are_charges_displayed_on_copies = 9;
+  uint32 location_id = 10;
+  string transport_document_type_code = 11;
+  string displayed_name_for_place_of_receipt = 12 [(buf.validate.field).string.max_len = 35];
+  string displayed_name_for_port_of_load = 13 [(buf.validate.field).string.max_len = 35];
+  string displayed_name_for_port_of_discharge = 14 [(buf.validate.field).string.max_len = 35];
+  string displayed_name_for_place_of_delivery = 15 [(buf.validate.field).string.max_len = 35];
+  string amend_to_transport_document = 16 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)$",
+      max_len: 20,
+    },
+  }];
+  string created_date_time = 17;
+  string updated_date_time = 18;
+  string user_id = 19;
+  string user_email = 20;
+  string request_id = 21;
+  repeated bkg.v2.CreateReferenceRequest references = 22;
+  repeated eventcore.v1.CreateUtilizedTransportEquipmentRequest utilized_transport_equipments = 23;
+  repeated ebl.v1.CreateConsignmentItemRequest consignment_items = 24;
+}
+
+message CreateShippingInstructionResponse {
+  ShippingInstruction shipping_instruction = 1;
+}
+
+message GetShippingInstructionsResponse {
+  repeated ShippingInstruction shipping_instructions = 1;
+  string next_cursor = 2;
+}
+
+message GetShippingInstructionsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FindByIdRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message FindByIdResponse {
+  ShippingInstruction shipping_instruction = 1;
+}
+
+message GetShippingInstructionByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetShippingInstructionByPkResponse {
+  ShippingInstruction shipping_instruction = 1;
+}
+
+message FindByReferenceRequest {
+  string shipping_instruction_reference = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message FindByReferenceResponse {
+  ShippingInstruction shipping_instruction = 1;
+}
+
+message UpdateShippingInstructionByShippingInstructionReferenceRequest {
+  string shipping_instruction_reference = 1;
+  string document_status = 2;
+  string transport_document_type_code = 3;
+  string displayed_name_for_place_of_receipt = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message UpdateShippingInstructionByShippingInstructionReferenceResponse {}
+
+message ShippingInstruction {
+  ShippingInstructionD shipping_instruction_d = 1;
+  ShippingInstructionT shipping_instruction_t = 2;
+}
+
+message ShippingInstructionD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string shipping_instruction_reference = 4;
+  string document_status = 5;
+  bool is_shipped_onboard_type = 6;
+  uint32 number_of_copies = 7;
+  uint32 number_of_originals = 8;
+  bool is_electronic = 9;
+  bool is_to_order = 10;
+  bool are_charges_displayed_on_originals = 11;
+  bool are_charges_displayed_on_copies = 12;
+  uint32 location_id = 13;
+  string transport_document_type_code = 14;
+  string displayed_name_for_place_of_receipt = 15;
+  string displayed_name_for_port_of_load = 16;
+  string displayed_name_for_port_of_discharge = 17;
+  string displayed_name_for_place_of_delivery = 18;
+  string amend_to_transport_document = 19;
+}
+
+message ShippingInstructionT {
+  google.protobuf.Timestamp created_date_time = 1;
+  google.protobuf.Timestamp updated_date_time = 2;
+}

@@ -1,0 +1,13 @@
+version: v2
+plugins:
+  - remote: buf.build/protocolbuffers/go:v1.35.2
+    out: internal/protogen
+    opt: paths=source_relative
+  - remote: buf.build/grpc/go
+    out: internal/protogen
+    opt: paths=source_relative
+  - remote: buf.build/bufbuild/validate-go:v1.1.0
+    out: internal/protogen
+    opt: paths=source_relative
+inputs:
+  - directory: .

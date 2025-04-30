@@ -1,0 +1,150 @@
+syntax = "proto3";
+
+package ebl.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
+
+// The ConsignmentItemService service definition.
+service ConsignmentItemService {
+  rpc CreateConsignmentItem(CreateConsignmentItemRequest) returns (CreateConsignmentItemResponse);
+  rpc CreateConsignmentItemsByShippingInstructionIdAndTOs(CreateConsignmentItemsByShippingInstructionIdAndTOsRequest) returns (CreateConsignmentItemsByShippingInstructionIdAndTOsResponse);
+  rpc FetchConsignmentItemsTOByShippingInstructionId(FetchConsignmentItemsTOByShippingInstructionIdRequest) returns (FetchConsignmentItemsTOByShippingInstructionIdResponse);
+  rpc RemoveConsignmentItemsByShippingInstructionId(RemoveConsignmentItemsByShippingInstructionIdRequest) returns (RemoveConsignmentItemsByShippingInstructionIdResponse);
+}
+
+message CreateConsignmentItemRequest {
+  string description_of_goods = 1 [(buf.validate.field) = {
+    string: {pattern: "^\\S+(\\s+\\S+)*$"},
+    ignore_empty: true,
+  }];
+  string hs_code = 2 [(buf.validate.field) = {
+    string: {pattern: "^[0-9]+$"},
+    ignore_empty: true,
+  }];
+  uint32 shipping_instruction_id = 3;
+  double weight = 4 [(buf.validate.field) = {ignore_empty: false}];
+  double volume = 5;
+  string weight_unit = 6 [(buf.validate.field) = {ignore_empty: false}];
+  string volume_unit = 7;
+  uint32 shipment_id = 8;
+  string user_id = 9;
+  string user_email = 10;
+  string request_id = 11;
+  repeated CreateCargoItemRequest cargo_items = 12;
+}
+
+message CreateConsignmentItemsByShippingInstructionIdAndTOsRequest {
+  CreateConsignmentItemRequest create_consignment_item_request = 1;
+}
+
+message CreateConsignmentItemResponse {
+  ConsignmentItem consignment_item = 1;
+}
+
+message CreateConsignmentItemsByShippingInstructionIdAndTOsResponse {
+  ConsignmentItem consignment_item = 1;
+}
+
+message FetchConsignmentItemsTOByShippingInstructionIdRequest {
+  uint32 shipping_instruction_id = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FetchConsignmentItemsTOByShippingInstructionIdResponse {
+  ConsignmentItem consignment_item = 1;
+}
+
+message RemoveConsignmentItemsByShippingInstructionIdRequest {
+  uint32 shipping_instruction_id = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message RemoveConsignmentItemsByShippingInstructionIdResponse {}
+
+message CargoItem {
+  CargoItemD cargo_item_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+  repeated CargoLineItem cargo_line_items = 4;
+}
+
+message CargoItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 consignment_item_id = 4;
+  double weight = 5;
+  double volume = 6;
+  string weight_unit = 7;
+  string volume_unit = 8;
+  uint32 number_of_packages = 9;
+  string package_code = 10;
+  uint32 utilized_transport_equipment_id = 11;
+  string package_name_on_bl = 12;
+}
+
+message CreateCargoItemRequest {
+  uint32 consignment_item_id = 1;
+  double weight = 2 [(buf.validate.field) = {ignore_empty: false}];
+  double volume = 3;
+  string weight_unit = 4 [(buf.validate.field) = {ignore_empty: false}];
+  string volume_unit = 5;
+  uint32 number_of_packages = 6;
+  string package_code = 7;
+  uint32 utilized_transport_equipment_id = 8;
+  string package_name_on_bl = 9;
+  string user_id = 10;
+  string user_email = 11;
+  string request_id = 12;
+  repeated CreateCargoLineItemRequest cargo_line_items = 13;
+}
+
+message CargoLineItem {
+  CargoLineItemD cargo_line_item_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message CargoLineItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 cargo_item_id = 4;
+  string shipping_marks = 5;
+}
+
+message CreateCargoLineItemRequest {
+  uint32 cargo_item_id = 1;
+  string shipping_marks = 2 [(buf.validate.field).string.max_len = 500];
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message ConsignmentItem {
+  ConsignmentItemD consignment_item_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+  repeated CargoItem cargo_items = 4;
+}
+
+message ConsignmentItemD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string description_of_goods = 4;
+  string hs_code = 5;
+  uint32 shipping_instruction_id = 6;
+  double weight = 7;
+  double volume = 8;
+  string weight_unit = 9;
+  string volume_unit = 10;
+  uint32 shipment_id = 11;
+}

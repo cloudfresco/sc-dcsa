@@ -1,0 +1,281 @@
+syntax = "proto3";
+
+package ebl.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
+
+// The SurrenderRequestService service definition.
+service SurrenderRequestService {
+  rpc CreateTransactionParty(CreateTransactionPartyRequest) returns (CreateTransactionPartyResponse);
+  rpc UpdateTransactionParty(UpdateTransactionPartyRequest) returns (UpdateTransactionPartyResponse);
+  rpc GetTransactionParties(GetTransactionPartiesRequest) returns (GetTransactionPartiesResponse);
+  rpc GetTransactionParty(GetTransactionPartyRequest) returns (GetTransactionPartyResponse);
+  rpc GetTransactionPartyByPk(GetTransactionPartyByPkRequest) returns (GetTransactionPartyByPkResponse);
+  rpc CreateTransactionPartySupportingCode(CreateTransactionPartySupportingCodeRequest) returns (CreateTransactionPartySupportingCodeResponse);
+  rpc UpdateTransactionPartySupportingCode(UpdateTransactionPartySupportingCodeRequest) returns (UpdateTransactionPartySupportingCodeResponse);
+  rpc CreateSurrenderRequest(CreateSurrenderRequestRequest) returns (CreateSurrenderRequestResponse);
+  rpc UpdateSurrenderRequest(UpdateSurrenderRequestRequest) returns (UpdateSurrenderRequestResponse);
+  rpc CreateEndorsementChainLink(CreateEndorsementChainLinkRequest) returns (CreateEndorsementChainLinkResponse);
+  rpc UpdateEndorsementChainLink(UpdateEndorsementChainLinkRequest) returns (UpdateEndorsementChainLinkResponse);
+}
+
+message CreateTransactionPartyRequest {
+  string ebl_platform_identifier = 1 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+@\\S+$",
+      max_len: 100,
+    },
+  }];
+  string legal_name = 2 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*$",
+      max_len: 100,
+    },
+  }];
+  string registration_number = 3 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*$",
+      max_len: 100,
+    },
+  }];
+  string location_of_registration = 4 [(buf.validate.field) = {
+    string: {
+      pattern: "^[A-Z]{2}$",
+      max_len: 2,
+    },
+  }];
+  string tax_reference = 5 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+$",
+      max_len: 100,
+    },
+  }];
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreateTransactionPartyResponse {
+  TransactionParty transaction_party = 1;
+}
+
+message UpdateTransactionPartyRequest {
+  string ebl_platform_identifier = 1;
+  string legal_name = 2;
+  string registration_number = 3;
+  string location_of_registration = 4;
+  string id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message UpdateTransactionPartyResponse {}
+
+message TransactionParty {
+  TransactionPartyD transaction_party_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message TransactionPartyD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string ebl_platform_identifier = 4;
+  string legal_name = 5;
+  string registration_number = 6;
+  string location_of_registration = 7;
+  string tax_reference = 8;
+}
+
+message GetTransactionPartyRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetTransactionPartyResponse {
+  TransactionParty transaction_party = 1;
+}
+
+message GetTransactionPartiesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetTransactionPartiesResponse {
+  repeated TransactionParty transaction_parties = 1;
+  string next_cursor = 2;
+}
+
+message GetTransactionPartyByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetTransactionPartyByPkResponse {
+  TransactionParty transaction_party = 1;
+}
+
+message CreateTransactionPartySupportingCodeRequest {
+  uint32 transaction_party_id = 1;
+  string party_code = 2 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*",
+      max_len: 100,
+    },
+  }];
+  string party_code_list_provider = 3 [(buf.validate.field).string.min_len = 1];
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateTransactionPartySupportingCodeResponse {
+  TransactionPartySupportingCode transaction_party_supporting_code = 1;
+}
+
+message UpdateTransactionPartySupportingCodeRequest {
+  uint32 transaction_party_id = 1;
+  string party_code = 2 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*",
+      max_len: 100,
+    },
+  }];
+  string party_code_list_provider = 3 [(buf.validate.field).string.min_len = 1];
+  string id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message UpdateTransactionPartySupportingCodeResponse {}
+
+message TransactionPartySupportingCode {
+  TransactionPartySupportingCodeD transaction_party_supporting_code_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message TransactionPartySupportingCodeD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 transaction_party_id = 4;
+  string party_code = 5;
+  string party_code_list_provider = 6;
+}
+
+message CreateEndorsementChainLinkRequest {
+  int32 entry_order = 1;
+  string action_date_time = 2;
+  uint32 actor = 3 [(buf.validate.field).uint32.gt = 0];
+  uint32 recipient = 4 [(buf.validate.field).uint32.gt = 0];
+  uint32 surrender_request_id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreateEndorsementChainLinkResponse {
+  EndorsementChainLink endorsement_chain_link = 1;
+}
+
+message UpdateEndorsementChainLinkRequest {
+  int32 entry_order = 1;
+  uint32 actor = 2;
+  uint32 recipient = 3;
+  string id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message UpdateEndorsementChainLinkResponse {}
+
+message EndorsementChainLink {
+  EndorsementChainLinkD endorsement_chain_link_d = 1;
+  EndorsementChainLinkT endorsement_chain_link_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message EndorsementChainLinkD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  int32 entry_order = 4;
+  uint32 actor = 5;
+  uint32 recipient = 6;
+  uint32 surrender_request_id = 7;
+}
+
+message EndorsementChainLinkT {
+  google.protobuf.Timestamp action_date_time = 1;
+}
+
+message CreateSurrenderRequestRequest {
+  string surrender_request_reference = 1 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*$",
+      max_len: 100,
+    },
+  }];
+  string transport_document_reference = 2 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*$",
+      max_len: 20,
+    },
+  }];
+  string surrender_request_code = 3;
+  string comments = 4 [(buf.validate.field).string.max_len = 255];
+  uint32 surrender_requested_by = 5;
+  string created_date_time = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateSurrenderRequestResponse {
+  SurrenderRequest surrender_request = 1;
+}
+
+message UpdateSurrenderRequestRequest {
+  string surrender_request_reference = 1;
+  string transport_document_reference = 2;
+  string surrender_request_code = 3;
+  string comments = 4;
+  string id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message UpdateSurrenderRequestResponse {}
+
+message SurrenderRequest {
+  SurrenderRequestD surrender_request_d = 1;
+  SurrenderRequestT surrender_request_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message SurrenderRequestD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string surrender_request_reference = 4;
+  string transport_document_reference = 5;
+  string surrender_request_code = 6;
+  string comments = 7;
+  uint32 surrender_requested_by = 8;
+}
+
+message SurrenderRequestT {
+  google.protobuf.Timestamp created_date_time = 1;
+}

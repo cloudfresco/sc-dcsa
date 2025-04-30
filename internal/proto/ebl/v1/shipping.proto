@@ -1,0 +1,178 @@
+syntax = "proto3";
+
+package ebl.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
+
+// The ShippingService service definition.
+service ShippingService {
+  rpc CreateShipment(CreateShipmentRequest) returns (CreateShipmentResponse);
+  rpc GetShipments(GetShipmentsRequest) returns (GetShipmentsResponse);
+  rpc GetShipment(GetShipmentRequest) returns (GetShipmentResponse);
+  rpc GetShipmentByPk(GetShipmentByPkRequest) returns (GetShipmentByPkResponse);
+  rpc CreateTransport(CreateTransportRequest) returns (CreateTransportResponse);
+  rpc GetTransports(GetTransportsRequest) returns (GetTransportsResponse);
+  rpc GetTransport(GetTransportRequest) returns (GetTransportResponse);
+  rpc GetTransportByPk(GetTransportByPkRequest) returns (GetTransportByPkResponse);
+  rpc FindCarrierBookingReferenceByShippingInstructionId(FindCarrierBookingReferenceByShippingInstructionIdRequest) returns (FindCarrierBookingReferenceByShippingInstructionIdResponse);
+}
+
+message CreateShipmentRequest {
+  uint32 booking_id = 1;
+  uint32 carrier_id = 2;
+  string carrier_booking_reference = 3;
+  string terms_and_conditions = 4;
+  string confirmation_datetime = 5;
+  string updated_date_time = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateShipmentResponse {
+  Shipment shipment = 1;
+}
+
+message FindCarrierBookingReferenceByShippingInstructionIdResponse {
+  string carrier_booking_reference = 1;
+}
+
+message FindCarrierBookingReferenceByShippingInstructionIdRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetShipmentRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetShipmentResponse {
+  Shipment shipment = 1;
+}
+
+message GetShipmentByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetShipmentByPkResponse {
+  Shipment shipment = 1;
+}
+
+message GetShipmentsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetShipmentsResponse {
+  repeated Shipment shipments = 1;
+  string next_cursor = 2;
+}
+
+message Shipment {
+  ShipmentD shipment_d = 1;
+  ShipmentT shipment_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message ShipmentD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 booking_id = 4;
+  uint32 carrier_id = 5;
+  string carrier_booking_reference = 6;
+  string terms_and_conditions = 7;
+}
+
+message ShipmentT {
+  google.protobuf.Timestamp confirmation_datetime = 1;
+  google.protobuf.Timestamp updated_date_time = 2;
+}
+
+message ShipmentCutoffTime {
+  ShipmentCutoffTimeD shipment_cutoff_time_d = 1;
+  ShipmentCutoffTimeT shipment_cutoff_time_t = 2;
+}
+
+message ShipmentCutoffTimeD {
+  uint32 id = 1;
+  uint32 shipment_id = 2;
+  string cut_off_time_code = 3;
+}
+
+message ShipmentCutoffTimeT {
+  google.protobuf.Timestamp cut_off_time = 1;
+}
+
+message CreateShipmentCutoffTimeRequest {
+  uint32 shipment_id = 1;
+  string cut_off_time_code = 2 [(buf.validate.field).string.max_len = 3];
+  string cut_off_time = 3 [(buf.validate.field).string.min_len = 1];
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateTransportRequest {
+  string transport_reference = 1;
+  string transport_name = 2;
+  uint32 load_transport_call_id = 3;
+  uint32 discharge_transport_call_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreateTransportResponse {
+  Transport transport = 1;
+}
+
+message GetTransportRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetTransportResponse {
+  Transport transport = 1;
+}
+
+message GetTransportByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetTransportByPkResponse {
+  Transport transport = 1;
+}
+
+message Transport {
+  TransportD transport_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message TransportD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string transport_reference = 4;
+  string transport_name = 5;
+  uint32 load_transport_call_id = 6;
+  uint32 discharge_transport_call_id = 7;
+}
+
+message GetTransportsResponse {
+  repeated Transport transports = 1;
+  string next_cursor = 2;
+}
+
+message GetTransportsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}

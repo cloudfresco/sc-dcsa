@@ -1,0 +1,220 @@
+syntax = "proto3";
+
+package ebl.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
+
+// The TransportDocumentService service definition.
+service TransportDocumentService {
+  rpc CreateTransportDocument(CreateTransportDocumentRequest) returns (CreateTransportDocumentResponse);
+  rpc CreateTransportDocumentFromShippingInstructionTO(CreateTransportDocumentFromShippingInstructionTORequest) returns (CreateTransportDocumentFromShippingInstructionTOResponse);
+  rpc GetTransportDocuments(GetTransportDocumentsRequest) returns (GetTransportDocumentsResponse);
+  rpc FindTransportDocumentById(FindTransportDocumentByIdRequest) returns (FindTransportDocumentByIdResponse);
+  rpc GetTransportDocumentByPk(GetTransportDocumentByPkRequest) returns (GetTransportDocumentByPkResponse);
+  rpc FindByTransportDocumentReference(FindByTransportDocumentReferenceRequest) returns (FindByTransportDocumentReferenceResponse);
+  rpc ApproveTransportDocument(ApproveTransportDocumentRequest) returns (ApproveTransportDocumentResponse);
+  rpc CreateTransportDocumentSummary(CreateTransportDocumentSummaryRequest) returns (CreateTransportDocumentSummaryResponse);
+  rpc GetTransportDocumentSummaries(GetTransportDocumentSummariesRequest) returns (GetTransportDocumentSummariesResponse);
+  rpc GetTransportDocumentSummaryByPk(GetTransportDocumentSummaryByPkRequest) returns (GetTransportDocumentSummaryByPkResponse);
+}
+
+message CreateTransportDocumentRequest {
+  string transport_document_reference = 1 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\s+)*$",
+      max_len: 20,
+    },
+  }];
+  uint32 location_id = 2;
+  string issue_date = 3;
+  string shipped_onboard_date = 4;
+  string received_for_shipment_date = 5;
+  uint32 number_of_originals = 6;
+  uint32 carrier_id = 7;
+  uint32 shipping_instruction_id = 8;
+  string declared_value_currency = 9 [(buf.validate.field) = {
+    string: {
+      pattern: "^[A-Z]{3}$",
+      max_len: 3,
+    },
+  }];
+  double declared_value = 10 [(buf.validate.field).double.gte = 0];
+  int32 number_of_rider_pages = 11;
+  string issuing_party = 12;
+  string created_date_time = 13;
+  string updated_date_time = 14;
+  string user_id = 15;
+  string user_email = 16;
+  string request_id = 17;
+}
+
+message CreateTransportDocumentResponse {
+  TransportDocument transport_document = 1;
+}
+
+message FindTransportDocumentByIdRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message FindTransportDocumentByIdResponse {
+  TransportDocument transport_document = 1;
+}
+
+message GetTransportDocumentByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetTransportDocumentByPkResponse {
+  TransportDocument transport_document = 1;
+}
+
+message FindByTransportDocumentReferenceResponse {
+  TransportDocument transport_document = 1;
+}
+
+message FindByTransportDocumentReferenceRequest {
+  string transport_document_reference = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message CreateTransportDocumentFromShippingInstructionTORequest {
+  CreateTransportDocumentRequest create_transport_document_request = 1;
+}
+
+message CreateTransportDocumentFromShippingInstructionTOResponse {
+  TransportDocument transport_document = 1;
+}
+
+message GetTransportDocumentsResponse {
+  repeated TransportDocument transport_documents = 1;
+  string next_cursor = 2;
+}
+
+message GetTransportDocumentsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message ApproveTransportDocumentRequest {
+  string transport_document_reference = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message ApproveTransportDocumentResponse {}
+
+message TransportDocument {
+  TransportDocumentD transport_document_d = 1;
+  TransportDocumentT transport_document_t = 2;
+}
+
+message TransportDocumentD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string transport_document_reference = 4;
+  uint32 location_id = 5;
+  uint32 number_of_originals = 6;
+  uint32 carrier_id = 7;
+  uint32 shipping_instruction_id = 8;
+  string declared_value_currency = 9;
+  double declared_value = 10;
+  int32 number_of_rider_pages = 11;
+  string issuing_party = 12;
+}
+
+message TransportDocumentT {
+  google.protobuf.Timestamp issue_date = 1;
+  google.protobuf.Timestamp shipped_onboard_date = 2;
+  google.protobuf.Timestamp received_for_shipment_date = 3;
+  google.protobuf.Timestamp created_date_time = 4;
+  google.protobuf.Timestamp updated_date_time = 5;
+}
+
+message CreateTransportDocumentSummaryRequest {
+  string transport_document_reference = 1 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\s+)*$",
+      max_len: 20,
+    },
+  }];
+  string transport_document_created_date_time = 2;
+  string transport_document_updated_date_time = 3;
+  string issue_date = 4;
+  string shipped_onboard_date = 5;
+  string received_for_shipment_date = 6;
+  uint32 number_of_originals = 7;
+  string carrier_code = 8 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+$",
+      max_len: 4,
+    },
+  }];
+  string carrier_code_list_provider = 9;
+  int32 number_of_rider_pages = 10;
+  string shipping_instruction_reference = 11;
+  string document_status = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+}
+
+message CreateTransportDocumentSummaryResponse {
+  TransportDocumentSummary transport_document_summary = 1;
+}
+
+message GetTransportDocumentSummariesResponse {
+  repeated TransportDocumentSummary transport_document_summaries = 1;
+  string next_cursor = 2;
+}
+
+message GetTransportDocumentSummariesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetTransportDocumentSummaryByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetTransportDocumentSummaryByPkResponse {
+  TransportDocumentSummary transport_document_summary = 1;
+}
+
+message TransportDocumentSummary {
+  TransportDocumentSummaryD transport_document_summary_d = 1;
+  TransportDocumentSummaryT transport_document_summary_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message TransportDocumentSummaryD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string transport_document_reference = 4;
+  uint32 number_of_originals = 5;
+  string carrier_code = 6;
+  string carrier_code_list_provider = 7;
+  int32 number_of_rider_pages = 8;
+  string shipping_instruction_reference = 9;
+  string document_status = 10;
+}
+
+message TransportDocumentSummaryT {
+  google.protobuf.Timestamp transport_document_created_date_time = 1;
+  google.protobuf.Timestamp transport_document_updated_date_time = 2;
+  google.protobuf.Timestamp issue_date = 3;
+  google.protobuf.Timestamp shipped_onboard_date = 4;
+  google.protobuf.Timestamp received_for_shipment_date = 5;
+}

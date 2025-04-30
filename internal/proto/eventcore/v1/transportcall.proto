@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package eventcore.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/eventcore/v1";
+
+// The TransportCallService service definition.
+service TransportCallService {
+  rpc CreateTransportCall(CreateTransportCallRequest) returns (CreateTransportCallResponse);
+  rpc GetTransportCalls(GetTransportCallsRequest) returns (GetTransportCallsResponse);
+  rpc FindTransportCall(FindTransportCallRequest) returns (FindTransportCallResponse);
+  rpc GetTransportCallByPk(GetTransportCallByPkRequest) returns (GetTransportCallByPkResponse);
+}
+
+message FindTransportCallRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message FindTransportCallResponse {
+  TransportCall transport_call = 1;
+}
+
+message GetTransportCallByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetTransportCallByPkResponse {
+  TransportCall transport_call = 1;
+}
+
+message CreateTransportCallRequest {
+  string transport_call_reference = 1 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\s+)*$",
+      max_len: 20,
+    },
+  }];
+  uint32 transport_call_sequence_number = 2;
+  uint32 facility_id = 3;
+  string facility_type_code = 4;
+  string other_facility = 5;
+  uint32 location_id = 6;
+  string mode_of_transport_code = 7;
+  uint32 vessel_id = 8;
+  uint32 import_voyage_id = 9;
+  uint32 export_voyage_id = 10;
+  string port_call_status_code = 11;
+  string port_visit_reference = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+}
+
+message CreateTransportCallResponse {
+  TransportCall transport_call = 1;
+}
+
+message GetTransportCallsResponse {
+  repeated TransportCall transport_calls = 1;
+  string next_cursor = 2;
+}
+
+message GetTransportCallsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message TransportCall {
+  TransportCallD transport_call_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message TransportCallD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string transport_call_reference = 4;
+  uint32 transport_call_sequence_number = 5;
+  uint32 facility_id = 6;
+  string facility_type_code = 7;
+  string other_facility = 8;
+  uint32 location_id = 9;
+  string mode_of_transport_code = 10;
+  uint32 vessel_id = 11;
+  uint32 import_voyage_id = 12;
+  uint32 export_voyage_id = 13;
+  string port_call_status_code = 14;
+  string port_visit_reference = 15;
+}

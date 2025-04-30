@@ -1,0 +1,158 @@
+syntax = "proto3";
+
+package bkg.v2;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2";
+
+// The ReferenceService service definition.
+service ReferenceService {
+  rpc CreateReference(CreateReferenceRequest) returns (CreateReferenceResponse);
+  rpc CreateReferencesByBookingIdAndTOs(CreateReferencesByBookingIdAndTOsRequest) returns (CreateReferencesByBookingIdAndTOsResponse);
+  rpc CreateReferencesByShippingInstructionIdAndTOs(CreateReferencesByShippingInstructionIdAndTOsRequest) returns (CreateReferencesByShippingInstructionIdAndTOsResponse);
+  rpc CreateReferencesByShippingInstructionReferenceAndConsignmentIdAndTOs(CreateReferencesByShippingInstructionReferenceAndConsignmentIdAndTOsRequest) returns (CreateReferencesByShippingInstructionReferenceAndConsignmentIdAndTOsResponse);
+  rpc FindByBookingId(FindByBookingIdRequest) returns (FindByBookingIdResponse);
+  rpc FindByShippingInstructionId(FindByShippingInstructionIdRequest) returns (FindByShippingInstructionIdResponse);
+  rpc ResolveReferencesForBookingId(ResolveReferencesForBookingIdRequest) returns (ResolveReferencesForBookingIdResponse);
+  rpc ResolveReferencesForShippingInstructionReference(ResolveReferencesForShippingInstructionReferenceRequest) returns (ResolveReferencesForShippingInstructionReferenceResponse);
+  rpc FindByShipmentId(FindByShipmentIdRequest) returns (FindByShipmentIdResponse);
+  rpc FindByTransportDocumentReference(FindByTransportDocumentReferenceRequest) returns (FindByTransportDocumentReferenceResponse);
+  rpc FindByCarrierBookingReference(FindByCarrierBookingReferenceRequest) returns (FindByCarrierBookingReferenceResponse);
+}
+
+message CreateReferenceRequest {
+  string reference_type_code = 1 [(buf.validate.field).string.max_len = 3];
+  string reference_value = 2 [(buf.validate.field).string.max_len = 100];
+  uint32 shipment_id = 3;
+  uint32 shipping_instruction_id = 4;
+  uint32 booking_id = 5;
+  uint32 consignment_item_id = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateReferenceResponse {
+  Reference1 reference1 = 1;
+}
+
+message CreateReferencesByBookingIdAndTOsRequest {
+  CreateReferenceRequest create_reference_request = 1;
+}
+
+message CreateReferencesByBookingIdAndTOsResponse {
+  Reference1 reference1 = 1;
+}
+
+message CreateReferencesByShippingInstructionIdAndTOsRequest {
+  CreateReferenceRequest create_reference_request = 1;
+}
+
+message CreateReferencesByShippingInstructionIdAndTOsResponse {
+  Reference1 reference1 = 1;
+}
+
+message CreateReferencesByShippingInstructionReferenceAndConsignmentIdAndTOsRequest {
+  CreateReferenceRequest create_reference_request = 1;
+}
+
+message CreateReferencesByShippingInstructionReferenceAndConsignmentIdAndTOsResponse {
+  Reference1 reference1 = 1;
+}
+
+message Reference1 {
+  Reference1D reference1_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message Reference1D {
+  uint32 id = 1;
+  string reference_type_code = 2;
+  string reference_value = 3;
+  uint32 shipment_id = 4;
+  uint32 shipping_instruction_id = 5;
+  uint32 booking_id = 6;
+  uint32 consignment_item_id = 7;
+}
+
+message FindByBookingIdRequest {
+  uint32 booking_id = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FindByBookingIdResponse {
+  Reference1 reference1 = 1;
+}
+
+message FindByShippingInstructionIdRequest {
+  uint32 shipping_instruction_id = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FindByShippingInstructionIdResponse {
+  Reference1 reference1 = 1;
+}
+
+message FindByShipmentIdRequest {
+  uint32 shipment_id = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FindByShipmentIdResponse {
+  Reference1 reference1 = 1;
+}
+
+message FindByTransportDocumentReferenceRequest {
+  string transport_document_reference = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FindByTransportDocumentReferenceResponse {
+  Reference1 reference1 = 1;
+}
+
+message FindByCarrierBookingReferenceRequest {
+  string carrier_booking_reference = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FindByCarrierBookingReferenceResponse {
+  Reference1 reference1 = 1;
+}
+
+message ResolveReferencesForBookingIdRequest {
+  uint32 reference_id = 1;
+  uint32 booking_id = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message ResolveReferencesForBookingIdResponse {}
+
+message ResolveReferencesForShippingInstructionReferenceRequest {
+  uint32 reference_id = 1;
+  uint32 shipping_instruction_id = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message ResolveReferencesForShippingInstructionReferenceResponse {}
+
+message ShipmentIds {
+  repeated uint32 shipment_ids = 1;
+}

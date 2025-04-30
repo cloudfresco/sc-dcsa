@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package ebl.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
+
+// The ShippingInstructionSummaryService service definition.
+service ShippingInstructionSummaryService {
+  rpc CreateShippingInstructionSummary(CreateShippingInstructionSummaryRequest) returns (CreateShippingInstructionSummaryResponse);
+  rpc GetShippingInstructionSummaries(GetShippingInstructionSummariesRequest) returns (GetShippingInstructionSummariesResponse);
+}
+
+message CreateShippingInstructionSummaryResponse {
+  ShippingInstructionSummary shipping_instruction_summary = 1;
+}
+
+message ShippingInstructionSummary {
+  ShippingInstructionSummaryD shipping_instruction_summary_d = 1;
+  ShippingInstructionSummaryT shipping_instruction_summary_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message ShippingInstructionSummaryD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string shipping_instruction_reference = 4;
+  string document_status = 5;
+  string amend_to_transport_document = 6;
+  string transport_document_type_code = 7;
+  bool is_shipped_onboard_type = 8;
+  uint32 number_of_copies = 9;
+  uint32 number_of_originals = 10;
+  bool is_electronic = 11;
+  bool is_to_order = 12;
+  bool are_charges_displayed_on_originals = 13;
+  bool are_charges_displayed_on_copies = 14;
+  string displayed_name_for_place_of_receipt = 15;
+  string displayed_name_for_port_of_load = 16;
+  string displayed_name_for_port_of_discharge = 17;
+  string displayed_name_for_place_of_delivery = 18;
+}
+
+message ShippingInstructionSummaryT {
+  google.protobuf.Timestamp shipping_instruction_created_date_time = 1;
+  google.protobuf.Timestamp shipping_instruction_updated_date_time = 2;
+}
+
+message CreateShippingInstructionSummaryRequest {
+  string shipping_instruction_reference = 1;
+  string document_status = 2;
+  string shipping_instruction_created_date_time = 3;
+  string shipping_instruction_updated_date_time = 4;
+  string amend_to_transport_document = 5;
+  string transport_document_type_code = 6;
+  bool is_shipped_onboard_type = 7;
+  uint32 number_of_copies = 8;
+  uint32 number_of_originals = 9;
+  bool is_electronic = 10;
+  bool is_to_order = 11;
+  bool are_charges_displayed_on_originals = 12;
+  bool are_charges_displayed_on_copies = 13;
+  string displayed_name_for_place_of_receipt = 14;
+  string displayed_name_for_port_of_load = 15;
+  string displayed_name_for_port_of_discharge = 16;
+  string displayed_name_for_place_of_delivery = 17;
+  string user_id = 18;
+  string user_email = 19;
+  string request_id = 20;
+}
+
+message GetShippingInstructionSummariesResponse {
+  repeated ShippingInstructionSummary shipping_instruction_summaries = 1;
+  string next_cursor = 2;
+}
+
+message GetShippingInstructionSummariesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}

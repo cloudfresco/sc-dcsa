@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package tnt.v3;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/tnt/v3";
+
+// The EventSubscriptionService service definition.
+service EventSubscriptionService {
+  rpc CreateEventSubscription(CreateEventSubscriptionRequest) returns (CreateEventSubscriptionResponse);
+  rpc GetEventSubscriptions(GetEventSubscriptionsRequest) returns (GetEventSubscriptionsResponse);
+  rpc FindEventSubscriptionByID(FindEventSubscriptionByIDRequest) returns (FindEventSubscriptionByIDResponse);
+  rpc DeleteEventSubscriptionByID(DeleteEventSubscriptionByIDRequest) returns (DeleteEventSubscriptionByIDResponse);
+  rpc UpdateEventSubscription(UpdateEventSubscriptionRequest) returns (UpdateEventSubscriptionResponse);
+}
+
+message EventSubscription {
+  EventSubscriptionD event_subscription_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message EventSubscriptionD {
+  uint32 id = 1;
+  bytes subscription_id = 2;
+  string callback_url = 3;
+  string document_reference = 4;
+  string equipment_reference = 5;
+  string transport_call_reference = 6;
+  string vessel_imo_number = 7;
+  string carrier_export_voyage_number = 8;
+  string universal_export_voyage_reference = 9;
+  string carrier_service_code = 10;
+  string universal_service_reference = 11;
+  string un_location_code = 12;
+  bytes secret = 13;
+}
+
+message CreateEventSubscriptionResponse {
+  EventSubscription event_subscription = 1;
+}
+
+message CreateEventSubscriptionRequest {
+  string callback_url = 1;
+  string document_reference = 2 [(buf.validate.field).string.max_len = 100];
+  string equipment_reference = 3 [(buf.validate.field).string.max_len = 100];
+  string transport_call_reference = 4 [(buf.validate.field).string.max_len = 100];
+  string vessel_imo_number = 5;
+  string carrier_export_voyage_number = 6;
+  string universal_export_voyage_reference = 7 [(buf.validate.field) = {
+    string: {
+      pattern: "\\d{2}[0-9A-Z]{2}[NEWS]",
+      max_len: 100,
+    },
+  }];
+  string carrier_service_code = 8 [(buf.validate.field).string.max_len = 50];
+  string universal_service_reference = 9;
+  string un_location_code = 10;
+  bytes secret = 11;
+  string user_id = 12;
+  string user_email = 13;
+  string request_id = 14;
+}
+
+message GetEventSubscriptionsResponse {
+  repeated EventSubscription event_subscriptions = 1;
+  string next_cursor = 2;
+}
+
+message GetEventSubscriptionsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message FindEventSubscriptionByIDRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message FindEventSubscriptionByIDResponse {
+  EventSubscription event_subscription = 1;
+}
+
+message UpdateEventSubscriptionRequest {
+  string callback_url = 1;
+  string document_reference = 2 [(buf.validate.field).string.max_len = 100];
+  string equipment_reference = 3 [(buf.validate.field).string.max_len = 100];
+  string transport_call_reference = 4 [(buf.validate.field).string.max_len = 100];
+  string vessel_imo_number = 5;
+  string carrier_export_voyage_number = 6;
+  string universal_export_voyage_reference = 7;
+  string carrier_service_code = 8 [(buf.validate.field).string.max_len = 50];
+  string universal_service_reference = 9;
+  string subscription_id = 10;
+  string user_id = 11;
+  string user_email = 12;
+  string request_id = 13;
+}
+
+message UpdateEventSubscriptionResponse {}
+
+message DeleteEventSubscriptionByIDRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message DeleteEventSubscriptionByIDResponse {}

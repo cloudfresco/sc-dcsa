@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package eventcore.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/eventcore/v1";
+
+// The UtilizedTransportEquipmentService service definition.
+service UtilizedTransportEquipmentService {
+  rpc CreateUtilizedTransportEquipment(CreateUtilizedTransportEquipmentRequest) returns (CreateUtilizedTransportEquipmentResponse);
+}
+
+message UtilizedTransportEquipment {
+  UtilizedTransportEquipmentD utilized_transport_equipment_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+  Equipment equipment = 4;
+}
+
+message UtilizedTransportEquipmentD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string equipment_reference = 4;
+  double cargo_gross_weight = 5 [(buf.validate.field).double.gt = 0];
+  string cargo_gross_weight_unit = 6 [(buf.validate.field).string.min_len = 1];
+  bool is_shipper_owned = 7;
+}
+
+message CreateUtilizedTransportEquipmentRequest {
+  string equipment_reference = 1;
+  double cargo_gross_weight = 2;
+  string cargo_gross_weight_unit = 3;
+  bool is_shipper_owned = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+  CreateEquipmentRequest equipment = 8;
+}
+
+message CreateUtilizedTransportEquipmentResponse {
+  UtilizedTransportEquipment utilized_transport_equipment = 1;
+}
+
+message Equipment {
+  EquipmentD equipment_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message EquipmentD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string equipment_reference = 4;
+  string iso_equipment_code = 5;
+  double tare_weight = 6;
+  string weight_unit = 7;
+}
+
+message CreateEquipmentRequest {
+  string equipment_reference = 1;
+  string iso_equipment_code = 2;
+  double tare_weight = 3;
+  string weight_unit = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}

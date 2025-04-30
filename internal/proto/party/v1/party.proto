@@ -1,0 +1,265 @@
+syntax = "proto3";
+
+package party.v1;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1";
+
+// The PartyService service definition.
+service PartyService {
+  rpc CreateParty(CreatePartyRequest) returns (CreatePartyResponse);
+  rpc GetParties(GetPartiesRequest) returns (GetPartiesResponse);
+  rpc GetParty(GetPartyRequest) returns (GetPartyResponse);
+  rpc GetPartyByPk(GetPartyByPkRequest) returns (GetPartyByPkResponse);
+  rpc UpdateParty(UpdatePartyRequest) returns (UpdatePartyResponse);
+  rpc DeleteParty(DeletePartyRequest) returns (DeletePartyResponse);
+  rpc CreatePartyContactDetail(CreatePartyContactDetailRequest) returns (CreatePartyContactDetailResponse);
+  rpc GetPartyContactDetail(GetPartyContactDetailRequest) returns (GetPartyContactDetailResponse);
+  rpc UpdatePartyContactDetail(UpdatePartyContactDetailRequest) returns (UpdatePartyContactDetailResponse);
+  rpc DeletePartyContactDetail(DeletePartyContactDetailRequest) returns (DeletePartyContactDetailResponse);
+  rpc CreateDisplayedAddress(CreateDisplayedAddressRequest) returns (CreateDisplayedAddressResponse);
+  rpc CreateFacility(CreateFacilityRequest) returns (CreateFacilityResponse);
+  rpc CreatePartyFunction(CreatePartyFunctionRequest) returns (CreatePartyFunctionResponse);
+  rpc CreatePartyIdentifyingCode(CreatePartyIdentifyingCodeRequest) returns (CreatePartyIdentifyingCodeResponse);
+}
+
+message CreatePartyRequest {
+  string party_name = 1;
+  string tax_reference1 = 2;
+  string tax_reference2 = 3;
+  string public_key = 4;
+
+  string name1 = 5;
+  string street = 6;
+  string street_number = 7;
+  string floor1 = 8;
+  string postal_code = 9;
+  string city = 10;
+  string state_region = 11;
+  string country_name = 12;
+  string user_id = 13;
+  string user_email = 14;
+  string request_id = 15;
+}
+
+message CreatePartyResponse {
+  Party party = 1;
+}
+
+message GetPartiesResponse {
+  repeated Party parties = 1;
+  string next_cursor = 2;
+}
+
+message GetPartiesRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message UpdatePartyRequest {
+  string id = 1;
+  string party_name = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message UpdatePartyResponse {}
+
+message DeletePartyRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message DeletePartyResponse {}
+
+message GetPartyRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetPartyResponse {
+  Party party = 1;
+}
+
+message GetPartyByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetPartyByPkResponse {
+  Party party = 1;
+}
+
+message Party {
+  PartyD party_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message PartyD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string party_name = 4;
+  string tax_reference1 = 5;
+  string tax_reference2 = 6;
+  string public_key = 7;
+  uint32 address_id = 8;
+}
+
+message Parties {
+  repeated Party parties = 1;
+}
+
+message PartyContactDetail {
+  PartyContactDetailD party_contact_detail_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message PartyContactDetailD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 party_id = 4;
+  string name = 5;
+  string email = 6;
+  string phone = 7;
+  string url = 8;
+}
+
+message CreatePartyContactDetailRequest {
+  uint32 party_id = 1;
+  string name = 2;
+  string email = 3;
+  string phone = 4;
+  string url = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreatePartyContactDetailResponse {
+  PartyContactDetail party_contact_detail = 1;
+}
+
+message UpdatePartyContactDetailRequest {
+  uint32 party_id = 1;
+  string name = 2;
+  string email = 3;
+  string phone = 4;
+  string url = 5;
+  string party_contact_detail_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message UpdatePartyContactDetailResponse {}
+
+message GetPartyContactDetailRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetPartyContactDetailResponse {
+  PartyContactDetail party_contact_detail = 1;
+}
+
+message DeletePartyContactDetailRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message DeletePartyContactDetailResponse {}
+
+message PartyContactDetails {
+  repeated PartyContactDetail party_contact_details = 1;
+}
+
+message CreateDisplayedAddressRequest {
+  uint32 document_party_id = 1;
+  uint32 address_line_number = 2;
+  string address_line_text = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreateDisplayedAddressResponse {
+  DisplayedAddress displayed_address = 1;
+}
+
+message DisplayedAddress {
+  uint32 document_party_id = 1;
+  uint32 address_line_number = 2;
+  string address_line_text = 3;
+}
+
+message CreateFacilityRequest {
+  string facility_name = 1;
+  string un_location_code = 2;
+  string facility_bic_code = 3;
+  string facility_smdg_code = 4;
+  uint32 location_id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreateFacilityResponse {
+  Facility facility = 1;
+}
+
+message Facility {
+  FacilityD facility_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message FacilityD {
+  uint32 id = 1;
+  string facility_name = 4;
+  string un_location_code = 5;
+  string facility_bic_code = 6;
+  string facility_smdg_code = 7;
+  uint32 location_id = 8;
+}
+
+message CreatePartyFunctionRequest {
+  string party_function_code = 1;
+  string party_function_name = 2;
+  string party_function_description = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message CreatePartyFunctionResponse {
+  PartyFunction party_function = 1;
+}
+
+message PartyFunction {
+  string party_function_code = 1;
+  string party_function_name = 2;
+  string party_function_description = 3;
+}
+
+message CreatePartyIdentifyingCodeRequest {
+  string dcsa_responsible_agency_code = 1;
+  uint32 party_id = 2;
+  string code_list_name = 3;
+  string party_code = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message CreatePartyIdentifyingCodeResponse {
+  PartyIdentifyingCode party_identifying_code = 1;
+}
+
+message PartyIdentifyingCode {
+  string dcsa_responsible_agency_code = 1;
+  uint32 party_id = 2;
+  string code_list_name = 3;
+  string party_code = 4;
+}

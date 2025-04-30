@@ -1,0 +1,454 @@
+{"roles": 
+    [
+      {
+        "role_name": "BkgCud",
+        "role_description": "create or update or delete Bkg",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "bkg:cud",
+        "permission_description": "create or update or delete Bkg",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "BkgRead",
+        "role_description": "read Bkg",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "bkg:read",
+        "permission_description": "read Bkg",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "BkgShipmentSummaryCud",
+        "role_description": "create or update or delete ",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "bkgss:cud",
+        "permission_description": "create or update or delete BkgShipmentSummary",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "BkgShipmentSummaryRead",
+        "role_description": "read ",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "bkgss:read",
+        "permission_description": "read BkgShipmentSummary",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "BkgSummaryCud",
+        "role_description": "create or update or delete BkgSummary",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "bkgs:cud",
+        "permission_description": "create or update or delete BkgSummary",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "BkgSummaryRead",
+        "role_description": "read bkg",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "bkgs:read",
+        "permission_description": "read bkg BkgSummary",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "ReferenceCud",
+        "role_description": "create or update or delete Reference",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "refer:cud",
+        "permission_description": "create or update or delete Reference",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "ReferenceRead",
+        "role_description": "read Reference",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "refer:read",
+        "permission_description": "read Reference",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "IssueRequestCud",
+        "role_description": "create or update or delete IssueRequest",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "isr:cud",
+        "permission_description": "create or update or delete IssueRequest",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "IssueRequestRead",
+        "role_description": "read IssueRequest",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "isr:read",
+        "permission_description": "read IssueRequest",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "IssueRequestResponseCud",
+        "role_description": "create or update or delete IssueRequestResponse",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "isrr:cud",
+        "permission_description": "create or update or delete IssueRequestResponse",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "IssueRequestResponseRead",
+        "role_description": "read IssueRequest",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "isrr:read",
+        "permission_description": "read IssueRequest",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+      
+      {
+        "role_name": "ShippingCud",
+        "role_description": "create or update or delete Shipping",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "shipping:cud",
+        "permission_description": "create or update or delete Shipping",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "ShippingRead",
+        "role_description": "read Shipping",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "shipping:read",
+        "permission_description": "read Shipping",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "ShippingInstructionCud",
+        "role_description": "create or update or delete ShippingInstruction",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "shippinginstr:cud",
+        "permission_description": "create or update or delete ShippingInstruction",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "ShippingInstructionRead",
+        "role_description": "read ShippingInstruction",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "shippinginstr:read",
+        "permission_description": "read ShippingInstruction",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+
+      {
+        "role_name": "SurrenderRequestCud",
+        "role_description": "create or update or delete ShippingInstructionSummary",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "surreq:cud",
+        "permission_description": "create or update or delete ShippingInstructionSummary",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "SurrenderRequestRead",
+        "role_description": "read ShippingInstructionSummary",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "surreq:read",
+        "permission_description": "read ShippingInstructionSummary",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "SurrenderRequestAnswerCud",
+        "role_description": "create or update or delete SurrenderRequestAnswer",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "surreqans:cud",
+        "permission_description": "create or update or delete SurrenderRequestAnswer",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "SurrenderRequestAnswerRead",
+        "role_description": "read SurrenderRequestAnswer",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "surreqans:read",
+        "permission_description": "read SurrenderRequestAnswer",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "TransportDocumentCud",
+        "role_description": "create or update or delete TransportDocument",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "transportdoc:cud",
+        "permission_description": "create or update or delete TransportDocument",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "TransportDocumentRead",
+        "role_description": "read TransportDocument",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "transportdoc:read",
+        "permission_description": "read TransportDocument",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+  
+      {
+        "role_name": "ChargeCud",
+        "role_description": "create or update or delete Charge",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "charge:cud",
+        "permission_description": "create or update or delete Charge",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "ChargeRead",
+        "role_description": "read Charge",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "charge:read",
+        "permission_description": "read Charge",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "TransportCallCud",
+        "role_description": "create or update or delete TransportCall",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "transportcall:cud",
+        "permission_description": "create or update or delete TransportCall",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "TransportCallRead",
+        "role_description": "read TransportCall",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "transportcall:read",
+        "permission_description": "read TransportCall",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "UtilizedTransportEquipmentCud",
+        "role_description": "create or update or delete UtilizedTransportEquipment",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "ute:cud",
+        "permission_description": "create or update or delete UtilizedTransportEquipment",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "UtilizedTransportEquipmentRead",
+        "role_description": "read UtilizedTransportEquipment",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "ute:read",
+        "permission_description": "read UtilizedTransportEquipment",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "VoyageCud",
+        "role_description": "create or update or delete Voyage",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "voyage:cud",
+        "permission_description": "create or update or delete Voyage",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "VoyageRead",
+        "role_description": "read Voyage",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "voyage:read",
+        "permission_description": "read Voyage",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "ServiceCud",
+        "role_description": "create or update or delete Service",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "srv:cud",
+        "permission_description": "create or update or delete Service",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "ServiceRead",
+        "role_description": "read Service",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "srv:read",
+        "permission_description": "read Service",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "TimestampCud",
+        "role_description": "create or update or delete Timestamp",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "ts:cud",
+        "permission_description": "create or update or delete Timestamp",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "TimestampRead",
+        "role_description": "read Timestamp",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "ts:read",
+        "permission_description": "read Timestamp",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "LegCud",
+        "role_description": "create or update or delete Leg",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "leg:cud",
+        "permission_description": "create or update or delete Leg",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "LegRead",
+        "role_description": "read Leg",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "leg:read",
+        "permission_description": "read Leg",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "ServiceScheduleCud",
+        "role_description": "create or update or delete ServiceSchedule",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "srvsched:cud",
+        "permission_description": "create or update or delete ServiceSchedule",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "ServiceScheduleRead",
+        "role_description": "read ServiceSchedule",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "srvsched:read",
+        "permission_description": "read ServiceSchedule",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "VesselScheduleCud",
+        "role_description": "create or update or delete VesselSchedule",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "vesselsched:cud",
+        "permission_description": "create or update or delete VesselSchedule",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "VesselScheduleRead",
+        "role_description": "read VesselSchedule",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "vesselsched:read",
+        "permission_description": "read VesselSchedule",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "EventCud",
+        "role_description": "create or update or delete Event",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "event:cud",
+        "permission_description": "create or update or delete Event",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "EventRead",
+        "role_description": "read Event",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "event:read",
+        "permission_description": "read Event",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "EventSubscriptionCud",
+        "role_description": "create or update or delete EventSubscription",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "eventsub:cud",
+        "permission_description": "create or update or delete EventSubscription",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "EventSubscriptionRead",
+        "role_description": "read EventSubscription",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "eventsub:read",
+        "permission_description": "read EventSubscription",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "SealCud",
+        "role_description": "create or update or delete Seal",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "seal:cud",
+        "permission_description": "create or update or delete Seal",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "SealRead",
+        "role_description": "read Seal",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "seal:read",
+        "permission_description": "read Seal",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]      
+      },
+
+      {
+        "role_name": "UsersCud",
+        "role_description": "create or update or delete Users",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "users:cud",
+        "permission_description": "create or update or delete Users",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]
+      },
+
+      {
+        "role_name": "UsersRead",
+        "role_description": "read Users",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "users:read",
+        "permission_description": "read Users",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459"]
+      },
+
+      {
+        "role_name": "PartiesCud",
+        "role_description": "create or update or delete Parties",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "parties:cud",
+        "permission_description": "create or update or delete Parties",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459", "auth0|66fcdfb6d20dcb68e3fcbc3b"]
+      },
+
+      {
+        "role_name": "PartiesRead",
+        "role_description": "read Parties",
+        "resource_server_identifier": "https://scdcsa.com",
+        "permission_name": "parties:read",
+        "permission_description": "read Parties",
+        "user_ids": ["auth0|66fd06d0bfea78a82bb42459", "auth0|66fcdfb6d20dcb68e3fcbc3b"]
+      }
+    ]
+}

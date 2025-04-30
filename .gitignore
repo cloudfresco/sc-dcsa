@@ -22,4 +22,19 @@ go.work
 go.work.sum
 
 # env file
-.env
+data
+sc-dcsa.sh
+sc-dcsa.log
+sc-dcsa_user.log
+sc-dcsa_party.log
+sc-dcsa_order.log
+sc-dcsa_tax.log
+sc-dcsa_bkg.log
+sc-dcsa_ebl.log
+sc-dcsa_logistics.log
+sc-dcsa_jit.log
+sc-dcsa_ovs.log
+sc-dcsa_tnt.log
+internal/common/keys
+frontend/node_modules
+frontend/.env

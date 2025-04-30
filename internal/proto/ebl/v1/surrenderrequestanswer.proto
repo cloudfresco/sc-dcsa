@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package ebl.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/ebl/v1";
+
+// The SurrenderRequestAnswerService service definition.
+service SurrenderRequestAnswerService {
+  rpc CreateSurrenderRequestAnswer(CreateSurrenderRequestAnswerRequest) returns (CreateSurrenderRequestAnswerResponse);
+  rpc UpdateSurrenderRequestAnswer(UpdateSurrenderRequestAnswerRequest) returns (UpdateSurrenderRequestAnswerResponse);
+}
+
+message CreateSurrenderRequestAnswerRequest {
+  string surrender_request_reference = 1 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*$",
+      max_len: 100,
+    },
+  }];
+  string action = 2;
+  string comments = 3 [(buf.validate.field) = {
+    string: {
+      pattern: "^\\S+(\\s+\\S+)*$",
+      max_len: 255,
+    },
+  }];
+  string created_date_time = 4;
+  uint32 surrender_request_id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message CreateSurrenderRequestAnswerResponse {
+  SurrenderRequestAnswer surrender_request_answer = 1;
+}
+
+message UpdateSurrenderRequestAnswerRequest {
+  string surrender_request_reference = 1;
+  string action = 2;
+  string comments = 3;
+  string id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message UpdateSurrenderRequestAnswerResponse {}
+
+message SurrenderRequestAnswer {
+  SurrenderRequestAnswerD surrender_request_answer_d = 1;
+  SurrenderRequestAnswerT surrender_request_answer_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message SurrenderRequestAnswerD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string surrender_request_reference = 4;
+  string action = 5;
+  string comments = 6;
+  uint32 surrender_request_id = 7;
+}
+
+message SurrenderRequestAnswerT {
+  google.protobuf.Timestamp created_date_time = 1;
+}

@@ -1,0 +1,196 @@
+syntax = "proto3";
+
+package common.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/common/v1";
+
+message GetByIdRequest {
+  uint32 id = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message GetRequest {
+  string id = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message Empty {}
+
+message CrUpdUser {
+  string status_code = 1;
+  string created_by_user_id = 2;
+  string updated_by_user_id = 3;
+}
+
+message CrUpdTime {
+  google.protobuf.Timestamp created_at = 1;
+  google.protobuf.Timestamp updated_at = 2;
+}
+
+message PartyInfo {
+  uint32 party_id = 1;
+  string party_name = 2;
+}
+
+message Address {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string name1 = 4;
+  string street = 5;
+  string street_number = 6;
+  string floor1 = 7;
+  string postal_code = 8;
+  string city = 9;
+  string state_region = 10;
+  string country_name = 11;
+}
+
+message Location {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string loc_id = 4;
+  string description = 5;
+  string conditions = 6;
+  string country_subentity = 7;
+  string country_subentity_code = 8;
+  string location_type_code = 9;
+  string information_u_r_i = 10;
+  string loc_name = 11;
+  google.protobuf.Timestamp validity_period_start_date = 12;
+  google.protobuf.Timestamp validity_period_end_date = 13;
+  double location_coord_lat = 14;
+  double location_coord_lon = 15;
+  double altitude_measure = 16;
+}
+
+message Role {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message CreateRole {
+  string name = 1;
+  string description = 2;
+  string auth0_domain = 3;
+  string auth0_mgmt_token = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message GetRole {
+  string role_id = 1;
+  string user_id = 2;
+  string auth0_domain = 3;
+  string auth0_mgmt_token = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message GetRoles {
+  string auth0_domain = 1;
+  string auth0_mgmt_token = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message DeleteRole {
+  string role_id = 1;
+  string auth0_domain = 2;
+  string auth0_mgmt_token = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message UpdateRole {
+  string role_id = 1;
+  string name = 2;
+  string description = 3;
+  string auth0_domain = 4;
+  string auth0_mgmt_token = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message RolePermission {
+  string permission_name = 1;
+  string description = 2;
+  string resource_server_name = 3;
+  string resource_server_identifier = 4;
+  string role_id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message AddPermisionsToRoles {
+  string resource_server_identifier = 1;
+  string permission_name = 2;
+  string role_id = 3;
+  string user_id = 4;
+  string auth0_domain = 5;
+  string auth0_mgmt_token = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message RemoveRolePermission {
+  string resource_server_identifier = 1;
+  string permission_name = 2;
+  string role_id = 3;
+  string user_id = 4;
+  string auth0_domain = 5;
+  string auth0_mgmt_token = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message GetRolePermissions {
+  string role_id = 1;
+  string user_id = 2;
+  string auth0_domain = 3;
+  string auth0_mgmt_token = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message AssignRolesToUsers {
+  string role_id = 1;
+  string assign_to_user_id = 2;
+  string user_id = 3;
+  string auth0_domain = 4;
+  string auth0_mgmt_token = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message ViewUserRoles {
+  string auth0_domain = 1;
+  string auth0_mgmt_token = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message AddAPIPermission {
+  repeated Permission permissions = 1;
+  string auth0_domain = 2;
+  string auth0_mgmt_token = 3;
+  string auth0_api_id = 4;
+  string user_id = 5;
+  string user_email = 6;
+  string request_id = 7;
+}
+
+message Permission {
+  string permission_name = 1;
+  string permission_description = 2;
+}

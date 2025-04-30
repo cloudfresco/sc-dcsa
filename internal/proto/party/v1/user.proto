@@ -1,0 +1,218 @@
+syntax = "proto3";
+
+package party.v1;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/party/v1";
+
+// The UserService service definition.
+service UserService {
+  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse);
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);
+  rpc GetAuthUserDetails(GetAuthUserDetailsRequest) returns (GetAuthUserDetailsResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse);
+  rpc GetRole(GetRoleRequest) returns (GetRoleResponse);
+  rpc GetRoles(GetRolesRequest) returns (GetRolesResponse);
+  rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse);
+  rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse);
+  rpc AddPermisionsToRoles(AddPermisionsToRolesRequest) returns (AddPermisionsToRolesResponse);
+  rpc RemoveRolePermission(RemoveRolePermissionRequest) returns (RemoveRolePermissionResponse);
+  rpc GetRolePermissions(GetRolePermissionsRequest) returns (GetRolePermissionsResponse);
+  rpc AssignRolesToUsers(AssignRolesToUsersRequest) returns (AssignRolesToUsersResponse);
+  rpc GetRoleUsers(GetRoleUsersRequest) returns (GetRoleUsersResponse);
+  rpc ViewUserRoles(ViewUserRolesRequest) returns (ViewUserRolesResponse);
+  rpc AddAPIPermission(AddAPIPermissionRequest) returns (AddAPIPermissionResponse);
+}
+
+message User {
+  string id = 1;
+  string email = 2;
+  string picture = 3;
+  string name = 4;
+  string role_id = 5;
+  string user_id = 6;
+  string user_email = 7;
+  string request_id = 8;
+}
+
+message GetUserRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+message GetUsersRequest {
+  string user_email = 1;
+  string request_id = 2;
+}
+
+// GetUsersResponse - used for getting users list
+message GetUsersResponse {
+  repeated User users = 1;
+}
+
+
+message DeleteUserRequest {
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message DeleteUserResponse {}
+
+// RefreshTokenRequest - refresh token
+message RefreshTokenRequest {
+  string refresh_token = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message RefreshTokenResponse {
+  uint32 id = 1;
+  string email = 2;
+  bytes password = 3;
+  string access_token = 4;
+  string refresh_token = 5;
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string user_id = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message UpdateUserResponse {}
+
+// ChangePasswordRequest - change password form
+message ChangePasswordRequest {
+  string email = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message ChangePasswordResponse {}
+
+message GetUserByEmailRequest {
+  string email = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message GetUserByEmailResponse {
+  User user = 1;
+}
+
+message GetAuthUserDetailsResponse {
+  string email = 1;
+  string user_id = 2;
+  repeated string roles = 3;
+  string request_id = 4;
+}
+
+message GetAuthUserDetailsRequest {
+  string email = 1;
+  string token_string = 2;
+  string request_url_path = 3;
+  string request_method = 4;
+  repeated string roles = 5;
+}
+
+message CreateRoleRequest {
+  common.v1.CreateRole create_role = 1;
+}
+
+message CreateRoleResponse {
+  common.v1.Role role = 1;
+}
+
+message GetRoleRequest {
+  common.v1.GetRole get_role = 1;
+}
+
+message GetRoleResponse {
+  common.v1.Role role = 1;
+}
+
+message GetRolesRequest {
+  common.v1.GetRoles get_roles = 1;
+}
+
+message GetRolesResponse {
+  repeated common.v1.Role roles = 1;
+}
+
+message DeleteRoleRequest {
+  common.v1.DeleteRole delete_role = 1;
+}
+
+message DeleteRoleResponse {}
+
+message UpdateRoleRequest {
+  common.v1.UpdateRole update_role = 1;
+}
+
+message UpdateRoleResponse {
+  common.v1.Role role = 1;
+}
+
+message AddPermisionsToRolesRequest {
+  common.v1.AddPermisionsToRoles add_permisions_to_roles = 1;
+}
+
+message AddPermisionsToRolesResponse {}
+
+message RemoveRolePermissionRequest {
+  common.v1.RemoveRolePermission remove_role_permission = 1;
+}
+
+message RemoveRolePermissionResponse {}
+
+message GetRolePermissionsRequest {
+  common.v1.GetRolePermissions get_role_permissions = 1;
+}
+
+message GetRolePermissionsResponse {
+  repeated common.v1.RolePermission role_permissions = 1;
+}
+
+message AssignRolesToUsersRequest {
+  common.v1.AssignRolesToUsers assign_roles_to_users = 1;
+}
+
+message AssignRolesToUsersResponse {}
+
+message GetRoleUsersRequest {
+  string role_id = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetRoleUsersResponse {
+  repeated User users = 1;
+}
+
+message ViewUserRolesRequest {
+ common.v1.ViewUserRoles view_user_roles = 1;
+}
+
+message ViewUserRolesResponse {
+  repeated common.v1.Role roles = 1;
+}
+
+message AddAPIPermissionRequest {
+  repeated common.v1.Permission permissions = 1;
+}
+
+message AddAPIPermissionResponse {}

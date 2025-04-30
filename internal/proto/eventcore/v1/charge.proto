@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package eventcore.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/eventcore/v1";
+
+// The ChargeService service definition.
+service ChargeService {
+  rpc CreateCharge(CreateChargeRequest) returns (CreateChargeResponse);
+  rpc FetchChargesByTransportDocumentId(FetchChargesByTransportDocumentIdRequest) returns (FetchChargesByTransportDocumentIdResponse);
+  rpc FetchChargesByShipmentId(FetchChargesByShipmentIdRequest) returns (FetchChargesByShipmentIdResponse);
+}
+
+message CreateChargeRequest {
+  uint32 transport_document_id = 1;
+  uint32 shipment_id = 2;
+  string charge_type = 3;
+  double currency_amount = 4 [(buf.validate.field).double.gte = 0];
+  string currency_code = 5 [(buf.validate.field).string.max_len = 3];
+  string payment_term_code = 6;
+  string calculation_basis = 7 [(buf.validate.field).string.max_len = 50];
+  double unit_price = 8;
+  double quantity = 9;
+  string user_id = 10;
+  string user_email = 11;
+  string request_id = 12;
+}
+
+message CreateChargeResponse {
+  Charge charge = 1;
+}
+
+message FetchChargesByShipmentIdRequest {
+  uint32 shipment_id = 1;
+  string user_id = 2;
+  string limit = 3;
+  string next_cursor = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message FetchChargesByShipmentIdResponse {
+  repeated Charge charges = 1;
+  string next_cursor = 2;
+}
+
+message FetchChargesByTransportDocumentIdRequest {
+  uint32 transport_document_id = 1;
+  string user_id = 2;
+  string limit = 3;
+  string next_cursor = 4;
+  string user_email = 5;
+  string request_id = 6;
+}
+
+message FetchChargesByTransportDocumentIdResponse {
+  repeated Charge charges = 1;
+  string next_cursor = 2;
+}
+
+message Charge {
+  ChargeD charge_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message ChargeD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 transport_document_id = 4;
+  uint32 shipment_id = 5;
+  string charge_type = 6;
+  double currency_amount = 7;
+  string currency_code = 8;
+  string payment_term_code = 9;
+  string calculation_basis = 10;
+  double unit_price = 11;
+  double quantity = 12;
+}

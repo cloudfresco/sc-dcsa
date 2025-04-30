@@ -1,0 +1,359 @@
+syntax = "proto3";
+
+package bkg.v2;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+import "bkg/v2/reference.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/cloudfresco/sc-dcsa/internal/protogen/bkg/v2";
+
+// The BkgService service definition.
+service BkgService {
+  rpc CreateBooking(CreateBookingRequest) returns (CreateBookingResponse);
+  rpc GetBookings(GetBookingsRequest) returns (GetBookingsResponse);
+  rpc GetBooking(GetBookingRequest) returns (GetBookingResponse);
+  rpc GetBookingByPk(GetBookingByPkRequest) returns (GetBookingByPkResponse);
+  rpc GetBookingByCarrierBookingRequestReference(GetBookingByCarrierBookingRequestReferenceRequest) returns (GetBookingByCarrierBookingRequestReferenceResponse);
+  rpc CancelBookingByCarrierBookingReference(CancelBookingByCarrierBookingReferenceRequest) returns (CancelBookingByCarrierBookingReferenceResponse);
+  rpc UpdateBookingByReferenceCarrierBookingRequestReference(UpdateBookingByReferenceCarrierBookingRequestReferenceRequest) returns (UpdateBookingByReferenceCarrierBookingRequestReferenceResponse);
+  rpc CreateCommodity(CreateCommodityRequest) returns (CreateCommodityResponse);
+  rpc CreateValueAddedService(CreateValueAddedServiceRequest) returns (CreateValueAddedServiceResponse);
+  rpc CreateRequestedEquipment(CreateRequestedEquipmentRequest) returns (CreateRequestedEquipmentResponse);
+  rpc CreateShipmentLocation(CreateShipmentLocationRequest) returns (CreateShipmentLocationResponse);
+  rpc CreateShipmentLocationsByBookingIDAndTOs(CreateShipmentLocationsByBookingIDAndTOsRequest) returns (CreateShipmentLocationsByBookingIDAndTOsResponse);
+  rpc FetchShipmentLocationsByBookingID(FetchShipmentLocationsByBookingIDRequest) returns (FetchShipmentLocationsByBookingIDResponse);
+}
+
+message CreateBookingRequest {
+  string carrier_booking_request_reference = 1 [(buf.validate.field).string.max_len = 100];
+  string document_status = 2;
+  string receipt_type_at_origin = 3 [(buf.validate.field).string.min_len = 1];
+  string delivery_type_at_destination = 4 [(buf.validate.field).string.min_len = 1];
+  string cargo_movement_type_at_origin = 5 [(buf.validate.field).string.min_len = 1];
+  string cargo_movement_type_at_destination = 6 [(buf.validate.field).string.min_len = 1];
+  string service_contract_reference = 7 [(buf.validate.field).string.max_len = 30];
+  string payment_term_code = 8;
+  bool is_partial_load_allowed = 9;
+  bool is_export_declaration_required = 10;
+  string export_declaration_reference = 11 [(buf.validate.field).string.max_len = 35];
+  bool is_import_license_required = 12;
+  string import_license_reference = 13;
+  string submission_date_time = 14;
+  bool is_ams_aci_filing_required = 15;
+  bool is_destination_filing_required = 16;
+  string contract_quotation_reference = 17 [(buf.validate.field).string.max_len = 35];
+  string expected_departure_date = 18;
+  string expected_arrival_at_place_of_delivery_start_date = 19;
+  string expected_arrival_at_place_of_delivery_end_date = 20;
+  string transport_document_type_code = 21;
+  string transport_document_reference = 22;
+  string booking_channel_reference = 23;
+  string inco_terms = 24;
+  string communication_channel_code = 25;
+  bool is_equipment_substitution_allowed = 26;
+  string vessel_name = 27;
+  string vessel_imo_number = 28;
+  string export_voyage_number = 29 [(buf.validate.field).string.max_len = 50];
+  string pre_carriage_mode_of_transport_code = 30;
+  uint32 vessel_id = 31;
+  string declared_value_currency_code = 32 [(buf.validate.field).string.max_len = 3];
+  double declared_value = 33;
+  uint32 voyage_id = 34;
+  uint32 location_id = 35;
+  string invoice_payable_at = 36;
+  string user_id = 37;
+  string user_email = 38;
+  string request_id = 39;
+  repeated CreateCommodityRequest commodities = 40;
+  repeated CreateValueAddedServiceRequest value_added_service_requests = 41;
+  repeated CreateReferenceRequest references = 42;
+  repeated CreateRequestedEquipmentRequest requested_equipments = 43;
+  repeated CreateShipmentLocationRequest shipment_locations = 44;
+}
+
+message CreateBookingResponse {
+  Booking booking = 1;
+}
+
+message GetBookingsRequest {
+  string limit = 1;
+  string next_cursor = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message GetBookingsResponse {
+  repeated Booking bookings = 1;
+  string next_cursor = 2;
+}
+
+message GetBookingRequest {
+  common.v1.GetRequest get_request = 1;
+}
+
+message GetBookingResponse {
+  Booking booking = 1;
+}
+
+message GetBookingByPkRequest {
+  common.v1.GetByIdRequest get_by_id_request = 1;
+}
+
+message GetBookingByPkResponse {
+  Booking booking = 1;
+}
+
+message GetBookingByCarrierBookingRequestReferenceRequest {
+  string carrier_booking_request_reference = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message GetBookingByCarrierBookingRequestReferenceResponse {
+  Booking booking = 1;
+}
+
+message CancelBookingByCarrierBookingReferenceRequest {
+  string carrier_booking_request_reference = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string request_id = 4;
+}
+
+message CancelBookingByCarrierBookingReferenceResponse {
+  Booking booking = 1;
+}
+
+message UpdateBookingByReferenceCarrierBookingRequestReferenceRequest {
+  string carrier_booking_request_reference = 1 [(buf.validate.field).string.max_len = 100];
+  string document_status = 2;
+  string receipt_type_at_origin = 3 [(buf.validate.field).string.min_len = 1];
+  string delivery_type_at_destination = 4 [(buf.validate.field).string.min_len = 1];
+  string cargo_movement_type_at_origin = 5 [(buf.validate.field).string.min_len = 1];
+  string cargo_movement_type_at_destination = 6 [(buf.validate.field).string.min_len = 1];
+  string service_contract_reference = 7 [(buf.validate.field).string.max_len = 30];
+  string payment_term_code = 8;
+  string user_id = 9;
+  string user_email = 10;
+  string request_id = 11;
+}
+
+message UpdateBookingByReferenceCarrierBookingRequestReferenceResponse {}
+
+message CreateCommodityRequest {
+  uint32 booking_id = 1;
+  string commodity_type = 2;
+  string hs_code = 3 [(buf.validate.field) = {
+    string: {
+      pattern: "^[0-9]+$",
+      min_len: 6,
+      max_len: 30,
+    },
+  }];
+  double cargo_gross_weight = 4;
+  string cargo_gross_weight_unit = 5;
+  double cargo_gross_volume = 6;
+  string cargo_gross_volume_unit = 7;
+  uint32 number_of_packages = 8;
+  string export_license_issue_date = 9;
+  string export_license_expiry_date = 10;
+  string user_id = 11;
+  string user_email = 12;
+  string request_id = 13;
+}
+
+message CreateCommodityResponse {
+  Commodity commodity = 1;
+}
+
+message CreateValueAddedServiceRequest {
+  uint32 booking_id = 1;
+  string value_added_service_code = 2;
+  string user_id = 3;
+  string user_email = 4;
+  string request_id = 5;
+}
+
+message CreateValueAddedServiceResponse {
+  ValueAddedServiceRequest value_added_service_request = 1;
+}
+
+message CreateRequestedEquipmentRequest {
+  uint32 booking_id = 1;
+  uint32 shipment_id = 2;
+  string requested_equipment_sizetype = 3;
+  int32 requested_equipment_units = 4;
+  string confirmed_equipment_sizetype = 5;
+  int32 confirmed_equipment_units = 6;
+  bool is_shipper_owned = 7;
+  string user_id = 8;
+  string user_email = 9;
+  string request_id = 10;
+}
+
+message CreateRequestedEquipmentResponse {
+  RequestedEquipment requested_equipment = 1;
+}
+
+message CreateShipmentLocationRequest {
+  uint32 shipment_id = 1;
+  uint32 booking_id = 2;
+  uint32 location_id = 3;
+  string shipment_location_type_code = 4 [(buf.validate.field).string.max_len = 3];
+  string displayed_name = 5;
+  string event_date_time = 6;
+  string user_id = 7;
+  string user_email = 8;
+  string request_id = 9;
+}
+
+message CreateShipmentLocationResponse {
+  ShipmentLocation shipment_location = 1;
+}
+
+message CreateShipmentLocationsByBookingIDAndTOsRequest {
+  CreateShipmentLocationRequest create_shipment_location_request = 1;
+}
+
+message CreateShipmentLocationsByBookingIDAndTOsResponse {
+  ShipmentLocation shipment_location = 1;
+}
+
+message FetchShipmentLocationsByBookingIDRequest {
+  uint32 booking_id = 1;
+  string user_email = 2;
+  string request_id = 3;
+}
+
+message FetchShipmentLocationsByBookingIDResponse {
+  ShipmentLocation shipment_location = 1;
+}
+
+message Booking {
+  BookingD booking_d = 1;
+  BookingT booking_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+  repeated Commodity commodities = 5;
+  repeated ValueAddedServiceRequest value_added_service_requests = 6;
+  repeated Reference1 references = 7;
+  repeated RequestedEquipment requested_equipments = 8;
+  repeated ShipmentLocation shipment_locations = 9;
+}
+
+message BookingD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  string carrier_booking_request_reference = 4;
+  string document_status = 5;
+  string receipt_type_at_origin = 6;
+  string delivery_type_at_destination = 7;
+  string cargo_movement_type_at_origin = 8;
+  string cargo_movement_type_at_destination = 9;
+  string service_contract_reference = 10;
+  string payment_term_code = 11;
+  bool is_partial_load_allowed = 12;
+  bool is_export_declaration_required = 13;
+  string export_declaration_reference = 14;
+  bool is_import_license_required = 15;
+  string import_license_reference = 16;
+  bool is_ams_aci_filing_required = 17;
+  bool is_destination_filing_required = 18;
+  string contract_quotation_reference = 19;
+  string transport_document_type_code = 20;
+  string transport_document_reference = 21;
+  string booking_channel_reference = 22;
+  string inco_terms = 23;
+  string communication_channel_code = 24;
+  bool is_equipment_substitution_allowed = 25;
+  string vessel_name = 26;
+  string vessel_imo_number = 27;
+  string export_voyage_number = 28;
+  string pre_carriage_mode_of_transport_code = 29;
+  uint32 vessel_id = 30;
+  string declared_value_currency_code = 31;
+  double declared_value = 32;
+  uint32 voyage_id = 33;
+  uint32 location_id = 34;
+  string invoice_payable_at = 35;
+}
+
+message BookingT {
+  google.protobuf.Timestamp submission_date_time = 1;
+  google.protobuf.Timestamp expected_departure_date = 2;
+  google.protobuf.Timestamp expected_arrival_at_place_of_delivery_start_date = 3;
+  google.protobuf.Timestamp expected_arrival_at_place_of_delivery_end_date = 4;
+}
+
+message Commodity {
+  CommodityD commodity_d = 1;
+  CommodityT commodity_t = 2;
+  common.v1.CrUpdUser cr_upd_user = 3;
+  common.v1.CrUpdTime cr_upd_time = 4;
+}
+
+message CommodityD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 booking_id = 4;
+  string commodity_type = 5;
+  string hs_code = 6;
+  double cargo_gross_weight = 7;
+  string cargo_gross_weight_unit = 8;
+  double cargo_gross_volume = 9;
+  string cargo_gross_volume_unit = 10;
+  uint32 number_of_packages = 11;
+}
+
+message CommodityT {
+  google.protobuf.Timestamp export_license_issue_date = 1;
+  google.protobuf.Timestamp export_license_expiry_date = 2;
+}
+
+message RequestedEquipment {
+  RequestedEquipmentD requested_equipment_d = 1;
+  common.v1.CrUpdUser cr_upd_user = 2;
+  common.v1.CrUpdTime cr_upd_time = 3;
+}
+
+message RequestedEquipmentD {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 booking_id = 4;
+  uint32 shipment_id = 5;
+  string requested_equipment_sizetype = 6;
+  int32 requested_equipment_units = 7;
+  string confirmed_equipment_sizetype = 8;
+  int32 confirmed_equipment_units = 9;
+  bool is_shipper_owned = 10;
+}
+
+message ShipmentLocation {
+  ShipmentLocationD shipment_location_d = 1;
+  ShipmentLocationT shipment_location_t = 2;
+}
+
+message ShipmentLocationD {
+  uint32 shipment_id = 1;
+  uint32 booking_id = 2;
+  uint32 location_id = 3;
+  string shipment_location_type_code = 4;
+  string displayed_name = 5;
+}
+
+message ShipmentLocationT {
+  google.protobuf.Timestamp event_date_time = 1;
+}
+
+message ValueAddedServiceRequest {
+  uint32 id = 1;
+  bytes uuid4 = 2;
+  string id_s = 3;
+  uint32 booking_id = 4;
+  string value_added_service_code = 5;
+}
