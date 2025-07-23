@@ -1,8 +1,8 @@
 module github.com/cloudfresco/sc-dcsa
 
-go 1.22.7
+go 1.23.0
 
-toolchain go1.22.8
+toolchain go1.24.1
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.35.2-20241127180247-a33202765966.1
@@ -20,7 +20,6 @@ require (
 	github.com/rs/xid v1.6.0
 	github.com/spf13/viper v1.19.0
 	github.com/stretchr/testify v1.10.0
-	github.com/throttled/throttled v2.2.5+incompatible
 	github.com/throttled/throttled/v2 v2.12.0
 	github.com/uber-go/tally v3.5.10+incompatible
 	github.com/uber/cadence-idl v0.0.0-20241126065313-57bd6876d48f
@@ -106,18 +105,18 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/net/metrics v1.4.0 // indirect
 	go.uber.org/thriftrw v1.32.0 // indirect
-	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/crypto v0.40.0 // indirect
 	golang.org/x/exp v0.0.0-20241215155358-4a5509556b9e // indirect
 	golang.org/x/exp/typeparams v0.0.0-20241215155358-4a5509556b9e // indirect
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
-	golang.org/x/mod v0.22.0 // indirect
-	golang.org/x/net v0.32.0 // indirect
+	golang.org/x/mod v0.25.0 // indirect
+	golang.org/x/net v0.42.0 // indirect
 	golang.org/x/oauth2 v0.24.0 // indirect
-	golang.org/x/sync v0.10.0 // indirect
-	golang.org/x/sys v0.28.0 // indirect
-	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/sync v0.16.0 // indirect
+	golang.org/x/sys v0.34.0 // indirect
+	golang.org/x/text v0.27.0 // indirect
 	golang.org/x/time v0.8.0 // indirect
-	golang.org/x/tools v0.28.0 // indirect
+	golang.org/x/tools v0.34.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20241209162323-e6fa225c2576 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20241209162323-e6fa225c2576 // indirect
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
