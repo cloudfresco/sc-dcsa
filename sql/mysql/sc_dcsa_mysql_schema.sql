@@ -1,9 +1,9 @@
-/*!999999\- enable the sandbox mode */ 
--- MariaDB dump 10.19  Distrib 10.6.18-MariaDB, for debian-linux-gnu (x86_64)
+/*M!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19  Distrib 10.6.22-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: scfdcsadb1
 -- ------------------------------------------------------
--- Server version	10.6.18-MariaDB-0ubuntu0.22.04.1
+-- Server version	10.6.22-MariaDB-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -22,7 +22,7 @@
 
 DROP TABLE IF EXISTS `addresses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `addresses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -53,7 +53,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `booking_cores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking_cores` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -91,7 +91,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `booking_ref_statuses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking_ref_statuses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -123,7 +123,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `booking_requests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking_requests` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -182,7 +182,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `booking_responses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking_responses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -233,7 +233,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `booking_shallow_cores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking_shallow_cores` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -271,7 +271,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `booking_shallows`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking_shallows` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -329,7 +329,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `booking_summaries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking_summaries` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -343,8 +343,8 @@ CREATE TABLE `booking_summaries` (
   `vessel_name` varchar(50) DEFAULT '',
   `carrier_export_voyage_number` varchar(50) DEFAULT '',
   `universal_export_voyage_reference` varchar(100) DEFAULT '',
-  `declared_value` double DEFAULT 0,
-  `delivery_value_currency` varchar(3) DEFAULT '',
+  `declared_value` bigint(20) DEFAULT 0,
+  `declared_value_currency` varchar(3) DEFAULT '',
   `payment_term_code` varchar(3) DEFAULT '',
   `is_partial_load_allowed` tinyint(1) DEFAULT 0,
   `is_export_declaration_required` tinyint(1) DEFAULT 0,
@@ -392,7 +392,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `bookings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bookings` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -423,8 +423,8 @@ CREATE TABLE `bookings` (
   `export_voyage_number` varchar(50) DEFAULT '',
   `pre_carriage_mode_of_transport_code` varchar(50) DEFAULT '',
   `vessel_id` int(10) unsigned DEFAULT 0,
-  `declared_value_currency_code` varchar(3) DEFAULT '',
-  `declared_value` double DEFAULT 0,
+  `declared_value` bigint(20) DEFAULT 0,
+  `declared_value_currency` varchar(3) DEFAULT '',
   `voyage_id` int(10) unsigned DEFAULT 0,
   `location_id` int(10) unsigned DEFAULT 0,
   `invoice_payable_at` varchar(50) DEFAULT '',
@@ -456,7 +456,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cargo_items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cargo_items` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -493,7 +493,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cargo_line_items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cargo_line_items` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -523,7 +523,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cargo_movement_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cargo_movement_types` (
   `cargo_movement_type_code` varchar(3) DEFAULT '',
   `cargo_movement_type_name` varchar(50) DEFAULT '',
@@ -546,7 +546,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `carrier_clauses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `carrier_clauses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -570,7 +570,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `carriers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `carriers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -601,18 +601,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `charges`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `charges` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
   `transport_document_id` int(10) unsigned DEFAULT 0,
   `shipment_id` int(10) unsigned DEFAULT 0,
   `charge_type` varchar(50) DEFAULT '',
-  `currency_amount` double DEFAULT 0,
-  `currency_code` varchar(50) DEFAULT '',
+  `amount` bigint(20) DEFAULT 0,
+  `amount_currency` varchar(50) DEFAULT '',
   `payment_term_code` varchar(50) DEFAULT '',
   `calculation_basis` varchar(50) DEFAULT '',
-  `unit_price` double DEFAULT 0,
+  `unit_price` bigint(20) DEFAULT 0,
+  `unit_price_currency` varchar(3) DEFAULT '',
   `quantity` double DEFAULT 0,
   `status_code` varchar(50) DEFAULT 'active',
   `created_by_user_id` varchar(50) DEFAULT 'active',
@@ -638,7 +639,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `code_list_responsible_agencies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `code_list_responsible_agencies` (
   `dcsa_responsible_agency_code` varchar(5) DEFAULT '',
   `code_list_responsible_agency_code` varchar(3) DEFAULT '',
@@ -662,7 +663,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `commodities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `commodities` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -700,7 +701,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `communication_channel_qualifiers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `communication_channel_qualifiers` (
   `communication_channel_qualifier_code` varchar(2) DEFAULT '',
   `communication_channel_qualifier_name` varchar(100) DEFAULT '',
@@ -723,7 +724,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `confirmed_equipments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `confirmed_equipments` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -753,7 +754,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `consignment_items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `consignment_items` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -789,7 +790,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `countries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `countries` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `country_code` varchar(2) DEFAULT '',
@@ -808,12 +809,37 @@ LOCK TABLES `countries` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `currencies`
+--
+
+DROP TABLE IF EXISTS `currencies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `currencies` (
+  `code` char(3) NOT NULL,
+  `numeric_code` char(3) NOT NULL,
+  `currency_name` varchar(100) NOT NULL,
+  `minor_unit` bigint(20) NOT NULL,
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `currencies`
+--
+
+LOCK TABLES `currencies` WRITE;
+/*!40000 ALTER TABLE `currencies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `currencies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `customs_reference_types`
 --
 
 DROP TABLE IF EXISTS `customs_reference_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customs_reference_types` (
   `customs_reference_type_code` varchar(50) DEFAULT '',
   `customs_reference_country_code` varchar(2) DEFAULT '',
@@ -837,7 +863,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cut_off_times`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cut_off_times` (
   `cut_off_time_code` varchar(3) DEFAULT '',
   `cut_off_time_name` varchar(100) DEFAULT '',
@@ -860,7 +886,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `displayed_addresses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `displayed_addresses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `document_party_id` int(10) unsigned DEFAULT 0,
@@ -885,7 +911,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `document_parties`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `document_parties` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -919,7 +945,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `document_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `document_types` (
   `document_type_code` varchar(3) DEFAULT '',
   `document_type_name` varchar(100) DEFAULT '',
@@ -942,7 +968,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ebl_solution_provider_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ebl_solution_provider_types` (
   `ebl_solution_provider_name` varchar(50) DEFAULT '',
   `ebl_solution_provider_code` varchar(5) DEFAULT '',
@@ -966,7 +992,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ebl_visualizations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ebl_visualizations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -996,7 +1022,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `empty_indicators`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `empty_indicators` (
   `empty_indicator_code` varchar(5) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1017,7 +1043,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `endorsement_chain_links`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `endorsement_chain_links` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1050,7 +1076,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `equipment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipment` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1082,7 +1108,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `equipment_event_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipment_event_types` (
   `equipment_event_type_code` varchar(4) DEFAULT '',
   `equipment_event_type_name` varchar(30) DEFAULT '',
@@ -1105,7 +1131,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `equipment_events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipment_events` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id_s` binary(16) DEFAULT NULL,
@@ -1136,7 +1162,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `event_cache_queue_deads`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_cache_queue_deads` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` binary(16) DEFAULT NULL,
@@ -1162,7 +1188,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `event_cache_queues`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_cache_queues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` binary(16) DEFAULT NULL,
@@ -1186,7 +1212,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `event_caches`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_caches` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` binary(16) DEFAULT NULL,
@@ -1214,7 +1240,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `event_classifiers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_classifiers` (
   `event_classifier_code` varchar(3) DEFAULT '',
   `event_classifier_name` varchar(30) DEFAULT '',
@@ -1237,7 +1263,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `event_subscription_document_type_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_subscription_document_type_codes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `subscription_id` int(10) unsigned DEFAULT 0,
@@ -1261,7 +1287,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `event_subscription_equipment_event_type_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_subscription_equipment_event_type_codes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `subscription_id` int(10) unsigned DEFAULT 0,
@@ -1285,7 +1311,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `event_subscription_event_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_subscription_event_types` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `subscription_id` binary(16) DEFAULT NULL,
@@ -1309,7 +1335,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `event_subscription_shipment_event_type_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_subscription_shipment_event_type_codes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `subscription_id` int(10) unsigned DEFAULT 0,
@@ -1333,7 +1359,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `event_subscription_transport_event_type_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_subscription_transport_event_type_codes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `subscription_id` int(10) unsigned DEFAULT 0,
@@ -1357,7 +1383,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `event_subscriptions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event_subscriptions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `subscription_id` binary(16) DEFAULT NULL,
@@ -1396,7 +1422,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `facilities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `facilities` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `facility_name` varchar(100) DEFAULT '',
@@ -1428,7 +1454,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `facility_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `facility_types` (
   `facility_type_code` varchar(4) DEFAULT '',
   `facility_type_name` varchar(100) DEFAULT '',
@@ -1451,7 +1477,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `general_reference_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `general_reference_types` (
   `general_reference_type_code` varchar(3) DEFAULT '',
   `general_reference_type_name` varchar(100) DEFAULT '',
@@ -1474,7 +1500,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hs_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hs_codes` (
   `hs_code` varchar(10) DEFAULT '',
   `hs_code_description` varchar(250) DEFAULT ''
@@ -1496,7 +1522,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `identifying_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `identifying_codes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1522,7 +1548,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `incoterms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `incoterms` (
   `incoterms_code` varchar(3) DEFAULT '',
   `incoterms_name` varchar(100) DEFAULT '',
@@ -1545,7 +1571,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `iso_equipment_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `iso_equipment_codes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `iso_equipment_code` varchar(4) DEFAULT '',
@@ -1571,7 +1597,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `issuance_request_responses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `issuance_request_responses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1605,7 +1631,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `issuance_requests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `issuance_requests` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1639,7 +1665,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `issue_parties`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `issue_parties` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1672,7 +1698,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `issue_party_supporting_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `issue_party_supporting_codes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1703,7 +1729,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `legs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `legs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1746,7 +1772,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `locations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `locations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1775,7 +1801,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `message_routing_rules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `message_routing_rules` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1803,7 +1829,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mode_of_transports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mode_of_transports` (
   `mode_of_transport_code` varchar(3) DEFAULT '',
   `mode_of_transport_name` varchar(100) DEFAULT '',
@@ -1827,7 +1853,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `negotiation_cycles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `negotiation_cycles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `cycle_key` varchar(80) DEFAULT '',
@@ -1852,7 +1878,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `notification_end_points`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notification_end_points` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `end_point_id` binary(16) DEFAULT NULL,
@@ -1880,7 +1906,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `operations_event_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `operations_event_types` (
   `operations_event_type_code` varchar(4) DEFAULT '',
   `operations_event_type_name` varchar(30) DEFAULT '',
@@ -1903,7 +1929,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `operations_events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `operations_events` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id_s` binary(16) DEFAULT NULL,
@@ -1943,7 +1969,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ops_event_timestamp_definitions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ops_event_timestamp_definitions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` binary(16) DEFAULT NULL,
@@ -1967,7 +1993,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `outbox_messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `outbox_messages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -1992,7 +2018,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `outgoing_event_queue_deads`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `outgoing_event_queue_deads` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` binary(16) DEFAULT NULL,
@@ -2022,7 +2048,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `outgoing_event_queues`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `outgoing_event_queues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` binary(16) DEFAULT NULL,
@@ -2049,7 +2075,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `package_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `package_codes` (
   `package_code` varchar(3) DEFAULT '',
   `package_code_description` varchar(50) DEFAULT ''
@@ -2071,7 +2097,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `parties`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `parties` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2104,7 +2130,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `party_contact_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `party_contact_details` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2137,7 +2163,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `party_functions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `party_functions` (
   `party_function_code` varchar(3) DEFAULT '',
   `party_function_name` varchar(100) DEFAULT '',
@@ -2160,7 +2186,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `party_identifying_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `party_identifying_codes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `dcsa_responsible_agency_code` varchar(5) DEFAULT '',
@@ -2186,7 +2212,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `payment_term_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `payment_term_types` (
   `payment_term_code` varchar(3) DEFAULT '',
   `payment_term_name` varchar(100) DEFAULT '',
@@ -2209,7 +2235,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pending_email_notification_deads`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pending_email_notification_deads` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` binary(16) DEFAULT NULL,
@@ -2237,7 +2263,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pending_email_notifications`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pending_email_notifications` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` binary(16) DEFAULT NULL,
@@ -2262,7 +2288,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pending_event_queues`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pending_event_queues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `delivery_id` binary(16) DEFAULT NULL,
@@ -2292,7 +2318,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `point_to_point_routings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `point_to_point_routings` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2323,7 +2349,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `port_call_parts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `port_call_parts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `port_call_part` varchar(100) DEFAULT '',
@@ -2347,7 +2373,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `port_call_phase_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `port_call_phase_types` (
   `port_call_phase_type_code` varchar(4) DEFAULT '',
   `port_call_phase_type_name` varchar(30) DEFAULT '',
@@ -2370,7 +2396,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `port_call_service_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `port_call_service_types` (
   `port_call_service_type_code` varchar(4) DEFAULT '',
   `port_call_service_type_name` varchar(30) DEFAULT '',
@@ -2393,7 +2419,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `port_call_status_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `port_call_status_types` (
   `port_call_status_type_code` varchar(4) DEFAULT '',
   `port_call_status_type_name` varchar(30) DEFAULT '',
@@ -2416,7 +2442,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `port_time_zones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `port_time_zones` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `un_location_code` varchar(4) DEFAULT '',
@@ -2440,7 +2466,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `publisher_patterns`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `publisher_patterns` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pattern_id` varchar(80) DEFAULT '',
@@ -2465,7 +2491,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `receipt_delivery_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `receipt_delivery_types` (
   `receipt_delivery_type_code` varchar(3) DEFAULT '',
   `receipt_delivery_type_name` varchar(50) DEFAULT '',
@@ -2488,7 +2514,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `reference1`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reference1` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `reference_type_code` varchar(3) DEFAULT '',
@@ -2521,7 +2547,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `reference_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reference_types` (
   `reference_type_code` varchar(3) DEFAULT '',
   `reference_type_name` varchar(100) DEFAULT '',
@@ -2544,7 +2570,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `requested_equipments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `requested_equipments` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2579,7 +2605,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `seal_sources`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `seal_sources` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `seal_source_code` varchar(5) DEFAULT '',
@@ -2603,7 +2629,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `seal_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `seal_types` (
   `seal_type_code` varchar(5) DEFAULT '',
   `seal_type_description` varchar(50) DEFAULT ''
@@ -2625,7 +2651,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `seals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `seals` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2657,7 +2683,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `service_schedules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `service_schedules` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2688,7 +2714,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `services`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `services` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2721,7 +2747,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipment_carrier_clauses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipment_carrier_clauses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2747,7 +2773,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipment_cutoff_times`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipment_cutoff_times` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `shipment_id` int(10) unsigned DEFAULT 0,
@@ -2772,7 +2798,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipment_event_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipment_event_types` (
   `shipment_event_type_code` varchar(4) DEFAULT '',
   `shipment_event_type_name` varchar(30) DEFAULT '',
@@ -2795,7 +2821,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipment_events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipment_events` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id_s` binary(16) DEFAULT NULL,
@@ -2826,7 +2852,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipment_location_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipment_location_types` (
   `shipment_location_type_code` varchar(3) DEFAULT '',
   `shipment_location_type_name` varchar(50) DEFAULT '',
@@ -2849,7 +2875,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipment_locations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipment_locations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `shipment_id` int(10) unsigned DEFAULT 0,
@@ -2877,7 +2903,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipment_summaries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipment_summaries` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2911,7 +2937,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipment_summary_cores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipment_summary_cores` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2944,7 +2970,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipment_transports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipment_transports` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -2973,7 +2999,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipments` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3007,7 +3033,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipping_instruction_ref_statuses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipping_instruction_ref_statuses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3034,7 +3060,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipping_instruction_requests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipping_instruction_requests` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3076,7 +3102,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipping_instruction_responses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipping_instruction_responses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3122,7 +3148,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipping_instruction_shallows`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipping_instruction_shallows` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3158,7 +3184,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipping_instruction_summaries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipping_instruction_summaries` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3203,7 +3229,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shipping_instructions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipping_instructions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3244,7 +3270,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `smdg_delay_reasons`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `smdg_delay_reasons` (
   `delay_reason_code` varchar(3) DEFAULT '',
   `delay_reason_name` varchar(100) DEFAULT '',
@@ -3267,7 +3293,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `subscription_bodies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `subscription_bodies` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3299,7 +3325,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `subscription_body_with_secrets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `subscription_body_with_secrets` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3332,7 +3358,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `subscriptions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `subscriptions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3365,7 +3391,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `surrender_request_answers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `surrender_request_answers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3399,7 +3425,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `surrender_requests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `surrender_requests` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3434,7 +3460,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tax_and_legal_reference_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tax_and_legal_reference_types` (
   `tax_and_legal_reference_type_code` varchar(50) DEFAULT '',
   `tax_and_legal_country_code` varchar(2) DEFAULT '',
@@ -3457,7 +3483,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `timestamp_definition_publisher_patterns`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `timestamp_definition_publisher_patterns` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `timestamp_id` varchar(80) DEFAULT '',
@@ -3481,7 +3507,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `timestamp_definitions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `timestamp_definitions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `timestamp_id` varchar(80) DEFAULT '',
@@ -3520,7 +3546,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `timestamp_notification_deads`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `timestamp_notification_deads` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3546,7 +3572,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `timestamps`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `timestamps` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3574,7 +3600,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tradelanes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tradelanes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3604,7 +3630,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transaction_parties`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transaction_parties` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3637,7 +3663,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transaction_party_supporting_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transaction_party_supporting_codes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3668,7 +3694,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transport_call_jit_port_visits`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transport_call_jit_port_visits` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `port_visit_id` int(10) unsigned DEFAULT 0,
@@ -3692,7 +3718,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transport_calls`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transport_calls` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3732,7 +3758,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transport_document_ref_statuses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transport_document_ref_statuses` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3759,7 +3785,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transport_document_roots`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transport_document_roots` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3792,7 +3818,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transport_document_summaries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transport_document_summaries` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3832,7 +3858,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transport_document_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transport_document_types` (
   `transport_document_type_code` varchar(3) DEFAULT '',
   `transport_document_type_name` varchar(20) DEFAULT '',
@@ -3855,7 +3881,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transport_documents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transport_documents` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -3864,8 +3890,8 @@ CREATE TABLE `transport_documents` (
   `number_of_originals` int(10) unsigned DEFAULT 0,
   `carrier_id` int(10) unsigned DEFAULT 0,
   `shipping_instruction_id` int(10) unsigned DEFAULT 0,
+  `declared_value` bigint(20) DEFAULT 0,
   `declared_value_currency` varchar(3) DEFAULT '',
-  `declared_value` double DEFAULT 0,
   `number_of_rider_pages` int(11) DEFAULT 0,
   `issuing_party` varchar(100) DEFAULT '',
   `issue_date` datetime DEFAULT current_timestamp(),
@@ -3892,7 +3918,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transport_event_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transport_event_types` (
   `transport_event_type_code` varchar(4) DEFAULT '',
   `transport_event_type_name` varchar(30) DEFAULT '',
@@ -3915,7 +3941,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transport_events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transport_events` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id_s` binary(16) DEFAULT NULL,
@@ -3945,7 +3971,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transport_plan_stage_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transport_plan_stage_types` (
   `transport_plan_stage_code` varchar(3) DEFAULT '',
   `transport_plan_stage_name` varchar(100) DEFAULT '',
@@ -3968,7 +3994,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transports` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -4000,7 +4026,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `un_locations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `un_locations` (
   `un_location_code` varchar(5) DEFAULT '',
   `un_location_name` varchar(100) DEFAULT '',
@@ -4024,7 +4050,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `unit_of_measures`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `unit_of_measures` (
   `unit_of_measure_code` varchar(3) DEFAULT '',
   `unit_of_measure_description` varchar(50) DEFAULT ''
@@ -4046,7 +4072,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `unmapped_event_queues`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `unmapped_event_queues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_id` binary(16) DEFAULT NULL,
@@ -4070,7 +4096,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `utilized_transport_equipments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `utilized_transport_equipments` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -4102,7 +4128,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `value_added_service_requests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `value_added_service_requests` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -4127,7 +4153,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `value_added_services`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `value_added_services` (
   `value_added_service_code` varchar(5) DEFAULT '',
   `value_added_service_name` varchar(100) DEFAULT '',
@@ -4150,7 +4176,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vessel_schedule_terminal_visits`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vessel_schedule_terminal_visits` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -4183,7 +4209,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vessel_schedules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vessel_schedules` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -4213,7 +4239,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vessel_sharing_agreement_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vessel_sharing_agreement_types` (
   `vessel_sharing_agreement_type_code` varchar(3) DEFAULT '',
   `vessel_sharing_agreement_type_name` varchar(50) DEFAULT '',
@@ -4236,7 +4262,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vessel_sharing_agreements`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vessel_sharing_agreements` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -4266,7 +4292,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vessel_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vessel_types` (
   `vessel_type_code` varchar(4) DEFAULT '',
   `vessel_type_name` varchar(100) DEFAULT '',
@@ -4290,7 +4316,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vessels`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vessels` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -4328,7 +4354,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `voyages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `voyages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uuid4` binary(16) DEFAULT NULL,
@@ -4362,4 +4388,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-05 14:25:55
+-- Dump completed on 2025-06-12 10:16:34

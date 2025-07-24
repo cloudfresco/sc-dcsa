@@ -26,16 +26,18 @@ type ChargeService struct {
 	DBService         *common.DBService
 	RedisService      *common.RedisService
 	UserServiceClient partyproto.UserServiceClient
+	CurrencyService   *common.CurrencyService
 	eventcoreproto.UnimplementedChargeServiceServer
 }
 
 // NewChargeService - Create Charge service
-func NewChargeService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient) *ChargeService {
+func NewChargeService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient, currency *common.CurrencyService) *ChargeService {
 	return &ChargeService{
 		log:               log,
 		DBService:         dbOpt,
 		RedisService:      redisOpt,
 		UserServiceClient: userServiceClient,
+		CurrencyService:   currency,
 	}
 }
 
@@ -46,11 +48,12 @@ const insertChargeSQL = `insert into charges
   transport_document_id,
   shipment_id,
   charge_type,
-  currency_amount,
-  currency_code,
+  amount,
+  amount_currency,
   payment_term_code,
   calculation_basis,
   unit_price,
+  unit_price_currency,
   quantity,
   status_code,
   created_by_user_id,
@@ -62,11 +65,12 @@ const insertChargeSQL = `insert into charges
 :transport_document_id,
 :shipment_id,
 :charge_type,
-:currency_amount,
-:currency_code,
+:amount,
+:amount_currency,
 :payment_term_code,
 :calculation_basis,
 :unit_price,
+:unit_price_currency,
 :quantity,
   :status_code,
   :created_by_user_id,
@@ -81,11 +85,12 @@ const selectChargesSQL = `select
   transport_document_id,
   shipment_id,
   charge_type,
-  currency_amount,
-  currency_code,
+  amount,
+  amount_currency,
   payment_term_code,
   calculation_basis,
   unit_price,
+  unit_price_currency,
   quantity,
   status_code,
   created_by_user_id,
@@ -94,7 +99,7 @@ const selectChargesSQL = `select
   updated_at from charges`
 
 // StartEventCoreServer - Start EventCore server
-func StartEventCoreServer(log *zap.Logger, isTest bool, pwd string, dbOpt *config.DBOptions, redisOpt *config.RedisOptions, mailerOpt *config.MailerOptions, grpcServerOpt *config.GrpcServerOptions, jwtOpt *config.JWTOptions, oauthOpt *config.OauthOptions, userOpt *config.UserOptions, uptraceOpt *config.UptraceOptions, dbService *common.DBService, redisService *common.RedisService, mailerService common.MailerIntf) {
+func StartEventCoreServer(log *zap.Logger, isTest bool, pwd string, dbOpt *config.DBOptions, redisOpt *config.RedisOptions, mailerOpt *config.MailerOptions, grpcServerOpt *config.GrpcServerOptions, jwtOpt *config.JWTOptions, oauthOpt *config.OauthOptions, userOpt *config.UserOptions, uptraceOpt *config.UptraceOptions, dbService *common.DBService, redisService *common.RedisService, mailerService common.MailerIntf, currencyService *common.CurrencyService) {
 	common.SetJWTOpt(jwtOpt)
 
 	creds, err := common.GetSrvCred(log, isTest, pwd, grpcServerOpt)
@@ -120,7 +125,7 @@ func StartEventCoreServer(log *zap.Logger, isTest bool, pwd string, dbOpt *confi
 	srvOpts = append(srvOpts, grpc.StatsHandler(otelgrpc.NewServerHandler()))
 
 	uc := partyproto.NewUserServiceClient(userConn)
-	chargeService := NewChargeService(log, dbService, redisService, uc)
+	chargeService := NewChargeService(log, dbService, redisService, uc, currencyService)
 	transportCallService := NewTransportCallService(log, dbService, redisService, uc)
 	utilizedTransportEquipmentService := NewUtilizedTransportEquipmentService(log, dbService, redisService, uc)
 	voyageService := NewVoyageService(log, dbService, redisService, uc)
@@ -161,14 +166,41 @@ func (cs *ChargeService) Create(ctx context.Context, in *eventcoreproto.CreateCh
 		return nil, err
 	}
 
+	amountCurrency, err := cs.CurrencyService.GetCurrency(ctx, in.AmountCurrency)
+	if err != nil {
+		cs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	amountMinor, err := common.ParseAmountString(in.Amount, amountCurrency)
+	if err != nil {
+		cs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	unitPriceCurrency, err := cs.CurrencyService.GetCurrency(ctx, in.UnitPriceCurrency)
+	if err != nil {
+		cs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	unitPriceMinor, err := common.ParseAmountString(in.UnitPrice, unitPriceCurrency)
+	if err != nil {
+		cs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
 	chargeD.TransportDocumentId = in.TransportDocumentId
 	chargeD.ShipmentId = in.ShipmentId
 	chargeD.ChargeType = in.ChargeType
-	chargeD.CurrencyAmount = in.CurrencyAmount
-	chargeD.CurrencyCode = in.CurrencyCode
+	chargeD.Amount = amountMinor
+	chargeD.AmountCurrency = amountCurrency.Code
+	chargeD.AmountString = common.FormatAmountString(amountMinor, amountCurrency)
 	chargeD.PaymentTermCode = in.PaymentTermCode
 	chargeD.CalculationBasis = in.CalculationBasis
-	chargeD.UnitPrice = in.UnitPrice
+	chargeD.UnitPrice = unitPriceMinor
+	chargeD.UnitPriceCurrency = unitPriceCurrency.Code
+	chargeD.UnitPriceString = common.FormatAmountString(unitPriceMinor, unitPriceCurrency)
 	chargeD.Quantity = in.Quantity
 
 	crUpdUser := commonproto.CrUpdUser{}
@@ -280,6 +312,22 @@ func (cs *ChargeService) FetchChargesByTransportDocumentId(ctx context.Context, 
 			cs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 			return nil, err
 		}
+		amountCurrency, err := cs.CurrencyService.GetCurrency(ctx, charge.ChargeD.AmountCurrency)
+		if err != nil {
+			cs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+			return nil, err
+		}
+
+		charge.ChargeD.AmountString = common.FormatAmountString(charge.ChargeD.Amount, amountCurrency)
+
+		unitPriceCurrency, err := cs.CurrencyService.GetCurrency(ctx, charge.ChargeD.UnitPriceCurrency)
+		if err != nil {
+			cs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+			return nil, err
+		}
+
+		charge.ChargeD.UnitPriceString = common.FormatAmountString(charge.ChargeD.UnitPrice, unitPriceCurrency)
+
 		charges = append(charges, charge)
 
 	}
@@ -337,6 +385,23 @@ func (cs *ChargeService) FetchChargesByShipmentId(ctx context.Context, in *event
 			cs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 			return nil, err
 		}
+
+		amountCurrency, err := cs.CurrencyService.GetCurrency(ctx, charge.ChargeD.AmountCurrency)
+		if err != nil {
+			cs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+			return nil, err
+		}
+
+		charge.ChargeD.AmountString = common.FormatAmountString(charge.ChargeD.Amount, amountCurrency)
+
+		unitPriceCurrency, err := cs.CurrencyService.GetCurrency(ctx, charge.ChargeD.UnitPriceCurrency)
+		if err != nil {
+			cs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+			return nil, err
+		}
+
+		charge.ChargeD.UnitPriceString = common.FormatAmountString(charge.ChargeD.UnitPrice, unitPriceCurrency)
+
 		charges = append(charges, charge)
 
 	}

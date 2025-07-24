@@ -21,7 +21,7 @@ func TestBkgService_FetchShipmentLocationsByBookingID(t *testing.T) {
 
 	ctx := LoginUser()
 
-	bookingService := NewBkgService(log, dbService, redisService, userServiceClient)
+	bookingService := NewBkgService(log, dbService, redisService, userServiceClient, currencyService)
 	shipmentLocation, err := GetShipmentLocation(uint32(15), uint32(10), uint32(1), "POL", "Hamburg", "2020-03-07T00:00:00Z")
 	if err != nil {
 		t.Error(err)
@@ -79,7 +79,7 @@ func TestBkgService_CreateShipmentLocation(t *testing.T) {
 	}
 	ctx := LoginUser()
 
-	bkgService := NewBkgService(log, dbService, redisService, userServiceClient)
+	bkgService := NewBkgService(log, dbService, redisService, userServiceClient, currencyService)
 	shipmentLocation := bkgproto.CreateShipmentLocationRequest{}
 	shipmentLocation.ShipmentId = uint32(7)
 	shipmentLocation.BookingId = uint32(1)

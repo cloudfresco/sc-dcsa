@@ -63,15 +63,17 @@ func (m *CreateChargeRequest) validate(all bool) error {
 
 	// no validation rules for ChargeType
 
-	// no validation rules for CurrencyAmount
+	// no validation rules for Amount
 
-	// no validation rules for CurrencyCode
+	// no validation rules for AmountCurrency
 
 	// no validation rules for PaymentTermCode
 
 	// no validation rules for CalculationBasis
 
 	// no validation rules for UnitPrice
+
+	// no validation rules for UnitPriceCurrency
 
 	// no validation rules for Quantity
 
@@ -1026,15 +1028,21 @@ func (m *ChargeD) validate(all bool) error {
 
 	// no validation rules for ChargeType
 
-	// no validation rules for CurrencyAmount
+	// no validation rules for Amount
 
-	// no validation rules for CurrencyCode
+	// no validation rules for AmountCurrency
+
+	// no validation rules for AmountString
 
 	// no validation rules for PaymentTermCode
 
 	// no validation rules for CalculationBasis
 
 	// no validation rules for UnitPrice
+
+	// no validation rules for UnitPriceCurrency
+
+	// no validation rules for UnitPriceString
 
 	// no validation rules for Quantity
 

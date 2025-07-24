@@ -119,7 +119,7 @@ func (m *CreateBookingRequest) validate(all bool) error {
 
 	// no validation rules for VesselId
 
-	// no validation rules for DeclaredValueCurrencyCode
+	// no validation rules for DeclaredValueCurrency
 
 	// no validation rules for DeclaredValue
 
@@ -4072,9 +4072,11 @@ func (m *BookingD) validate(all bool) error {
 
 	// no validation rules for VesselId
 
-	// no validation rules for DeclaredValueCurrencyCode
+	// no validation rules for DeclaredValueCurrency
 
 	// no validation rules for DeclaredValue
+
+	// no validation rules for DeclaredValueString
 
 	// no validation rules for VoyageId
 

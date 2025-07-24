@@ -24,6 +24,7 @@ import (
 var (
 	dbService         *common.DBService
 	redisService      *common.RedisService
+	currencyService   *common.CurrencyService
 	userServiceClient partyproto.UserServiceClient
 	mailerService     common.MailerIntf
 	jwtOpt            *config.JWTOptions
@@ -85,7 +86,7 @@ func TestMain(m *testing.M) {
 	redisOpt, mailerOpt, serverOpt, grpcServerOpt, oauthOpt, userOpt, uptraceOpt = config.GetConfigOpt(log, v)
 
 	dbService, redisService, _ = common.GetServices(log, true, dbOpt, redisOpt, jwtOpt, mailerOpt)
-
+	currencyService = common.NewCurrencyService(log, dbService)
 	mailerService, err = test.CreateMailerServiceTest(log)
 	if err != nil {
 		log.Error("Error", zap.Error(err))
@@ -94,7 +95,7 @@ func TestMain(m *testing.M) {
 	pwd, _ := os.Getwd()
 	go partyservices.StartUserServer(logUser, true, pwd, dbOpt, redisOpt, mailerOpt, serverOpt, grpcServerOpt, jwtOpt, oauthOpt, userOpt, uptraceOpt, dbService, redisService, mailerService)
 
-	go StartEventCoreServer(logEbl, true, pwd, dbOpt, redisOpt, mailerOpt, grpcServerOpt, jwtOpt, oauthOpt, userOpt, uptraceOpt, dbService, redisService, mailerService)
+	go StartEventCoreServer(logEbl, true, pwd, dbOpt, redisOpt, mailerOpt, grpcServerOpt, jwtOpt, oauthOpt, userOpt, uptraceOpt, dbService, redisService, mailerService, currencyService)
 
 	keyPath := filepath.Join(pwd, filepath.FromSlash("/../../../")+filepath.FromSlash(grpcServerOpt.GrpcCaCertPath))
 	creds, err := credentials.NewClientTLSFromFile(keyPath, "localhost")

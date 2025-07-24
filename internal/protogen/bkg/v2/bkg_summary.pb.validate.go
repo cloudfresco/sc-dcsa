@@ -83,7 +83,7 @@ func (m *CreateBookingSummaryRequest) validate(all bool) error {
 
 	// no validation rules for DeclaredValue
 
-	// no validation rules for DeliveryValueCurrency
+	// no validation rules for DeclaredValueCurrency
 
 	// no validation rules for PaymentTermCode
 
@@ -861,7 +861,9 @@ func (m *BookingSummaryD) validate(all bool) error {
 
 	// no validation rules for DeclaredValue
 
-	// no validation rules for DeliveryValueCurrency
+	// no validation rules for DeclaredValueCurrency
+
+	// no validation rules for DeclaredValueString
 
 	// no validation rules for PaymentTermCode
 

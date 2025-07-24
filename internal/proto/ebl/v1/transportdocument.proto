@@ -42,7 +42,7 @@ message CreateTransportDocumentRequest {
       max_len: 3,
     },
   }];
-  double declared_value = 10 [(buf.validate.field).double.gte = 0];
+  string declared_value = 10 [(buf.validate.field).double.gte = 0];
   int32 number_of_rider_pages = 11;
   string issuing_party = 12;
   string created_date_time = 13;
@@ -126,9 +126,10 @@ message TransportDocumentD {
   uint32 carrier_id = 7;
   uint32 shipping_instruction_id = 8;
   string declared_value_currency = 9;
-  double declared_value = 10;
-  int32 number_of_rider_pages = 11;
-  string issuing_party = 12;
+  int64 declared_value = 10;
+  string declared_value_string = 11;
+  int32 number_of_rider_pages = 12;
+  string issuing_party = 13;
 }
 
 message TransportDocumentT {

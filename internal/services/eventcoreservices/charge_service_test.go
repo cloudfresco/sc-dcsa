@@ -22,17 +22,18 @@ func TestChargeService_Create(t *testing.T) {
 
 	ctx := LoginUser()
 
-	chargeService := NewChargeService(log, dbService, redisService, userServiceClient)
+	chargeService := NewChargeService(log, dbService, redisService, userServiceClient, currencyService)
 
 	charge := eventcoreproto.CreateChargeRequest{}
 	charge.TransportDocumentId = uint32(4)
 	charge.ShipmentId = uint32(11)
 	charge.ChargeType = "TBD"
-	charge.CurrencyAmount = float64(12.12)
-	charge.CurrencyCode = "UMB"
+	charge.Amount = "12.12"
+	charge.AmountCurrency = "EUR"
 	charge.PaymentTermCode = "PRE"
 	charge.CalculationBasis = "WHAT"
-	charge.UnitPrice = float64(12.12)
+	charge.UnitPrice = "12.12"
+	charge.UnitPriceCurrency = "EUR"
 	charge.Quantity = float64(123.321)
 	charge.UserId = "auth0|66fd06d0bfea78a82bb42459"
 	charge.UserEmail = "sprov300@gmail.com"
@@ -65,8 +66,8 @@ func TestChargeService_Create(t *testing.T) {
 		chargeResult := chargeResp.Charge
 		assert.NotNil(t, chargeResult)
 		assert.Equal(t, chargeResult.ChargeD.ChargeType, "TBD", "they should be equal")
-		assert.Equal(t, chargeResult.ChargeD.CurrencyAmount, float64(12.12), "they should be equal")
-		assert.Equal(t, chargeResult.ChargeD.CurrencyCode, "UMB", "they should be equal")
+		assert.Equal(t, chargeResult.ChargeD.Amount, int64(1212), "they should be equal")
+		assert.Equal(t, chargeResult.ChargeD.AmountCurrency, "EUR", "they should be equal")
 		assert.Equal(t, chargeResult.ChargeD.PaymentTermCode, "PRE", "they should be equal")
 		assert.Equal(t, chargeResult.ChargeD.CalculationBasis, "WHAT", "they should be equal")
 		assert.NotNil(t, chargeResult.CrUpdTime.CreatedAt)
@@ -84,9 +85,9 @@ func TestChargeService_FetchChargesByTransportDocumentId(t *testing.T) {
 
 	ctx := LoginUser()
 
-	chargeService := NewChargeService(log, dbService, redisService, userServiceClient)
+	chargeService := NewChargeService(log, dbService, redisService, userServiceClient, currencyService)
 
-	charge, err := GetCharge(uint32(1), []byte{249, 211, 201, 174, 137, 193, 67, 148, 165, 252, 142, 115, 83, 138, 170, 196}, "f9d3c9ae-89c1-4394-a5fc-8e73538aaac4", uint32(6), uint32(19), "TBD", float64(12.12), "UMB", "PRE", "WHAT", float64(12.12), float64(123.321), "2020-03-07T12:12:12Z", "2020-04-07T12:12:12Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
+	charge, err := GetCharge(uint32(1), []byte{249, 211, 201, 174, 137, 193, 67, 148, 165, 252, 142, 115, 83, 138, 170, 196}, "f9d3c9ae-89c1-4394-a5fc-8e73538aaac4", uint32(6), uint32(19), "TBD", int64(1212), "EUR", "12.12", "PRE", "WHAT", int64(1212), "EUR", "12.12", float64(123.321), "2020-03-07T12:12:12Z", "2020-04-07T12:12:12Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
 	if err != nil {
 		t.Error(err)
 		return
@@ -138,8 +139,8 @@ func TestChargeService_FetchChargesByTransportDocumentId(t *testing.T) {
 		chargeResult := chargeResponse.Charges[0]
 		assert.NotNil(t, chargeResult)
 		assert.Equal(t, chargeResult.ChargeD.ChargeType, "TBD", "they should be equal")
-		assert.Equal(t, chargeResult.ChargeD.CurrencyAmount, float64(12.12), "they should be equal")
-		assert.Equal(t, chargeResult.ChargeD.CurrencyCode, "UMB", "they should be equal")
+		assert.Equal(t, chargeResult.ChargeD.Amount, int64(1212), "they should be equal")
+		assert.Equal(t, chargeResult.ChargeD.AmountCurrency, "EUR", "they should be equal")
 		assert.Equal(t, chargeResult.ChargeD.PaymentTermCode, "PRE", "they should be equal")
 		assert.Equal(t, chargeResult.ChargeD.CalculationBasis, "WHAT", "they should be equal")
 		assert.NotNil(t, chargeResult.CrUpdTime.CreatedAt)
@@ -156,8 +157,8 @@ func TestChargeService_FetchChargesByShipmentId(t *testing.T) {
 
 	ctx := LoginUser()
 
-	chargeService := NewChargeService(log, dbService, redisService, userServiceClient)
-	charge, err := GetCharge(uint32(1), []byte{249, 211, 201, 174, 137, 193, 67, 148, 165, 252, 142, 115, 83, 138, 170, 196}, "f9d3c9ae-89c1-4394-a5fc-8e73538aaac4", uint32(6), uint32(19), "TBD", float64(12.12), "UMB", "PRE", "WHAT", float64(12.12), float64(123.321), "2020-03-07T12:12:12Z", "2020-04-07T12:12:12Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
+	chargeService := NewChargeService(log, dbService, redisService, userServiceClient, currencyService)
+	charge, err := GetCharge(uint32(1), []byte{249, 211, 201, 174, 137, 193, 67, 148, 165, 252, 142, 115, 83, 138, 170, 196}, "f9d3c9ae-89c1-4394-a5fc-8e73538aaac4", uint32(6), uint32(19), "TBD", int64(1212), "EUR", "12.12", "PRE", "WHAT", int64(1212), "EUR", "12.12", float64(123.321), "2020-03-07T12:12:12Z", "2020-04-07T12:12:12Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
 	if err != nil {
 		t.Error(err)
 		return
@@ -209,8 +210,8 @@ func TestChargeService_FetchChargesByShipmentId(t *testing.T) {
 		chargeResult := chargeResponse.Charges[0]
 		assert.NotNil(t, chargeResult)
 		assert.Equal(t, chargeResult.ChargeD.ChargeType, "TBD", "they should be equal")
-		assert.Equal(t, chargeResult.ChargeD.CurrencyAmount, float64(12.12), "they should be equal")
-		assert.Equal(t, chargeResult.ChargeD.CurrencyCode, "UMB", "they should be equal")
+		assert.Equal(t, chargeResult.ChargeD.Amount, int64(1212), "they should be equal")
+		assert.Equal(t, chargeResult.ChargeD.AmountCurrency, "EUR", "they should be equal")
 		assert.Equal(t, chargeResult.ChargeD.PaymentTermCode, "PRE", "they should be equal")
 		assert.Equal(t, chargeResult.ChargeD.CalculationBasis, "WHAT", "they should be equal")
 		assert.NotNil(t, chargeResult.CrUpdTime.CreatedAt)
@@ -218,7 +219,7 @@ func TestChargeService_FetchChargesByShipmentId(t *testing.T) {
 	}
 }
 
-func GetCharge(id uint32, uuid4 []byte, idS string, transportDocumentId uint32, shipmentId uint32, chargeType string, currencyAmount float64, currencyCode string, paymentTermCode string, calculationBasis string, unitPrice float64, quantity float64, createdAt string, updatedAt string, createdByUserId string, updatedByUserId string) (*eventcoreproto.Charge, error) {
+func GetCharge(id uint32, uuid4 []byte, idS string, transportDocumentId uint32, shipmentId uint32, chargeType string, amount int64, amountCurrency string, amountString string, paymentTermCode string, calculationBasis string, unitPrice int64, unitPriceCurrency string, unitPriceString string, quantity float64, createdAt string, updatedAt string, createdByUserId string, updatedByUserId string) (*eventcoreproto.Charge, error) {
 	createdAt1, err := common.ConvertTimeToTimestamp(Layout, createdAt)
 	if err != nil {
 		log.Error("Error", zap.Error(err))
@@ -236,11 +237,14 @@ func GetCharge(id uint32, uuid4 []byte, idS string, transportDocumentId uint32, 
 	chargeD.TransportDocumentId = transportDocumentId
 	chargeD.ShipmentId = shipmentId
 	chargeD.ChargeType = chargeType
-	chargeD.CurrencyAmount = currencyAmount
-	chargeD.CurrencyCode = currencyCode
+	chargeD.Amount = amount
+	chargeD.AmountCurrency = amountCurrency
+	chargeD.AmountString = amountString
 	chargeD.PaymentTermCode = paymentTermCode
 	chargeD.CalculationBasis = calculationBasis
 	chargeD.UnitPrice = unitPrice
+	chargeD.UnitPriceCurrency = unitPriceCurrency
+	chargeD.UnitPriceString = unitPriceString
 	chargeD.Quantity = quantity
 
 	crUpdTime := new(commonproto.CrUpdTime)

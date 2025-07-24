@@ -194,3 +194,10 @@ message Permission {
   string permission_name = 1;
   string permission_description = 2;
 }
+
+message Currency {
+ string code = 1;
+ string  numeric_code = 2;
+ string currency_name = 3;
+ int32  minor_unit = 4;
+}

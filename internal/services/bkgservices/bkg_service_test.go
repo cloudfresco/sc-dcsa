@@ -3,6 +3,7 @@ package bkgservices
 
 import (
 	"context"
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -23,14 +24,14 @@ func TestBkgService_GetBookings(t *testing.T) {
 
 	ctx := LoginUser()
 
-	bkgService := NewBkgService(log, dbService, redisService, userServiceClient)
+	bkgService := NewBkgService(log, dbService, redisService, userServiceClient, currencyService)
 
-	bkg, err := GetBooking(uint32(16), []byte{43, 149, 187, 185, 210, 212, 68, 22, 172, 254, 98, 7, 225, 129, 181, 244}, "2b95bbb9-d2d4-4416-acfe-6207e181b5f4", "ABC123123123", "RECE", "CY", "CFS", "FCL", "LCL", "SERVICE_CONTRACT_REFERENCE_03", "PRE", true, true, "EXPORT_DECLARATION_REFERENCE_03", false, "IMPORT_LICENSE_REFERENCE_03", "2020-03-10T00:00:00Z", false, true, "", "2020-03-10T00:00:00Z", "2020-03-12T00:00:00Z", "2020-03-13T00:00:00Z", "SWB", "TRANSPORT_DOC_REF_03", "BOOKING_CHA_REF_03", "FCA", "EI", false, "", "", "CARRIER_VOYAGE_NUMBER_03", "", uint32(1), "WTK", float64(12.12), uint32(0), uint32(0), "", "2020-03-10T00:00:00Z", "2021-12-16T00:00:00Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
+	bkg, err := GetBooking(uint32(16), []byte{43, 149, 187, 185, 210, 212, 68, 22, 172, 254, 98, 7, 225, 129, 181, 244}, "2b95bbb9-d2d4-4416-acfe-6207e181b5f4", "ABC123123123", "RECE", "CY", "CFS", "FCL", "LCL", "SERVICE_CONTRACT_REFERENCE_03", "PRE", true, true, "EXPORT_DECLARATION_REFERENCE_03", false, "IMPORT_LICENSE_REFERENCE_03", "2020-03-10T00:00:00Z", false, true, "", "2020-03-10T00:00:00Z", "2020-03-12T00:00:00Z", "2020-03-13T00:00:00Z", "SWB", "TRANSPORT_DOC_REF_03", "BOOKING_CHA_REF_03", "FCA", "EI", false, "", "", "CARRIER_VOYAGE_NUMBER_03", "", uint32(1), "EUR", int64(1212), "12.12", uint32(0), uint32(0), "", "2020-03-10T00:00:00Z", "2021-12-16T00:00:00Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	bkg1, err := GetBooking(uint32(15), []byte{11, 187, 52, 122, 129, 59, 68, 141, 146, 110, 220, 104, 180, 134, 54, 147}, "0bbb347a-813b-448d-926e-dc68b4863693", "BR1239719872", "PENU", "CY", "CFS", "FCL", "LCL", "SERVICE_CONTRACT_REFERENCE_02", "PRE", true, true, "EXPORT_DECLARATION_REFERENCE_02", false, "IMPORT_LICENSE_REFERENCE_02", "2020-04-15T00:00:00Z", false, true, "", "2020-04-15T00:00:00Z", "2020-04-16T00:00:00Z", "2020-04-17T00:00:00Z", "SWB", "TRANSPORT_DOC_REF_02", "BOOKING_CHA_REF_02", "FCA", "EI", false, "", "", "CARRIER_VOYAGE_NUMBER_02", "", uint32(1), "WTK", float64(12.12), uint32(0), uint32(0), "", "2020-04-15T00:00:00Z", "2021-01-10T00:00:00Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
+	bkg1, err := GetBooking(uint32(15), []byte{11, 187, 52, 122, 129, 59, 68, 141, 146, 110, 220, 104, 180, 134, 54, 147}, "0bbb347a-813b-448d-926e-dc68b4863693", "BR1239719872", "PENU", "CY", "CFS", "FCL", "LCL", "SERVICE_CONTRACT_REFERENCE_02", "PRE", true, true, "EXPORT_DECLARATION_REFERENCE_02", false, "IMPORT_LICENSE_REFERENCE_02", "2020-04-15T00:00:00Z", false, true, "", "2020-04-15T00:00:00Z", "2020-04-16T00:00:00Z", "2020-04-17T00:00:00Z", "SWB", "TRANSPORT_DOC_REF_02", "BOOKING_CHA_REF_02", "FCA", "EI", false, "", "", "CARRIER_VOYAGE_NUMBER_02", "", uint32(1), "EUR", int64(1212), "12.12", uint32(0), uint32(0), "", "2020-04-15T00:00:00Z", "2021-01-10T00:00:00Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
 	if err != nil {
 		t.Error(err)
 		return
@@ -93,9 +94,9 @@ func TestBkgService_GetBooking(t *testing.T) {
 	}
 	ctx := LoginUser()
 
-	bkgService := NewBkgService(log, dbService, redisService, userServiceClient)
+	bkgService := NewBkgService(log, dbService, redisService, userServiceClient, currencyService)
 
-	bkg, err := GetBooking(uint32(16), []byte{43, 149, 187, 185, 210, 212, 68, 22, 172, 254, 98, 7, 225, 129, 181, 244}, "2b95bbb9-d2d4-4416-acfe-6207e181b5f4", "ABC123123123", "RECE", "CY", "CFS", "FCL", "LCL", "SERVICE_CONTRACT_REFERENCE_03", "PRE", true, true, "EXPORT_DECLARATION_REFERENCE_03", false, "IMPORT_LICENSE_REFERENCE_03", "2020-03-10T00:00:00Z", false, true, "", "2020-03-10T00:00:00Z", "2020-03-12T00:00:00Z", "2020-03-13T00:00:00Z", "SWB", "TRANSPORT_DOC_REF_03", "BOOKING_CHA_REF_03", "FCA", "EI", false, "", "", "CARRIER_VOYAGE_NUMBER_03", "", uint32(1), "WTK", float64(12.12), uint32(0), uint32(0), "", "2020-03-10T00:00:00Z", "2021-12-16T00:00:00Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
+	bkg, err := GetBooking(uint32(16), []byte{43, 149, 187, 185, 210, 212, 68, 22, 172, 254, 98, 7, 225, 129, 181, 244}, "2b95bbb9-d2d4-4416-acfe-6207e181b5f4", "ABC123123123", "RECE", "CY", "CFS", "FCL", "LCL", "SERVICE_CONTRACT_REFERENCE_03", "PRE", true, true, "EXPORT_DECLARATION_REFERENCE_03", false, "IMPORT_LICENSE_REFERENCE_03", "2020-03-10T00:00:00Z", false, true, "", "2020-03-10T00:00:00Z", "2020-03-12T00:00:00Z", "2020-03-13T00:00:00Z", "SWB", "TRANSPORT_DOC_REF_03", "BOOKING_CHA_REF_03", "FCA", "EI", false, "", "", "CARRIER_VOYAGE_NUMBER_03", "", uint32(1), "EUR", int64(1212), "12.12", uint32(0), uint32(0), "", "2020-03-10T00:00:00Z", "2021-12-16T00:00:00Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
 	if err != nil {
 		t.Error(err)
 		return
@@ -158,9 +159,9 @@ func TestBkgService_GetBookingByPk(t *testing.T) {
 	}
 	ctx := LoginUser()
 
-	bkgService := NewBkgService(log, dbService, redisService, userServiceClient)
+	bkgService := NewBkgService(log, dbService, redisService, userServiceClient, currencyService)
 
-	bkg, err := GetBooking(uint32(16), []byte{43, 149, 187, 185, 210, 212, 68, 22, 172, 254, 98, 7, 225, 129, 181, 244}, "2b95bbb9-d2d4-4416-acfe-6207e181b5f4", "ABC123123123", "RECE", "CY", "CFS", "FCL", "LCL", "SERVICE_CONTRACT_REFERENCE_03", "PRE", true, true, "EXPORT_DECLARATION_REFERENCE_03", false, "IMPORT_LICENSE_REFERENCE_03", "2020-03-10T00:00:00Z", false, true, "", "2020-03-10T00:00:00Z", "2020-03-12T00:00:00Z", "2020-03-13T00:00:00Z", "SWB", "TRANSPORT_DOC_REF_03", "BOOKING_CHA_REF_03", "FCA", "EI", false, "", "", "CARRIER_VOYAGE_NUMBER_03", "", uint32(1), "WTK", float64(12.12), uint32(0), uint32(0), "", "2020-03-10T00:00:00Z", "2021-12-16T00:00:00Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
+	bkg, err := GetBooking(uint32(16), []byte{43, 149, 187, 185, 210, 212, 68, 22, 172, 254, 98, 7, 225, 129, 181, 244}, "2b95bbb9-d2d4-4416-acfe-6207e181b5f4", "ABC123123123", "RECE", "CY", "CFS", "FCL", "LCL", "SERVICE_CONTRACT_REFERENCE_03", "PRE", true, true, "EXPORT_DECLARATION_REFERENCE_03", false, "IMPORT_LICENSE_REFERENCE_03", "2020-03-10T00:00:00Z", false, true, "", "2020-03-10T00:00:00Z", "2020-03-12T00:00:00Z", "2020-03-13T00:00:00Z", "SWB", "TRANSPORT_DOC_REF_03", "BOOKING_CHA_REF_03", "FCA", "EI", false, "", "", "CARRIER_VOYAGE_NUMBER_03", "", uint32(1), "EUR", int64(1212), "12.12", uint32(0), uint32(0), "", "2020-03-10T00:00:00Z", "2021-12-16T00:00:00Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
 	if err != nil {
 		t.Error(err)
 		return
@@ -223,7 +224,7 @@ func TestBkgService_UpdateBookingByReferenceCarrierBookingRequestReference(t *te
 	}
 	ctx := LoginUser()
 
-	bkgService := NewBkgService(log, dbService, redisService, userServiceClient)
+	bkgService := NewBkgService(log, dbService, redisService, userServiceClient, currencyService)
 
 	form := bkgproto.UpdateBookingByReferenceCarrierBookingRequestReferenceRequest{}
 	form.DocumentStatus = "PENU"
@@ -278,9 +279,9 @@ func TestBkgService_GetBookingByCarrierBookingRequestReference(t *testing.T) {
 	}
 	ctx := LoginUser()
 
-	bkgService := NewBkgService(log, dbService, redisService, userServiceClient)
+	bkgService := NewBkgService(log, dbService, redisService, userServiceClient, currencyService)
 
-	bkg, err := GetBooking(uint32(16), []byte{43, 149, 187, 185, 210, 212, 68, 22, 172, 254, 98, 7, 225, 129, 181, 244}, "2b95bbb9-d2d4-4416-acfe-6207e181b5f4", "ABC123123123", "RECE", "CY", "CFS", "FCL", "LCL", "SERVICE_CONTRACT_REFERENCE_03", "PRE", true, true, "EXPORT_DECLARATION_REFERENCE_03", false, "IMPORT_LICENSE_REFERENCE_03", "2020-03-10T00:00:00Z", false, true, "", "2020-03-10T00:00:00Z", "2020-03-12T00:00:00Z", "2020-03-13T00:00:00Z", "SWB", "TRANSPORT_DOC_REF_03", "BOOKING_CHA_REF_03", "FCA", "EI", false, "", "", "CARRIER_VOYAGE_NUMBER_03", "", uint32(1), "WTK", float64(12.12), uint32(0), uint32(0), "", "2020-03-10T00:00:00Z", "2021-12-16T00:00:00Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
+	bkg, err := GetBooking(uint32(16), []byte{43, 149, 187, 185, 210, 212, 68, 22, 172, 254, 98, 7, 225, 129, 181, 244}, "2b95bbb9-d2d4-4416-acfe-6207e181b5f4", "ABC123123123", "RECE", "CY", "CFS", "FCL", "LCL", "SERVICE_CONTRACT_REFERENCE_03", "PRE", true, true, "EXPORT_DECLARATION_REFERENCE_03", false, "IMPORT_LICENSE_REFERENCE_03", "2020-03-10T00:00:00Z", false, true, "", "2020-03-10T00:00:00Z", "2020-03-12T00:00:00Z", "2020-03-13T00:00:00Z", "SWB", "TRANSPORT_DOC_REF_03", "BOOKING_CHA_REF_03", "FCA", "EI", false, "", "", "CARRIER_VOYAGE_NUMBER_03", "", uint32(1), "EUR", int64(1212), "12.12", uint32(0), uint32(0), "", "2020-03-10T00:00:00Z", "2021-12-16T00:00:00Z", "auth0|66fd06d0bfea78a82bb42459", "auth0|66fd06d0bfea78a82bb42459")
 	if err != nil {
 		t.Error(err)
 		return
@@ -332,7 +333,7 @@ func TestBkgService_GetBookingByCarrierBookingRequestReference(t *testing.T) {
 	}
 }
 
-func GetBooking(id uint32, uuid4 []byte, idS string, carrierBookingRequestReference string, documentStatus string, receiptTypeAtOrigin string, deliveryTypeAtDestination string, cargoMovementTypeAtOrigin string, cargoMovementTypeAtDestination string, serviceContractReference string, paymentTermCode string, isPartialLoadAllowed bool, isExportDeclarationRequired bool, exportDeclarationReference string, isImportLicenseRequired bool, importLicenseReference string, submissionDateTime string, isAmsAciFilingRequired bool, isDestinationFilingRequired bool, contractQuotationReference string, expectedDepartureDate string, expectedArrivalAtPlaceOfDeliveryStartDate string, expectedArrivalAtPlaceOfDeliveryEndDate string, transportDocumentTypeCode string, transportDocumentReference string, bookingChannelReference string, incoTerms string, communicationChannelCode string, isEquipmentSubstitutionAllowed bool, vesselName string, vesselImoNumber string, exportVoyageNumber string, preCarriageModeOfTransportCode string, vesselId uint32, declaredValueCurrencyCode string, declaredValue float64, voyageId uint32, locationId uint32, invoicePayableAt string, createdAt string, updatedAt string, createdByUserId string, updatedByUserId string) (*bkgproto.Booking, error) {
+func GetBooking(id uint32, uuid4 []byte, idS string, carrierBookingRequestReference string, documentStatus string, receiptTypeAtOrigin string, deliveryTypeAtDestination string, cargoMovementTypeAtOrigin string, cargoMovementTypeAtDestination string, serviceContractReference string, paymentTermCode string, isPartialLoadAllowed bool, isExportDeclarationRequired bool, exportDeclarationReference string, isImportLicenseRequired bool, importLicenseReference string, submissionDateTime string, isAmsAciFilingRequired bool, isDestinationFilingRequired bool, contractQuotationReference string, expectedDepartureDate string, expectedArrivalAtPlaceOfDeliveryStartDate string, expectedArrivalAtPlaceOfDeliveryEndDate string, transportDocumentTypeCode string, transportDocumentReference string, bookingChannelReference string, incoTerms string, communicationChannelCode string, isEquipmentSubstitutionAllowed bool, vesselName string, vesselImoNumber string, exportVoyageNumber string, preCarriageModeOfTransportCode string, vesselId uint32, declaredValueCurrency string, declaredValue int64, declaredValueString string, voyageId uint32, locationId uint32, invoicePayableAt string, createdAt string, updatedAt string, createdByUserId string, updatedByUserId string) (*bkgproto.Booking, error) {
 	createdAt1, err := common.ConvertTimeToTimestamp(Layout, createdAt)
 	if err != nil {
 		log.Error("Error", zap.Error(err))
@@ -394,8 +395,9 @@ func GetBooking(id uint32, uuid4 []byte, idS string, carrierBookingRequestRefere
 	bookingD.ExportVoyageNumber = exportVoyageNumber
 	bookingD.PreCarriageModeOfTransportCode = preCarriageModeOfTransportCode
 	bookingD.VesselId = vesselId
-	bookingD.DeclaredValueCurrencyCode = declaredValueCurrencyCode
+	bookingD.DeclaredValueCurrency = declaredValueCurrency
 	bookingD.DeclaredValue = declaredValue
+	bookingD.DeclaredValueString = declaredValueString
 	bookingD.VoyageId = voyageId
 	bookingD.LocationId = locationId
 	bookingD.InvoicePayableAt = invoicePayableAt
@@ -428,7 +430,7 @@ func TestBkgService_CreateBooking(t *testing.T) {
 	}
 	ctx := LoginUser()
 
-	bkgService := NewBkgService(log, dbService, redisService, userServiceClient)
+	bkgService := NewBkgService(log, dbService, redisService, userServiceClient, currencyService)
 
 	bkg := bkgproto.CreateBookingRequest{}
 	bkg.CarrierBookingRequestReference = "ef223019-ff16-4870-be69-9dbaaaae9b11"
@@ -461,8 +463,8 @@ func TestBkgService_CreateBooking(t *testing.T) {
 	bkg.VesselImoNumber = "9321483"
 	bkg.ExportVoyageNumber = "export-voyage-number"
 	bkg.PreCarriageModeOfTransportCode = ""
-	bkg.DeclaredValueCurrencyCode = "EUR"
-	bkg.DeclaredValue = float64(10000)
+	bkg.DeclaredValueCurrency = "EUR"
+	bkg.DeclaredValue = "100.00"
 	bkg.InvoicePayableAt = ""
 	bkg.UserId = "auth0|66fd06d0bfea78a82bb42459"
 	bkg.UserEmail = "sprov300@gmail.com"
@@ -540,6 +542,7 @@ func TestBkgService_CreateBooking(t *testing.T) {
 			return
 		}
 		bookingResult := bookingResponse.Booking
+		fmt.Println("bookingResult", bookingResult)
 		assert.NotNil(t, bookingResult)
 		assert.Equal(t, bookingResult.BookingD.CarrierBookingRequestReference, "ef223019-ff16-4870-be69-9dbaaaae9b11", "they should be equal")
 		assert.Equal(t, bookingResult.BookingD.DocumentStatus, "Received", "they should be equal")

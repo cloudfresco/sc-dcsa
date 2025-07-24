@@ -19,16 +19,18 @@ type TransportDocumentService struct {
 	DBService         *common.DBService
 	RedisService      *common.RedisService
 	UserServiceClient partyproto.UserServiceClient
+	CurrencyService   *common.CurrencyService
 	eblproto.UnimplementedTransportDocumentServiceServer
 }
 
 // NewTransportDocumentService - Create Transport Document service
-func NewTransportDocumentService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient) *TransportDocumentService {
+func NewTransportDocumentService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient, currency *common.CurrencyService) *TransportDocumentService {
 	return &TransportDocumentService{
 		log:               log,
 		DBService:         dbOpt,
 		RedisService:      redisOpt,
 		UserServiceClient: userServiceClient,
+		CurrencyService:   currency,
 	}
 }
 
@@ -129,8 +131,23 @@ func (tds *TransportDocumentService) CreateTransportDocument(ctx context.Context
 	transportDocumentD.NumberOfOriginals = in.NumberOfOriginals
 	transportDocumentD.CarrierId = in.CarrierId
 	transportDocumentD.ShippingInstructionId = in.ShippingInstructionId
-	transportDocumentD.DeclaredValueCurrency = in.DeclaredValueCurrency
-	transportDocumentD.DeclaredValue = in.DeclaredValue
+
+	declaredValueCurrency, err := tds.CurrencyService.GetCurrency(ctx, in.DeclaredValueCurrency)
+	if err != nil {
+		tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	declaredValueMinor, err := common.ParseAmountString(in.DeclaredValue, declaredValueCurrency)
+	if err != nil {
+		tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	transportDocumentD.DeclaredValueCurrency = declaredValueCurrency.Code
+	transportDocumentD.DeclaredValue = declaredValueMinor
+	transportDocumentD.DeclaredValueString = common.FormatAmountString(declaredValueMinor, declaredValueCurrency)
+
 	transportDocumentD.NumberOfRiderPages = in.NumberOfRiderPages
 	transportDocumentD.IssuingParty = in.IssuingParty
 
@@ -213,8 +230,22 @@ func (tds *TransportDocumentService) CreateTransportDocumentFromShippingInstruct
 	transportDocumentD.NumberOfOriginals = in.NumberOfOriginals
 	transportDocumentD.CarrierId = in.CarrierId
 	transportDocumentD.ShippingInstructionId = shippingInstruction.ShippingInstructionD.Id
-	transportDocumentD.DeclaredValueCurrency = in.DeclaredValueCurrency
-	transportDocumentD.DeclaredValue = in.DeclaredValue
+
+	declaredValueCurrency, err := tds.CurrencyService.GetCurrency(ctx, in.DeclaredValueCurrency)
+	if err != nil {
+		tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	declaredValueMinor, err := common.ParseAmountString(in.DeclaredValue, declaredValueCurrency)
+	if err != nil {
+		tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	transportDocumentD.DeclaredValueCurrency = declaredValueCurrency.Code
+	transportDocumentD.DeclaredValue = declaredValueMinor
+	transportDocumentD.DeclaredValueString = common.FormatAmountString(declaredValueMinor, declaredValueCurrency)
 	transportDocumentD.NumberOfRiderPages = in.NumberOfRiderPages
 	transportDocumentD.IssuingParty = in.IssuingParty
 
@@ -327,6 +358,15 @@ func (tds *TransportDocumentService) GetTransportDocuments(ctx context.Context, 
 			tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 			return nil, err
 		}
+
+		declaredValueCurrency, err := tds.CurrencyService.GetCurrency(ctx, transportDocument.TransportDocumentD.DeclaredValueCurrency)
+		if err != nil {
+			tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+			return nil, err
+		}
+
+		transportDocument.TransportDocumentD.DeclaredValueString = common.FormatAmountString(transportDocument.TransportDocumentD.DeclaredValue, declaredValueCurrency)
+
 		transportDocuments = append(transportDocuments, transportDocument)
 
 	}
@@ -367,6 +407,14 @@ func (tds *TransportDocumentService) FindTransportDocumentById(ctx context.Conte
 		return nil, err
 	}
 
+	declaredValueCurrency, err := tds.CurrencyService.GetCurrency(ctx, transportDocument.TransportDocumentD.DeclaredValueCurrency)
+	if err != nil {
+		tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	transportDocument.TransportDocumentD.DeclaredValueString = common.FormatAmountString(transportDocument.TransportDocumentD.DeclaredValue, declaredValueCurrency)
+
 	tranDocResponse := eblproto.FindTransportDocumentByIdResponse{}
 	tranDocResponse.TransportDocument = transportDocument
 
@@ -392,6 +440,14 @@ func (tds *TransportDocumentService) GetTransportDocumentByPk(ctx context.Contex
 		tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 		return nil, err
 	}
+
+	declaredValueCurrency, err := tds.CurrencyService.GetCurrency(ctx, transportDocument.TransportDocumentD.DeclaredValueCurrency)
+	if err != nil {
+		tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	transportDocument.TransportDocumentD.DeclaredValueString = common.FormatAmountString(transportDocument.TransportDocumentD.DeclaredValue, declaredValueCurrency)
 
 	tranDocResponse := eblproto.GetTransportDocumentByPkResponse{}
 	tranDocResponse.TransportDocument = transportDocument
@@ -441,6 +497,14 @@ func (tds *TransportDocumentService) FindByTransportDocumentReference(ctx contex
 		tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 		return nil, err
 	}
+
+	declaredValueCurrency, err := tds.CurrencyService.GetCurrency(ctx, transportDocument.TransportDocumentD.DeclaredValueCurrency)
+	if err != nil {
+		tds.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	transportDocument.TransportDocumentD.DeclaredValueString = common.FormatAmountString(transportDocument.TransportDocumentD.DeclaredValue, declaredValueCurrency)
 
 	tranDocResponse := eblproto.FindByTransportDocumentReferenceResponse{}
 	tranDocResponse.TransportDocument = transportDocument

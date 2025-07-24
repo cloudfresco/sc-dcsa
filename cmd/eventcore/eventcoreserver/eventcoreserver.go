@@ -40,5 +40,6 @@ func main() {
 	dbService, redisService, mailerService := common.GetServices(log, false, dbOpt, redisOpt, jwtOpt, mailerOpt)
 
 	pwd, _ := os.Getwd()
-	eventcoreservices.StartEventCoreServer(log, false, pwd, dbOpt, redisOpt, mailerOpt, grpcServerOpt, jwtOpt, oauthOpt, userOpt, uptraceOpt, dbService, redisService, mailerService)
+	currencyService := common.NewCurrencyService(log, dbService)
+	eventcoreservices.StartEventCoreServer(log, false, pwd, dbOpt, redisOpt, mailerOpt, grpcServerOpt, jwtOpt, oauthOpt, userOpt, uptraceOpt, dbService, redisService, mailerService, currencyService)
 }

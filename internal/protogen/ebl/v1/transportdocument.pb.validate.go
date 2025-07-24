@@ -2047,6 +2047,8 @@ func (m *TransportDocumentD) validate(all bool) error {
 
 	// no validation rules for DeclaredValue
 
+	// no validation rules for DeclaredValueString
+
 	// no validation rules for NumberOfRiderPages
 
 	// no validation rules for IssuingParty

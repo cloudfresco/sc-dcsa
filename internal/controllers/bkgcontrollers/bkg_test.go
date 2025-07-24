@@ -56,8 +56,8 @@ func TestCreateBooking(t *testing.T) {
 	bkg.VesselImoNumber = "9321483"
 	bkg.ExportVoyageNumber = "export-voyage-number"
 	bkg.PreCarriageModeOfTransportCode = ""
-	bkg.DeclaredValueCurrencyCode = "EUR"
-	bkg.DeclaredValue = float64(10000)
+	bkg.DeclaredValueCurrency = "EUR"
+	bkg.DeclaredValue = "10000"
 	bkg.InvoicePayableAt = ""
 
 	commodity := bkgproto.CreateCommodityRequest{}

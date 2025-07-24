@@ -29,16 +29,18 @@ type BkgService struct {
 	DBService         *common.DBService
 	RedisService      *common.RedisService
 	UserServiceClient partyproto.UserServiceClient
+	CurrencyService   *common.CurrencyService
 	bkgproto.UnimplementedBkgServiceServer
 }
 
 // NewBkgService - Create Booking service
-func NewBkgService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient) *BkgService {
+func NewBkgService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient, currency *common.CurrencyService) *BkgService {
 	return &BkgService{
 		log:               log,
 		DBService:         dbOpt,
 		RedisService:      redisOpt,
 		UserServiceClient: userServiceClient,
+		CurrencyService:   currency,
 	}
 }
 
@@ -73,7 +75,7 @@ const insertBookingSQL = `insert into bookings
   export_voyage_number,
   pre_carriage_mode_of_transport_code,
   vessel_id,
-  declared_value_currency_code,
+  declared_value_currency,
   declared_value,
   voyage_id,
   location_id,
@@ -115,7 +117,7 @@ const insertBookingSQL = `insert into bookings
 :export_voyage_number,
 :pre_carriage_mode_of_transport_code,
 :vessel_id,
-:declared_value_currency_code,
+:declared_value_currency,
 :declared_value,
 :voyage_id,
 :location_id,
@@ -172,7 +174,7 @@ const selectBookingsSQL = `select
   export_voyage_number,
   pre_carriage_mode_of_transport_code,
   vessel_id,
-  declared_value_currency_code,
+  declared_value_currency,
   declared_value,
   voyage_id,
   location_id,
@@ -188,7 +190,7 @@ const selectBookingsSQL = `select
   updated_at from bookings`
 
 // StartBkgServer - Start Bkg server
-func StartBkgServer(log *zap.Logger, isTest bool, pwd string, dbOpt *config.DBOptions, redisOpt *config.RedisOptions, mailerOpt *config.MailerOptions, grpcServerOpt *config.GrpcServerOptions, jwtOpt *config.JWTOptions, oauthOpt *config.OauthOptions, userOpt *config.UserOptions, uptraceOpt *config.UptraceOptions, dbService *common.DBService, redisService *common.RedisService, mailerService common.MailerIntf) {
+func StartBkgServer(log *zap.Logger, isTest bool, pwd string, dbOpt *config.DBOptions, redisOpt *config.RedisOptions, mailerOpt *config.MailerOptions, grpcServerOpt *config.GrpcServerOptions, jwtOpt *config.JWTOptions, oauthOpt *config.OauthOptions, userOpt *config.UserOptions, uptraceOpt *config.UptraceOptions, dbService *common.DBService, redisService *common.RedisService, mailerService common.MailerIntf, currencyService *common.CurrencyService) {
 	common.SetJWTOpt(jwtOpt)
 
 	creds, err := common.GetSrvCred(log, isTest, pwd, grpcServerOpt)
@@ -214,9 +216,9 @@ func StartBkgServer(log *zap.Logger, isTest bool, pwd string, dbOpt *config.DBOp
 	srvOpts = append(srvOpts, grpc.StatsHandler(otelgrpc.NewServerHandler()))
 
 	uc := partyproto.NewUserServiceClient(userConn)
-	bkgService := NewBkgService(log, dbService, redisService, uc)
+	bkgService := NewBkgService(log, dbService, redisService, uc, currencyService)
 	bkgShipmentSummaryService := NewBkgShipmentSummaryService(log, dbService, redisService, uc)
-	bkgSummaryService := NewBkgSummaryService(log, dbService, redisService, uc)
+	bkgSummaryService := NewBkgSummaryService(log, dbService, redisService, uc, currencyService)
 	referenceService := NewReferenceService(log, dbService, redisService, uc)
 
 	lis, err := net.Listen("tcp", grpcServerOpt.GrpcBkgServerPort)
@@ -306,8 +308,23 @@ func (bs *BkgService) CreateBooking(ctx context.Context, in *bkgproto.CreateBook
 	bookingD.ExportVoyageNumber = in.ExportVoyageNumber
 	bookingD.PreCarriageModeOfTransportCode = in.PreCarriageModeOfTransportCode
 	bookingD.VesselId = in.VesselId
-	bookingD.DeclaredValueCurrencyCode = in.DeclaredValueCurrencyCode
-	bookingD.DeclaredValue = in.DeclaredValue
+
+	declaredValueCurrency, err := bs.CurrencyService.GetCurrency(ctx, in.DeclaredValueCurrency)
+	if err != nil {
+		bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	declaredValueMinor, err := common.ParseAmountString(in.DeclaredValue, declaredValueCurrency)
+	if err != nil {
+		bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	bookingD.DeclaredValueCurrency = declaredValueCurrency.Code
+	bookingD.DeclaredValue = declaredValueMinor
+	bookingD.DeclaredValueString = common.FormatAmountString(declaredValueMinor, declaredValueCurrency)
+
 	bookingD.VoyageId = in.VoyageId
 	bookingD.LocationId = in.LocationId
 	bookingD.InvoicePayableAt = in.InvoicePayableAt
@@ -557,6 +574,14 @@ func (bs *BkgService) GetBookings(ctx context.Context, in *bkgproto.GetBookingsR
 			bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 			return nil, err
 		}
+		declaredValueCurrency, err := bs.CurrencyService.GetCurrency(ctx, booking.BookingD.DeclaredValueCurrency)
+		if err != nil {
+			bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+			return nil, err
+		}
+
+		booking.BookingD.DeclaredValueString = common.FormatAmountString(booking.BookingD.DeclaredValue, declaredValueCurrency)
+
 		bookings = append(bookings, booking)
 
 	}
@@ -597,6 +622,14 @@ func (bs *BkgService) GetBooking(ctx context.Context, getBookingRequest *bkgprot
 		return nil, err
 	}
 
+	declaredValueCurrency, err := bs.CurrencyService.GetCurrency(ctx, booking.BookingD.DeclaredValueCurrency)
+	if err != nil {
+		bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	booking.BookingD.DeclaredValueString = common.FormatAmountString(booking.BookingD.DeclaredValue, declaredValueCurrency)
+
 	bookingResponse := bkgproto.GetBookingResponse{}
 	bookingResponse.Booking = booking
 	return &bookingResponse, nil
@@ -621,6 +654,14 @@ func (bs *BkgService) GetBookingByPk(ctx context.Context, getBookingByPkRequest 
 		bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 		return nil, err
 	}
+
+	declaredValueCurrency, err := bs.CurrencyService.GetCurrency(ctx, booking.BookingD.DeclaredValueCurrency)
+	if err != nil {
+		bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	booking.BookingD.DeclaredValueString = common.FormatAmountString(booking.BookingD.DeclaredValue, declaredValueCurrency)
 	bookingResponse := bkgproto.GetBookingByPkResponse{}
 	bookingResponse.Booking = booking
 	return &bookingResponse, nil
@@ -644,6 +685,14 @@ func (bs *BkgService) GetBookingByCarrierBookingRequestReference(ctx context.Con
 		bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 		return nil, err
 	}
+
+	declaredValueCurrency, err := bs.CurrencyService.GetCurrency(ctx, booking.BookingD.DeclaredValueCurrency)
+	if err != nil {
+		bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	booking.BookingD.DeclaredValueString = common.FormatAmountString(booking.BookingD.DeclaredValue, declaredValueCurrency)
 
 	bookingResponse := bkgproto.GetBookingByCarrierBookingRequestReferenceResponse{}
 	bookingResponse.Booking = booking

@@ -62,7 +62,7 @@ test:
 
 
 	@echo "Starting tests"
-	go test -v github.com/cloudfresco/sc-dcsa/internal/controllers/partycontrollers
+	go test -v github.com/cloudfresco/sc-dcsa/internal/services/eblservices
 	#@for pkg in $$(go list ./...); do echo "Testing" $$pkg && go test -v $$pkg; done		
 
 clean:

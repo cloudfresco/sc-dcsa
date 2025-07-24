@@ -1,0 +1,17 @@
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('AUD', '36', 'Australian Dollar', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('BHD', '48', 'Bahraini Dinar', '3');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('COP', '170', 'Colombian Peso', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('DKK', '208', 'Danish Krone', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('EUR', '978', 'Euro', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('HKD', '344', 'Hong Kong Dollar', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('INR', '356', 'Indian Rupee', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('IRR', '364', 'Iranian Rial', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('IQD', '368', 'Iraqi Dinar', '3');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('KRW', '410', 'Won', '0');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('MYR', '458', 'Malaysian Ringgit', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('MXN', '484', 'Mexican Peso', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('NZD', '554', 'New Zealand Dollar', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('RUB', '643', 'Russian Ruble', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('SGD', '702', 'Singapore Dollar', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('GBP', '826', 'Pound Sterling', '2');
+INSERT INTO currencies (code, numeric_code, currency_name, minor_unit) VALUES ('USD', '840', 'US Dollar', '2');

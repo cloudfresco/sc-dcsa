@@ -22,16 +22,18 @@ type BkgSummaryService struct {
 	DBService         *common.DBService
 	RedisService      *common.RedisService
 	UserServiceClient partyproto.UserServiceClient
+	CurrencyService   *common.CurrencyService
 	bkgproto.UnimplementedBkgSummaryServiceServer
 }
 
 // NewBkgSummaryService - Create BkgSummary Service
-func NewBkgSummaryService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient) *BkgSummaryService {
+func NewBkgSummaryService(log *zap.Logger, dbOpt *common.DBService, redisOpt *common.RedisService, userServiceClient partyproto.UserServiceClient, currency *common.CurrencyService) *BkgSummaryService {
 	return &BkgSummaryService{
 		log:               log,
 		DBService:         dbOpt,
 		RedisService:      redisOpt,
 		UserServiceClient: userServiceClient,
+		CurrencyService:   currency,
 	}
 }
 
@@ -229,8 +231,23 @@ func (bs *BkgSummaryService) CreateBookingSummary(ctx context.Context, in *bkgpr
 	bkgSummaryD.VesselName = in.VesselName
 	bkgSummaryD.CarrierExportVoyageNumber = in.CarrierExportVoyageNumber
 	bkgSummaryD.UniversalExportVoyageReference = in.UniversalExportVoyageReference
-	bkgSummaryD.DeclaredValue = in.DeclaredValue
-	bkgSummaryD.DeliveryValueCurrency = in.DeliveryValueCurrency
+
+	declaredValueCurrency, err := bs.CurrencyService.GetCurrency(ctx, in.DeclaredValueCurrency)
+	if err != nil {
+		bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	declaredValueMinor, err := common.ParseAmountString(in.DeclaredValue, declaredValueCurrency)
+	if err != nil {
+		bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	bkgSummaryD.DeclaredValueCurrency = declaredValueCurrency.Code
+	bkgSummaryD.DeclaredValue = declaredValueMinor
+	bkgSummaryD.DeclaredValueString = common.FormatAmountString(declaredValueMinor, declaredValueCurrency)
+
 	bkgSummaryD.PaymentTermCode = in.PaymentTermCode
 	bkgSummaryD.IsPartialLoadAllowed = in.IsPartialLoadAllowed
 	bkgSummaryD.IsExportDeclarationRequired = in.IsExportDeclarationRequired
@@ -354,6 +371,14 @@ func (bs *BkgSummaryService) GetBookingSummaryByCarrierBookingRequestReference(c
 		return nil, err
 	}
 
+	declaredValueCurrency, err := bs.CurrencyService.GetCurrency(ctx, bkgSummary.BookingSummaryD.DeclaredValueCurrency)
+	if err != nil {
+		bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+		return nil, err
+	}
+
+	bkgSummary.BookingSummaryD.DeclaredValueString = common.FormatAmountString(bkgSummary.BookingSummaryD.DeclaredValue, declaredValueCurrency)
+
 	bookingSummaryResponse := bkgproto.GetBookingSummaryByCarrierBookingRequestReferenceResponse{}
 	bookingSummaryResponse.BookingSummary = bkgSummary
 
@@ -428,6 +453,15 @@ func (bs *BkgSummaryService) GetBookingSummaries(ctx context.Context, in *bkgpro
 			bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
 			return nil, err
 		}
+
+		declaredValueCurrency, err := bs.CurrencyService.GetCurrency(ctx, bkgSummary.BookingSummaryD.DeclaredValueCurrency)
+		if err != nil {
+			bs.log.Error("Error", zap.String("user", in.GetUserEmail()), zap.String("reqid", in.GetRequestId()), zap.Error(err))
+			return nil, err
+		}
+
+		bkgSummary.BookingSummaryD.DeclaredValueString = common.FormatAmountString(bkgSummary.BookingSummaryD.DeclaredValue, declaredValueCurrency)
+
 		bkgSummaries = append(bkgSummaries, bkgSummary)
 
 	}

@@ -32,6 +32,7 @@ const message = ref("");
 const getMessage = async () => {
   const { getAccessTokenSilently } = useAuth0();
   const accessToken = await getAccessTokenSilently();
+  alert(accessToken)
   const { data, error } = await getPartyResource(accessToken);
 
   if (data) {

@@ -1,3 +1,4 @@
+TRUNCATE currencies;
 TRUNCATE vessels;
 TRUNCATE locations;
 TRUNCATE bookings;

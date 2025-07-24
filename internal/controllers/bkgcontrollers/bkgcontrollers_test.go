@@ -23,6 +23,7 @@ var (
 	dbService         *common.DBService
 	redisService      *common.RedisService
 	mailerService     common.MailerIntf
+	currencyService   *common.CurrencyService
 	jwtOpt            *config.JWTOptions
 	userTestOpt       *config.UserTestOptions
 	redisOpt          *config.RedisOptions
@@ -78,7 +79,7 @@ func TestMain(m *testing.M) {
 	redisOpt, mailerOpt, serverOpt, grpcServerOpt, oauthOpt, userOpt, uptraceOpt = config.GetConfigOpt(log, v)
 
 	dbService, redisService, _ = common.GetServices(log, true, dbOpt, redisOpt, jwtOpt, mailerOpt)
-
+	currencyService = common.NewCurrencyService(log, dbService)
 	mailerService, err = test.CreateMailerServiceTest(log)
 	if err != nil {
 		log.Error("Error", zap.Error(err))
@@ -87,7 +88,7 @@ func TestMain(m *testing.M) {
 	backendServerAddr = serverOpt.BackendServerAddr
 
 	pwd, _ := os.Getwd()
-	go bkgservices.StartBkgServer(logBkg, true, pwd, dbOpt, redisOpt, mailerOpt, grpcServerOpt, jwtOpt, oauthOpt, userOpt, uptraceOpt, dbService, redisService, mailerService)
+	go bkgservices.StartBkgServer(logBkg, true, pwd, dbOpt, redisOpt, mailerOpt, grpcServerOpt, jwtOpt, oauthOpt, userOpt, uptraceOpt, dbService, redisService, mailerService, currencyService)
 	go partyservices.StartUserServer(logUser, true, pwd, dbOpt, redisOpt, mailerOpt, serverOpt, grpcServerOpt, jwtOpt, oauthOpt, userOpt, uptraceOpt, dbService, redisService, mailerService)
 	go bkgworkers.StartBkgWorker(log, true, pwd, grpcServerOpt, configFilePath)
 

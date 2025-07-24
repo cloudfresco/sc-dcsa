@@ -22,14 +22,14 @@ func TestTransportDocumentService_GetTransportDocuments(t *testing.T) {
 
 	ctx := LoginUser()
 
-	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, userServiceClient)
-	transportDocument1, err := GetTransportDocument(uint32(6), []byte{84, 74, 242, 38, 15, 235, 64, 110, 170, 113, 85, 41, 169, 108, 181, 91}, "544af226-0feb-406e-aa71-5529a96cb55b", "be038e58-5365", uint32(1), "2020-11-25T00:00:00Z", "2020-12-24T00:00:00Z", "2020-12-31T00:00:00Z", uint32(12), uint32(3), uint32(1), "WTK", float64(12.12), int32(12), "c49ea2d6-3806-46c8-8490-294affc71286", "2021-11-28T14:12:56Z", "2021-12-01T07:41:00Z")
+	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, userServiceClient, currencyService)
+	transportDocument1, err := GetTransportDocument(uint32(6), []byte{84, 74, 242, 38, 15, 235, 64, 110, 170, 113, 85, 41, 169, 108, 181, 91}, "544af226-0feb-406e-aa71-5529a96cb55b", "be038e58-5365", uint32(1), "2020-11-25T00:00:00Z", "2020-12-24T00:00:00Z", "2020-12-31T00:00:00Z", uint32(12), uint32(3), uint32(1), "EUR", int64(1212), "12.12", int32(12), "c49ea2d6-3806-46c8-8490-294affc71286", "2021-11-28T14:12:56Z", "2021-12-01T07:41:00Z")
 	if err != nil {
 		t.Error(err)
 		return
 	}
 
-	transportDocument2, err := GetTransportDocument(uint32(5), []byte{207, 72, 173, 10, 154, 75, 72, 167, 183, 82, 194, 72, 251, 93, 136, 217}, "cf48ad0a-9a4b-48a7-b752-c248fb5d88d9", "c90a0ed6-ccc9-48e3", uint32(8), "2022-05-16T00:00:00Z", "2022-05-15T00:00:00Z", "2022-05-14T00:00:00Z", uint32(12), uint32(3), uint32(9), "WTK", float64(12.12), int32(12), "8e463a84-0a2d-47cd-9332-51e6cb36b635", "2021-11-28T14:12:56Z", "2021-12-01T07:41:00Z")
+	transportDocument2, err := GetTransportDocument(uint32(5), []byte{207, 72, 173, 10, 154, 75, 72, 167, 183, 82, 194, 72, 251, 93, 136, 217}, "cf48ad0a-9a4b-48a7-b752-c248fb5d88d9", "c90a0ed6-ccc9-48e3", uint32(8), "2022-05-16T00:00:00Z", "2022-05-15T00:00:00Z", "2022-05-14T00:00:00Z", uint32(12), uint32(3), uint32(9), "EUR", int64(1212), "12.12", int32(12), "8e463a84-0a2d-47cd-9332-51e6cb36b635", "2021-11-28T14:12:56Z", "2021-12-01T07:41:00Z")
 	if err != nil {
 		t.Error(err)
 		return
@@ -79,7 +79,7 @@ func TestTransportDocumentService_GetTransportDocuments(t *testing.T) {
 		assert.NotNil(t, transDocsResp)
 		transDocumentResult := transDocsResp.TransportDocuments[1]
 		assert.Equal(t, transDocumentResult.TransportDocumentD.TransportDocumentReference, "c90a0ed6-ccc9-48e3", "they should be equal")
-		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValueCurrency, "WTK", "they should be equal")
+		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValueCurrency, "EUR", "they should be equal")
 	}
 }
 
@@ -92,8 +92,8 @@ func TestTransportDocumentService_FindTransportDocumentById(t *testing.T) {
 
 	ctx := LoginUser()
 
-	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, userServiceClient)
-	transportDocument, err := GetTransportDocument(uint32(6), []byte{84, 74, 242, 38, 15, 235, 64, 110, 170, 113, 85, 41, 169, 108, 181, 91}, "544af226-0feb-406e-aa71-5529a96cb55b", "be038e58-5365", uint32(1), "2020-11-25T00:00:00Z", "2020-12-24T00:00:00Z", "2020-12-31T00:00:00Z", uint32(12), uint32(3), uint32(1), "WTK", float64(12.12), int32(12), "c49ea2d6-3806-46c8-8490-294affc71286", "2021-11-28T14:12:56Z", "2021-12-01T07:41:00Z")
+	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, userServiceClient, currencyService)
+	transportDocument, err := GetTransportDocument(uint32(6), []byte{84, 74, 242, 38, 15, 235, 64, 110, 170, 113, 85, 41, 169, 108, 181, 91}, "544af226-0feb-406e-aa71-5529a96cb55b", "be038e58-5365", uint32(1), "2020-11-25T00:00:00Z", "2020-12-24T00:00:00Z", "2020-12-31T00:00:00Z", uint32(12), uint32(3), uint32(1), "EUR", int64(1212), "12.12", int32(12), "c49ea2d6-3806-46c8-8490-294affc71286", "2021-11-28T14:12:56Z", "2021-12-01T07:41:00Z")
 	if err != nil {
 		t.Error(err)
 		return
@@ -141,7 +141,7 @@ func TestTransportDocumentService_FindTransportDocumentById(t *testing.T) {
 		assert.NotNil(t, transDocResp)
 		transDocumentResult := transDocResp.TransportDocument
 		assert.Equal(t, transDocumentResult.TransportDocumentD.TransportDocumentReference, "be038e58-5365", "they should be equal")
-		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValueCurrency, "WTK", "they should be equal")
+		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValueCurrency, "EUR", "they should be equal")
 	}
 }
 
@@ -154,8 +154,8 @@ func TestTransportDocumentService_GetTransportDocumentByPk(t *testing.T) {
 
 	ctx := LoginUser()
 
-	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, userServiceClient)
-	transportDocument, err := GetTransportDocument(uint32(6), []byte{84, 74, 242, 38, 15, 235, 64, 110, 170, 113, 85, 41, 169, 108, 181, 91}, "544af226-0feb-406e-aa71-5529a96cb55b", "be038e58-5365", uint32(1), "2020-11-25T00:00:00Z", "2020-12-24T00:00:00Z", "2020-12-31T00:00:00Z", uint32(12), uint32(3), uint32(1), "WTK", float64(12.12), int32(12), "c49ea2d6-3806-46c8-8490-294affc71286", "2021-11-28T14:12:56Z", "2021-12-01T07:41:00Z")
+	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, userServiceClient, currencyService)
+	transportDocument, err := GetTransportDocument(uint32(6), []byte{84, 74, 242, 38, 15, 235, 64, 110, 170, 113, 85, 41, 169, 108, 181, 91}, "544af226-0feb-406e-aa71-5529a96cb55b", "be038e58-5365", uint32(1), "2020-11-25T00:00:00Z", "2020-12-24T00:00:00Z", "2020-12-31T00:00:00Z", uint32(12), uint32(3), uint32(1), "EUR", int64(1212), "12.12", int32(12), "c49ea2d6-3806-46c8-8490-294affc71286", "2021-11-28T14:12:56Z", "2021-12-01T07:41:00Z")
 	if err != nil {
 		t.Error(err)
 		return
@@ -203,7 +203,7 @@ func TestTransportDocumentService_GetTransportDocumentByPk(t *testing.T) {
 		assert.NotNil(t, transDocResp)
 		transDocumentResult := transDocResp.TransportDocument
 		assert.Equal(t, transDocumentResult.TransportDocumentD.TransportDocumentReference, "be038e58-5365", "they should be equal")
-		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValueCurrency, "WTK", "they should be equal")
+		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValueCurrency, "EUR", "they should be equal")
 	}
 }
 
@@ -216,8 +216,8 @@ func TestTransportDocumentService_FindByTransportDocumentReference(t *testing.T)
 
 	ctx := LoginUser()
 
-	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, userServiceClient)
-	transportDocument, err := GetTransportDocument(uint32(6), []byte{84, 74, 242, 38, 15, 235, 64, 110, 170, 113, 85, 41, 169, 108, 181, 91}, "544af226-0feb-406e-aa71-5529a96cb55b", "be038e58-5365", uint32(1), "2020-11-25T00:00:00Z", "2020-12-24T00:00:00Z", "2020-12-31T00:00:00Z", uint32(12), uint32(3), uint32(1), "WTK", float64(12.12), int32(12), "c49ea2d6-3806-46c8-8490-294affc71286", "2021-11-28T14:12:56Z", "2021-12-01T07:41:00Z")
+	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, userServiceClient, currencyService)
+	transportDocument, err := GetTransportDocument(uint32(6), []byte{84, 74, 242, 38, 15, 235, 64, 110, 170, 113, 85, 41, 169, 108, 181, 91}, "544af226-0feb-406e-aa71-5529a96cb55b", "be038e58-5365", uint32(1), "2020-11-25T00:00:00Z", "2020-12-24T00:00:00Z", "2020-12-31T00:00:00Z", uint32(12), uint32(3), uint32(1), "EUR", int64(1212), "12.12", int32(12), "c49ea2d6-3806-46c8-8490-294affc71286", "2021-11-28T14:12:56Z", "2021-12-01T07:41:00Z")
 	if err != nil {
 		t.Error(err)
 		return
@@ -263,11 +263,11 @@ func TestTransportDocumentService_FindByTransportDocumentReference(t *testing.T)
 		assert.NotNil(t, transDocResp)
 		transDocumentResult := transDocResp.TransportDocument
 		assert.Equal(t, transDocumentResult.TransportDocumentD.TransportDocumentReference, "be038e58-5365", "they should be equal")
-		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValueCurrency, "WTK", "they should be equal")
+		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValueCurrency, "EUR", "they should be equal")
 	}
 }
 
-func GetTransportDocument(id uint32, uuid4 []byte, idS string, transportDocumentReference string, locationId uint32, issueDate string, shippedOnboardDate string, receivedForShipmentDate string, numberOfOriginals uint32, carrierId uint32, shippingInstructionId uint32, declaredValueCurrency string, declaredValue float64, numberOfRiderPages int32, issuingParty string, createdDateTime string, updatedDateTime string) (*eblproto.TransportDocument, error) {
+func GetTransportDocument(id uint32, uuid4 []byte, idS string, transportDocumentReference string, locationId uint32, issueDate string, shippedOnboardDate string, receivedForShipmentDate string, numberOfOriginals uint32, carrierId uint32, shippingInstructionId uint32, declaredValueCurrency string, declaredValue int64, declaredValueString string, numberOfRiderPages int32, issuingParty string, createdDateTime string, updatedDateTime string) (*eblproto.TransportDocument, error) {
 	issueDate1, err := common.ConvertTimeToTimestamp(Layout, issueDate)
 	if err != nil {
 		log.Error("Error", zap.Error(err))
@@ -304,6 +304,7 @@ func GetTransportDocument(id uint32, uuid4 []byte, idS string, transportDocument
 	transportDocumentD.ShippingInstructionId = shippingInstructionId
 	transportDocumentD.DeclaredValueCurrency = declaredValueCurrency
 	transportDocumentD.DeclaredValue = declaredValue
+	transportDocumentD.DeclaredValueString = declaredValueString
 	transportDocumentD.NumberOfRiderPages = numberOfRiderPages
 	transportDocumentD.IssuingParty = issuingParty
 
@@ -327,7 +328,7 @@ func TestTransportDocumentService_CreateTransportDocument(t *testing.T) {
 
 	ctx := LoginUser()
 
-	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, userServiceClient)
+	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, userServiceClient, currencyService)
 
 	transportDocument := eblproto.CreateTransportDocumentRequest{}
 	transportDocument.TransportDocumentReference = "0cc0bef0-a7c8-4c03"
@@ -338,8 +339,8 @@ func TestTransportDocumentService_CreateTransportDocument(t *testing.T) {
 	transportDocument.NumberOfOriginals = uint32(12)
 	transportDocument.CarrierId = uint32(3)
 	transportDocument.ShippingInstructionId = uint32(8)
-	transportDocument.DeclaredValueCurrency = "WTK"
-	transportDocument.DeclaredValue = float64(12.12)
+	transportDocument.DeclaredValueCurrency = "EUR"
+	transportDocument.DeclaredValue = "1212"
 	transportDocument.NumberOfRiderPages = int32(12)
 	transportDocument.IssuingParty = "499918a2-d12d-4df6-840c-dd92357002df"
 	transportDocument.CreatedDateTime = "11/28/2021"
@@ -372,8 +373,8 @@ func TestTransportDocumentService_CreateTransportDocument(t *testing.T) {
 		assert.NotNil(t, transDocResp)
 		transDocumentResult := transDocResp.TransportDocument
 		assert.Equal(t, transDocumentResult.TransportDocumentD.TransportDocumentReference, "0cc0bef0-a7c8-4c03", "they should be equal")
-		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValueCurrency, "WTK", "they should be equal")
-		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValue, float64(12.12), "they should be equal")
+		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValueCurrency, "EUR", "they should be equal")
+		assert.Equal(t, transDocumentResult.TransportDocumentD.DeclaredValue, int64(121200), "they should be equal")
 		assert.Equal(t, transDocumentResult.TransportDocumentD.NumberOfRiderPages, int32(12), "they should be equal")
 	}
 }

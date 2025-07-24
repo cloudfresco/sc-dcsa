@@ -34,8 +34,8 @@ func TestCreateTransportDocument(t *testing.T) {
 	transportDocument.NumberOfOriginals = uint32(12)
 	transportDocument.CarrierId = uint32(3)
 	transportDocument.ShippingInstructionId = uint32(8)
-	transportDocument.DeclaredValueCurrency = "WTK"
-	transportDocument.DeclaredValue = float64(12.12)
+	transportDocument.DeclaredValueCurrency = "EUR"
+	transportDocument.DeclaredValue = "1212"
 	transportDocument.NumberOfRiderPages = int32(12)
 	transportDocument.IssuingParty = "499918a2-d12d-4df6-840c-dd92357002df"
 	transportDocument.CreatedDateTime = "11/28/2021"

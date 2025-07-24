@@ -18,15 +18,16 @@ message CreateChargeRequest {
   uint32 transport_document_id = 1;
   uint32 shipment_id = 2;
   string charge_type = 3;
-  double currency_amount = 4 [(buf.validate.field).double.gte = 0];
-  string currency_code = 5 [(buf.validate.field).string.max_len = 3];
+  string amount = 4 [(buf.validate.field).double.gte = 0];
+  string amount_currency = 5 [(buf.validate.field).string.max_len = 3];
   string payment_term_code = 6;
   string calculation_basis = 7 [(buf.validate.field).string.max_len = 50];
-  double unit_price = 8;
-  double quantity = 9;
-  string user_id = 10;
-  string user_email = 11;
-  string request_id = 12;
+  string unit_price = 8;
+  string unit_price_currency = 9;
+  double quantity = 10;
+  string user_id = 11;
+  string user_email = 12;
+  string request_id = 13;
 }
 
 message CreateChargeResponse {
@@ -74,10 +75,13 @@ message ChargeD {
   uint32 transport_document_id = 4;
   uint32 shipment_id = 5;
   string charge_type = 6;
-  double currency_amount = 7;
-  string currency_code = 8;
-  string payment_term_code = 9;
-  string calculation_basis = 10;
-  double unit_price = 11;
-  double quantity = 12;
+  int64 amount = 7;
+  string amount_currency = 8;
+  string amount_string = 9;
+  string payment_term_code = 10;
+  string calculation_basis = 11;
+  int64 unit_price = 12;
+  string unit_price_currency = 13;
+  string unit_price_string = 14;
+  double quantity = 15;
 }

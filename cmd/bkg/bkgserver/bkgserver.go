@@ -39,6 +39,7 @@ func main() {
 
 	dbService, redisService, mailerService := common.GetServices(log, false, dbOpt, redisOpt, jwtOpt, mailerOpt)
 
+	currencyService := common.NewCurrencyService(log, dbService)
 	pwd, _ := os.Getwd()
-	bkgservices.StartBkgServer(log, false, pwd, dbOpt, redisOpt, mailerOpt, grpcServerOpt, jwtOpt, oauthOpt, userOpt, uptraceOpt, dbService, redisService, mailerService)
+	bkgservices.StartBkgServer(log, false, pwd, dbOpt, redisOpt, mailerOpt, grpcServerOpt, jwtOpt, oauthOpt, userOpt, uptraceOpt, dbService, redisService, mailerService, currencyService)
 }

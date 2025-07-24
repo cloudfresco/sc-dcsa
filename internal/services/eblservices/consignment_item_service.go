@@ -90,7 +90,7 @@ const selectConsignmentItemsSQL = `select
   updated_at from consignment_items`
 
 // StartEblServer - Start Ebl server
-func StartEblServer(log *zap.Logger, isTest bool, pwd string, dbOpt *config.DBOptions, redisOpt *config.RedisOptions, mailerOpt *config.MailerOptions, grpcServerOpt *config.GrpcServerOptions, jwtOpt *config.JWTOptions, oauthOpt *config.OauthOptions, userOpt *config.UserOptions, uptraceOpt *config.UptraceOptions, dbService *common.DBService, redisService *common.RedisService, mailerService common.MailerIntf) {
+func StartEblServer(log *zap.Logger, isTest bool, pwd string, dbOpt *config.DBOptions, redisOpt *config.RedisOptions, mailerOpt *config.MailerOptions, grpcServerOpt *config.GrpcServerOptions, jwtOpt *config.JWTOptions, oauthOpt *config.OauthOptions, userOpt *config.UserOptions, uptraceOpt *config.UptraceOptions, dbService *common.DBService, redisService *common.RedisService, mailerService common.MailerIntf, currencyService *common.CurrencyService) {
 	common.SetJWTOpt(jwtOpt)
 
 	creds, err := common.GetSrvCred(log, isTest, pwd, grpcServerOpt)
@@ -119,7 +119,7 @@ func StartEblServer(log *zap.Logger, isTest bool, pwd string, dbOpt *config.DBOp
 	consignmentItemService := NewConsignmentItemService(log, dbService, redisService, uc)
 	shippingService := NewShippingService(log, dbService, redisService, uc)
 	shippingInstructionService := NewShippingInstructionService(log, dbService, redisService, uc)
-	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, uc)
+	transportDocumentService := NewTransportDocumentService(log, dbService, redisService, uc, currencyService)
 	surrenderRequestService := NewSurrenderRequestService(log, dbService, redisService, uc)
 	surrenderRequestAnswerService := NewSurrenderRequestAnswerService(log, dbService, redisService, uc)
 	issueRequestService := NewIssueRequestService(log, dbService, redisService, uc)
